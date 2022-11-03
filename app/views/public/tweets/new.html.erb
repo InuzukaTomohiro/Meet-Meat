@@ -1,4 +1,4 @@
-<%= form_with model: @post do |f| %>
+<%= form_with model: @tweet do |f| %>
 
   <div class="field">
     <%= f.label :body, "お肉の感想" %>
@@ -8,6 +8,12 @@
   <div class="field" >
     <%= f.label :meat_image, "お肉" %>
     <%= f.file_field :meat_image, accept: "image/*"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :meat_id, "お肉の種類" %>
+    <%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type), {include_blank: '選択してください'}, {} %>
+    <span>グラム</span>
   </div>
 
   <div class="field">

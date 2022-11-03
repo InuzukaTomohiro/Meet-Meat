@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get "followings" => "relationships#followings", as: "followings"
       get "followers"  => "relationships#followers",  as: "followers"
     end
-    resources :posts do
+    resources :tweets do
       resources :comments, only: [:create, :edit, :update, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
@@ -25,9 +25,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "homes#top"
-    resources :users, only: [:index, :show, :edit, :update]
-    resources :posts, only: [:index, :show, :destroy]
-    resources :meats, only: [:index, :create, :edit, :update]
+    resources :users,  only: [:index, :show, :edit, :update]
+    resources :tweets, only: [:index, :show, :destroy]
+    resources :meats,  only: [:index, :create, :edit, :update]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

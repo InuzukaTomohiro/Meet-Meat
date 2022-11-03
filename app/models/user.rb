@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :phone_number, uniqueness: true, length: { in: 10..11 }, numericality: :only_integer
 
   has_many :user_meats,    dependent: :destroy
-  has_many :posts,         dependent: :destroy
+  has_many :tweets,        dependent: :destroy
   has_many :comments,      dependent: :destroy
   has_many :favorites,     dependent: :destroy
   has_many :relationships,            class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
