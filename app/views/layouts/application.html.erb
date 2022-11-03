@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Taberu</title>
+    <title>Meet Meat</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <div class="container">
     <%= yield %>
+    </div>
+    <footer>
+      <%= link_to "マイページ", user_path(current_user) %>
+      <%= link_to "新規登録", new_post_path %>
+      <%= link_to "ブックマーク",  favorites_index_path %>
+      <%= link_to "投稿一覧", posts_path %>
+      <%= link_to "ログアウト用ボタン", destroy_user_session_path, method: :delete %>
+    </footer>
   </body>
 </html>

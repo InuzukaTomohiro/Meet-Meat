@@ -4,7 +4,7 @@ class CreateUserMeats < ActiveRecord::Migration[6.1]
 
       t.integer :meat_id,      null: false
       t.integer :user_id,      null: false
-      t.integer :total_weight, null: false
+      t.integer :daily_weight, null: false, default: 0
       t.timestamps
     end
   end
