@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root "homes#top"
     get "users/confirm"
+    get "favorites/index"
     resources :users, only: [:show, :edit, :update, :destroy] do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
