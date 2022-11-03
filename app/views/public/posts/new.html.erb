@@ -1,0 +1,23 @@
+<%= form_with model: @post do |f| %>
+
+  <div class="field">
+    <%= f.label :body, "お肉の感想" %>
+    <%= f.text_area :body, autofocus: true, placeholder: "満足なり。" %>
+  </div>
+
+  <div class="field" >
+    <%= f.label :meat_image, "お肉" %>
+    <%= f.file_field :meat_image, accept: "image/*"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :once_weight, "食べたお肉の量" %>
+    <%= f.text_field :once_weight, placeholder: "300" %>
+    <span>グラム</span>
+  </div>
+
+  <div>
+    <%= f.submit "投稿する！" %>
+  </div>
+
+<% end %>

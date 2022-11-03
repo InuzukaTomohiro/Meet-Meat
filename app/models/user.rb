@@ -15,16 +15,15 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :relationships,            source: :followed
   has_many :followers,  through: :reverse_of_relationships, source: :follower
-  
+
   has_one_attached :profile_image
-  
+
   def get_profile_image(width, height)
-    unless item_image.attached?
+    unless profile_image.attached?
       file_path = Rails.root.join("app/assets/images/default-image.jpeg")
       profile_image.attach(io: File.open(file_path), filename: "default-image.jpeg", content_type: "image/jpeg")
     end
-    profile_image.variant(resize_to_fill: [width, height]).processed
+    profile_image.variant(resize_to_limit: [width, height]).processed
   end
-
 
 end
