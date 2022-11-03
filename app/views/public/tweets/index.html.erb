@@ -1,0 +1,29 @@
+<% @tweets.each do |tweet| %>
+  <div class="row">
+    <div class="col-2">
+      <%= tweet.user.nick_name %><br>
+      <%= image_tag tweet.user.get_profile_image(50, 50) %>
+      <div>いいね数</div>
+      <div>コメント数</div>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-6">
+          <%= image_tag tweet.get_meat_image(50, 50) %>
+        </div>
+        <div class="col-6">
+          <div class="row">
+            <%= tweet.body %>
+          </div>
+          <div class="row">
+            <%= tweet.meat.meat_type %>
+            <%= tweet.once_weight %><span>グラム</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        コメントフォーム追加予定
+      </div>
+    </div>
+  </div>
+<% end %>
