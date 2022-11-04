@@ -1,0 +1,4 @@
+<%= form_with model: [tweet, tweet_comment] do |f| %>
+  <%= f.text_area :body, placeholder: "コメント" %>
+  <%= f.submit "コメントする", class: "btn btn-sm" %>
+<% end %>
