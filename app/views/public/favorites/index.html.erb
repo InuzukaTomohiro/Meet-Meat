@@ -1,25 +1,22 @@
-<% @tweets.each do |tweet| %>
+<% @favorites.each do |favorite| %>
   <div class="row">
     <div class="col-2">
-      <%= tweet.user.nick_name %><br>
-      <%= image_tag tweet.user.get_profile_image(50, 50) %>
-      <div>
-        <%= render "public/favorites/favorite_btn", tweet: tweet %>
-      </div>
+      <%= favorite.tweet.user.nick_name %><br>
+      <%= image_tag favorite.tweet.user.get_profile_image(50, 50) %>
       <div>コメント数</div>
     </div>
     <div class="col-8">
       <div class="row">
         <div class="col-6">
-          <%= image_tag tweet.get_meat_image(50, 50) %>
+          <%= image_tag favorite.tweet.get_meat_image(50, 50) %>
         </div>
         <div class="col-6">
           <div class="row">
-            <%= tweet.body %>
+            <%= favorite.tweet.body %>
           </div>
           <div class="row">
-            <%= tweet.meat.meat_type %>
-            <%= tweet.once_weight %><span>グラム</span>
+            <%= favorite.tweet.meat.meat_type %>
+            <%= favorite.tweet.once_weight %><span>グラム</span>
           </div>
         </div>
       </div>
