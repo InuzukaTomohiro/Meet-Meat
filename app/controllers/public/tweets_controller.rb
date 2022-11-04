@@ -6,6 +6,7 @@ class Public::TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.all.order(created_at: :desc)
+    @tweet_comment = Comment.new
   end
 
   def create

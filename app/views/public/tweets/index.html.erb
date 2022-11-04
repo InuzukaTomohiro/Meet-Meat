@@ -8,7 +8,12 @@
       <div>
         <%= render "public/favorites/favorite_btn", tweet: tweet %>
       </div>
-      <div>コメント数</div>
+      <div>
+        <%= link_to tweet_comments_path(tweet) do %>
+          <span>コメント数:</span>
+          <%= tweet.comments.count %>
+        <% end %>
+      </div>
     </div>
     <div class="col-8">
       <div class="row">
@@ -26,7 +31,7 @@
         </div>
       </div>
       <div class="row">
-        コメントフォーム追加予定
+        <%= render "public/comments/form", tweet: tweet, tweet_comment: @tweet_comment %>
       </div>
     </div>
   </div>
