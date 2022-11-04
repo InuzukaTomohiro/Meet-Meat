@@ -1,8 +1,13 @@
 class Public::CommentsController < ApplicationController
 
   def index
+    @tweet          = Tweet.find(params[:tweet_id])
+    @tweet_comments = @tweet.comments.all
+  end
+
+  def edit
     @tweet    = Tweet.find(params[:tweet_id])
-    @comments = @tweet.comments.all
+    @comment  = Comment.find(params[:id])
   end
 
   def create
@@ -13,8 +18,11 @@ class Public::CommentsController < ApplicationController
     redirect_to tweets_path
   end
 
-  def edit
-
+  def update
+    tweet         = Tweet.find(params[:tweet_id])
+    tweet_comment = tweet.comments.find_by(params[:id])
+    tweet_comment.update(comment_params)
+    redirect_to tweet_comments_path(tweet)
   end
 
   def destroy

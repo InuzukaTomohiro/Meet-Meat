@@ -1,15 +1,15 @@
-<% @comments.each do |comment| %>
+<% @tweet_comments.each do |tweet_comment| %>
   <div class="row">
     <div class="col-2">
-      <%= comment.user.nick_name %><br>
-      <%= image_tag comment.user.get_profile_image(100, 100) %>
+      <%= tweet_comment.user.nick_name %><br>
+      <%= image_tag tweet_comment.user.get_profile_image(100, 100) %>
     </div>
     <div class="col-9">
-      <%= comment.body %>
+      <%= tweet_comment.body %>
     </div>
     <div class="col-1">
-      <%= link_to "編集", edit_tweet_comment_path(@tweet, comment), class: "btn btn-sm btn-primary" %>
-      <%= link_to "削除", tweet_comment_path(@tweet, comment), method: :delete, class: "btn btn-sm btn-danger" %>
+      <%= link_to "編集", edit_tweet_comment_path(@tweet, tweet_comment), class: "btn btn-sm btn-primary" %>
+      <%= link_to "削除", tweet_comment_path(@tweet, tweet_comment), method: :delete, class: "btn btn-sm btn-danger" %>
     </div>
   </div>
 <% end %>
