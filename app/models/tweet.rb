@@ -19,4 +19,9 @@ class Tweet < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
 
+  #検索機能
+  def self.search(keyword)
+    Tweet.where("body LIKE?", "%#{keyword}%")
+  end
+
 end
