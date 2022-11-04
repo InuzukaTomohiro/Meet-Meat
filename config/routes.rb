@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     root "homes#top"
     get "users/confirm"
     get "favorites/index"
+    resources :searches, only: [:index]
     resources :users, only: [:show, :edit, :update, :destroy] do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
