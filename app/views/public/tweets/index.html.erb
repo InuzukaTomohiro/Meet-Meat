@@ -1,8 +1,10 @@
 <% @tweets.each do |tweet| %>
   <div class="row">
     <div class="col-2">
-      <%= tweet.user.nick_name %><br>
-      <%= image_tag tweet.user.get_profile_image(50, 50) %>
+      <%= link_to user_path(tweet.user) do %>
+        <%= tweet.user.nick_name %><br>
+        <%= image_tag tweet.user.get_profile_image(50, 50) %>
+      <% end %>
       <div>
         <%= render "public/favorites/favorite_btn", tweet: tweet %>
       </div>
