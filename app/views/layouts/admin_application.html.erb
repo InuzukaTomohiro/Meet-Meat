@@ -11,7 +11,6 @@
 
   <body>
     <div class="container">
-      <%= notice %>
     <%= yield %>
     </div>
     <footer>
@@ -19,16 +18,12 @@
         <%= f.text_field :keyword, placeholder: "キーワード" %>
         <%= f.submit "検索" %>
       <% end %>
-      <% if user_signed_in? %>
-        <%= link_to "マイページ", user_path(current_user) %>
+      <% if admin_signed_in? %>
         <%= link_to "ブックマーク", favorites_index_path %>
-        <%= link_to "新規投稿", new_tweet_path %>
         <%= link_to "退会", users_confirm_path %>
-        <%= link_to "投稿一覧", tweets_path %>
-        <%= link_to "ログアウト用ボタン", destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to "新規登録", new_user_registration_path %>
-        <%= link_to "投稿一覧", tweets_path %>
+        <%= link_to "ユーザー", admin_users_path %>
+        <%= link_to "投稿一覧", admin_tweets_path %>
+        <%= link_to "ログアウト用ボタン", destroy_admin_session_path, method: :delete %>
       <% end %>
     </footer>
   </body>
