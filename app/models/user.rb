@@ -39,9 +39,13 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-
+  # 検索機能
   def self.search(keyword)
     User.where("nick_name LIKE?", "%#{keyword}%")
+  end
+  # 停止ユーザーログイン処置
+  def active_for_authentication?
+    super && (self.is_active == true)
   end
 
 end

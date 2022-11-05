@@ -1,0 +1,38 @@
+<%= form_with model: @user, url: admin_user_path(@user) do |f| %>
+  <div class="field">
+    <%= f.label :nick_name, "ニックネーム" %><br>
+    <%= f.text_field :nick_name, autofocus: true, placeholder: "ニックネーム" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :introduction, "自己紹介" %><br>
+    <%= f.text_area :introduction, placeholder: "自己紹介文" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :profile_image, "プロフィール画像" %><br>
+    <%= f.file_field :profile_image, accept: "image/*"  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number, "電話番号" %><br>
+    <%= f.text_field :phone_number, autocomplete: "phone_number" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "メールアドレス" %><br>
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_active, "ユーザーステータス" %>
+    <%= f.radio_button :is_active, :true, checked: true %>
+    <%= f.label :is_active, "有効" %>
+    <%= f.radio_button :is_active, :false %>
+    <%= f.label :is_active, "無効" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "編集完了", class: "btn btn-md btn-primary" %>
+  </div>
+<% end %>
