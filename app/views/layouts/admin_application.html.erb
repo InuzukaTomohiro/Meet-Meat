@@ -19,8 +19,6 @@
         <%= f.submit "検索" %>
       <% end %>
       <% if admin_signed_in? %>
-        <%= link_to "ブックマーク", favorites_index_path %>
-        <%= link_to "退会", users_confirm_path %>
         <%= link_to "ユーザー", admin_users_path %>
         <%= link_to "投稿一覧", admin_tweets_path %>
         <%= link_to "ログアウト用ボタン", destroy_admin_session_path, method: :delete %>
