@@ -1,0 +1,26 @@
+<% @users.each do |user| %>
+  <div class="row">
+    <div class="col-2">
+      <%= image_tag user.get_profile_image(100, 100) %>
+    </div>
+    <div class="col-2">
+      ニックネーム:
+      <%= user.nick_name %><br>
+      登録日:
+      <%= user.created_at.strftime("%Y/%m/%d") %><br>
+      フォロー:
+      <%= link_to user_followings_path(user) do %>
+        <%= user.followings.count %>
+      <% end %><br>
+      フォロワー
+      <%= link_to "フォロワー", user_followers_path(user) %>
+    </div>
+    <div class="col-4">
+      自己紹介文:
+      <%= user.introduction %>
+    </div>
+    <div class="col-4">
+      累計食肉欄
+    </div>
+  </div>
+<% end %>
