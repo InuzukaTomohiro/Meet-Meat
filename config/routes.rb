@@ -12,8 +12,9 @@ Rails.application.routes.draw do
     root "homes#top"
     get "users/confirm"
     get "favorites/index"
-    resources :searches, only: [:index]
-    resources :users, only: [:show, :edit, :update, :destroy] do
+    get "tweet_search" => "searches#tweet_search"
+    get "user_search" => "searches#user_search"
+    resources :users, only: [:index, :show, :edit, :update, :destroy] do
       resource :relationships, only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers"  => "relationships#followers",  as: "followers"

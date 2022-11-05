@@ -1,3 +1,8 @@
+<%= form_with url: user_search_path, method: :get do |f| %>
+  <%= f.text_field :keyword, placeholder: "ユーザー検索" %>
+  <%= f.submit "検索" %>
+<% end %>
+
 <% if @users.exists? %>
   <% @users.each do |user| %>
     <div class="row">
