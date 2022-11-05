@@ -1,4 +1,5 @@
 class Admin::TweetsController < ApplicationController
+  layout "layouts/admin_application"
 
   def index
     @tweets = Tweet.all
