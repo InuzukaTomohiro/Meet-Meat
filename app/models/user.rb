@@ -40,4 +40,8 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  def self.search(keyword)
+    User.where("nick_name LIKE?", "%#{keyword}%")
+  end
+
 end

@@ -14,7 +14,7 @@
     <%= yield %>
     </div>
     <footer>
-      <%= form_with url: searches_path, method: :get do |f| %>
+      <%= form_with url: tweet_search_path, method: :get do |f| %>
         <%= f.text_field :keyword, placeholder: "キーワード" %>
         <%= f.submit "検索" %>
       <% end %>

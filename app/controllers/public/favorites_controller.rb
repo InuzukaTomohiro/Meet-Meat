@@ -5,13 +5,15 @@ class Public::FavoritesController < ApplicationController
   end
 
   def create
-    favorite = Favorite.new(user_id: current_user.id, tweet_id: params[:tweet_id])
+    tweet    = Tweet.find(params[:tweet_id])
+    favorite = current_user.favorites.new(tweet_id: tweet.id)
     favorite.save
     redirect_to tweets_path
   end
 
   def destroy
-    favorite = Favorite.find_by(user_id: current_user.id, tweet_id: params[:tweet_id])
+    tweet = Tweet.find(params[:tweet_id])
+    favorite = current_user.favorites.find_by(tweet_id: tweet.id)
     favorite.destroy
     redirect_to tweets_path
   end

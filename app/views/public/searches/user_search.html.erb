@@ -1,0 +1,21 @@
+<% @users.each do |user| %>
+  <div class="row">
+    <div class="col-2">
+      <%= user.nick_name %><br>
+      <%= image_tag user.get_profile_image(100, 100) %>
+    </div>
+    <div class="col-10">
+      <div class="row">
+        <div class="col-4">投稿数：<%= user.tweets.count %></div>
+        <div class="col-4">フォロー数：<%= user.followings.count %></div>
+        <div class="col-4">フォロワー数：<%= user.followers.count %></div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <%= user.introduction %>
+        </div>
+        累計食肉数欄
+      </div>
+    </div>
+  </div>
+<% end %>
