@@ -48,4 +48,11 @@ class User < ApplicationRecord
     super && (self.is_active == true)
   end
 
+  def self.guest
+    find_or_create_by!(nick_name: 'guestuser', email: 'guest@example.com', phone_number: "0000000000") do |user|
+      user.password  = SecureRandom.urlsafe_base64
+      user.nick_name = "guestuser"
+    end
+  end
+
 end
