@@ -2,8 +2,12 @@ class Tweet < ApplicationRecord
 
   belongs_to :user
   belongs_to :meat
-  has_many :comments,    dependent: :destroy
-  has_many :favorites,   dependent: :destroy
+  has_many   :comments,    dependent: :destroy
+  has_many   :favorites,   dependent: :destroy
+
+  validates :body,        presence: :true
+  validates :meat_id,     presence: :true
+  validates :once_weight, presence: :true, numericality: :only_integer
 
   has_one_attached :meat_image
 

@@ -4,9 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :nick_name,    uniqueness: true, length: { in: 1..20 }
-  validates :phone_number, uniqueness: true, length: { in: 10..11 }, numericality: :only_integer
-
   has_many :user_meats,    dependent: :destroy
   has_many :tweets,        dependent: :destroy
   has_many :comments,      dependent: :destroy
@@ -15,6 +12,9 @@ class User < ApplicationRecord
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :relationships,            source: :followed
   has_many :followers,  through: :reverse_of_relationships, source: :follower
+
+  validates :nick_name,    uniqueness: true, length: { in: 1..20 }
+  validates :phone_number, uniqueness: true, length: { in: 10..11 }, numericality: :only_integer
 
   # プロフィール画像
   has_one_attached :profile_image
@@ -47,7 +47,7 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (self.is_active == true)
   end
-
+  # ゲストログインデータ
   def self.guest
     find_or_create_by!(nick_name: 'guestuser', email: 'guest@example.com', phone_number: "0000000000") do |user|
       user.password  = SecureRandom.urlsafe_base64

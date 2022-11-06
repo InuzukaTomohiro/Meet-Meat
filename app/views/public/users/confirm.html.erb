@@ -1,3 +1,17 @@
-<h2>退会画面</h2>
-<p>退会すると全てのデータが削除されます。よろしいですか？</p>
-<%= link_to "登録解除", user_path(@user), method: :delete, class: "btn btn-lg bnt-danger" %>
+<div class="row">
+  <div class="col-12 text-center">
+    <h2>登録解除画面</h2>
+    <p class="mt-5 mb-3">
+      <strong>~注意事項~</strong>
+    </p>
+    <div class="row">
+      <div class="col-3"></div>
+        <ul class="list-unstyled text-left">
+          <li>退会されますと全てのデータが削除され、再度ログインができなくなります。</li>
+          <li>退会後のご利用の際はもう一度新規登録をしていただくことが必要になります。</li>
+          <li>「退会する」ボタンをクリックすることで登録情報を削除することができます。</li>
+        </ul>
+      </div>
+      <%= link_to "退会する", user_path(@user), method: :delete, class: "btn btn-lg btn-danger mt-5" %>
+  </div>
+</div>

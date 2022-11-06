@@ -1,29 +1,39 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class=text-center>新規投稿</h2>
+  </div>
+</div>
+
 <%= form_with model: @tweet do |f| %>
-
-  <div class="field">
-    <%= f.label :body, "お肉の感想" %>
-    <%= f.text_area :body, autofocus: true, placeholder: "満足なり。" %>
-  </div>
-
-  <div class="field" >
-    <%= f.label :meat_image, "お肉" %>
-    <%= f.file_field :meat_image, accept: "image/*"  %>
-  </div>
-
-  <div class="field">
-    <%= f.label :meat_id, "お肉の種類" %>
-    <%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type), {include_blank: '選択してください'}, {} %>
-    <span>グラム</span>
-  </div>
-
-  <div class="field">
-    <%= f.label :once_weight, "食べたお肉の量" %>
-    <%= f.text_field :once_weight, placeholder: "300" %>
-    <span>グラム</span>
-  </div>
-
-  <div>
-    <%= f.submit "投稿する！" %>
-  </div>
-
+  <%= render "layouts/errors", obj: @tweet %>
+  <table class="user_form">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.label :body, "お肉の感想" %></td>
+        <td><%= f.text_area :body, autofocus: true, placeholder: "満足なり。", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :meat_image, "お肉の写真" %></td>
+        <td><%= f.file_field :meat_image, accept: "image/*", class: "form-control-file" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :meat_id, "お肉の種類" %></td>
+        <td><%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type), {include_blank: '選択してください'}, {class: "form-control"} %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :once_weight, "お肉の量(グラム)" %></td>
+        <td><%= f.text_field :once_weight, placeholder: "300", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "投稿する！", class: "btn btn-lg btn-success" %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>

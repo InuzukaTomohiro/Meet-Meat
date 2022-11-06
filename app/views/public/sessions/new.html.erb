@@ -1,26 +1,30 @@
-<h2>ログイン</h2>
-
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center">ログイン</h2>
+  </div>
+</div>
 <%= form_with model: @user, url: new_user_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン", class: "btn btn-md btn-primary" %>
-  </div>
+  <%= render "layouts/errors", obj: @user %>
+  <table class="user_form">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.label :email, "メールアドレス" %></td>
+        <td><%= f.email_field :email, placeholder: "meat@example", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :password, "パスワード" %></td>
+        <td><%= f.password_field :password, autocomplete: "off", placeholder: "**********", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "ログイン", class: "btn btn-md btn-primary" %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
-
-<!--<%= render "public/shared/links" %>-->

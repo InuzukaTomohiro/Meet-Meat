@@ -10,9 +10,12 @@ class Public::TweetsController < ApplicationController
   end
 
   def create
-    tweet = current_user.tweets.new(tweet_params)
-    tweet.save
-    redirect_to tweets_path
+    @tweet = current_user.tweets.new(tweet_params)
+    if @tweet.save
+      redirect_to tweets_path
+    else
+      render :new
+    end
   end
 
   private

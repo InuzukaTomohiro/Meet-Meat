@@ -1,0 +1,71 @@
+<header class="public_header">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand border bg-danger rounded px-2" href="/">Meet Meat</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <% if user_signed_in? %>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <%= link_to "マイページ", user_path(current_user), class: "nav-link border border-danger rounded-pill mr-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ブックマーク", favorites_index_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "新規投稿", new_tweet_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "投稿一覧", tweets_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdownMenuLink"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            その他
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <%= link_to "退会", users_confirm_path, class: "dropdown-item" %>
+            <%= form_with url: tweet_search_path, method: :get, class: "dropdown-item" do |f| %>
+              <%= f.text_field :keyword, placeholder: "ユーザー検索" %>
+              <%= f.submit "検索" %>
+            <% end %>
+          </div>
+        </li>
+      </ul>
+      <% else %>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <%= link_to "新規登録", new_user_registration_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link border border-danger rounded-pill mr-2" %>
+        </li>
+      </ul>
+      <% end %>
+      <%= form_with url: tweet_search_path, method: :get do |f| %>
+        <%= f.text_field :keyword, placeholder: "キーワード" %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+   </nav>
+</header>
