@@ -1,36 +1,46 @@
-<h2>新規登録</h2>
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center">新規登録</h2>
+  </div>
+</div>
 
 <%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user' do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :nick_name, "ニックネーム" %><br />
-    <%= f.text_field :nick_name, autofocus: true, autocomplete: "nick_name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone_number, "電話番号" %><br />
-    <%= f.text_field :phone_number, autocomplete: "phone_number" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password, "パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "パスワード（確認用）" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "新規登録", class: "btn btn-md btn-primary" %>
-  </div>
+  <%= render "layouts/errors", obj: @user %>
+  <table class="user_form">
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.label :nick_name, "ニックネーム" %></td>
+        <td><%= f.text_field :nick_name, autofocus: true, placeholder: "ミートくん", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :phone_number, "電話番号(ハイフンなし)" %></td>
+        <td><%= f.text_field :phone_number, placeholder: "3100403104", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :email, "メールアドレス" %></td>
+        <td><%= f.email_field :email, placeholder: "meat@example", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :password, "パスワード" %></td>
+        <td><%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "6文字以上", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "新規登録", class: "btn btn-md btn-primary" %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
 
-<%= render "public/shared/links" %>
+<div>
+  <p>
+    Meet Meatは新規登録不要で機能の体験ができます。<br>
+    体験したい場合は、サイト上部にあります<strong>「ゲストログイン」</strong>をクリックしてください。<br>
+  </p>
+</div>
