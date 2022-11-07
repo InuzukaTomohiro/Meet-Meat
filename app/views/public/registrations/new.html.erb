@@ -28,7 +28,11 @@
       </tr>
       <tr>
         <td><%= f.label :password, "パスワード" %></td>
-        <td><%= f.password_field :password_confirmation, autocomplete: "off", placeholder: "6文字以上", class: "form-control" %></td>
+        <td><%= f.password_field :password, autocomplete: "new-password", placeholder: "6文字以上", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :password_confirmation,"パスワード(確認用)" %></td>
+        <td><%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認用パスワード", class: "form-control" %></td>
       </tr>
       <tr>
         <td></td>
