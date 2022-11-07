@@ -2,6 +2,7 @@
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import "user.scss";
 @import "favorite.scss";
+@import "tweet.scss";
 
 * {
   margin: 0;
@@ -18,14 +19,8 @@ body {
   background-color: #e5ffcc;
 }
 
-.user_form {
-  border-collapse: separate;
-  border-spacing: 30px 20px;
-  margin: 0 auto;
-}
-
-.tweets {
+.tweets, .comments {
   background-color: white;
-  padding: 10px 0;
+  padding: 10px;
   margin: 5px 0;
 }

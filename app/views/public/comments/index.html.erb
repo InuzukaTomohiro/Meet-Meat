@@ -1,5 +1,7 @@
-<% @tweet_comments.each do |tweet_comment| %>
-  <div class="row">
+<section>
+  <h2>コメント一覧</h2>
+  <% @tweet_comments.each do |tweet_comment| %>
+  <div class="comments row">
     <div class="col-2">
       <%= tweet_comment.user.nick_name %><br>
       <%= image_tag tweet_comment.user.get_profile_image(100, 100) %>
@@ -13,3 +15,5 @@
     </div>
   </div>
 <% end %>
+
+</section>

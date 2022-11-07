@@ -1,5 +1,23 @@
 .profile {
   background-color: white;
-  padding: 10px 0;
+  padding: 10px;
 
+}
+
+.introduction {
+  height: 100px;
+  padding: 0 10px;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+}
+
+.total_meat {
+  height: 100px;
+  padding: 0 10px;
+}
+
+.user_form {
+  border-collapse: separate;
+  border-spacing: 30px 20px;
+  margin: 0 auto;
 }

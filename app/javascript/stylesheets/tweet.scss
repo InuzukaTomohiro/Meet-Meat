@@ -1,0 +1,11 @@
+.tweet_content {
+  height: 100%;
+  align-items: center;
+}
+
+.tweet_body {
+  height: 100px;
+  padding: 0 10px;
+  overflow-wrap: break-word;
+  overflow-y: scroll;
+}

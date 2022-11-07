@@ -1,15 +1,19 @@
 <section>
   <h2><%= @user.nick_name %>さんのページ</h2>
-  <div class="profile row mb-2">
-    <div class="col-2">
-      <%= image_tag @user.get_profile_image(100, 100) %>
-    </div>
-    <div class="col-1">
-      <%= @user.nick_name %><br>
-      <% if @user.email != "guest@example.com" %>
-        <%= link_to "登録情報編集", edit_user_path(@user), class: "btn btn-sm btn-success" %><br>
-      <% end %>
-      <%= @user.created_at.strftime("%Y/%m/%d") %>
+  <div class="profile row align-items-center mb-2">
+    <div class="col-3">
+      <div class="row">
+        <div class="col-6">
+          <%= image_tag @user.get_profile_image(100, 100) %>
+        </div>
+        <div class="col-6">
+          <%= @user.nick_name %><br>
+          <% if @user.email != "guest@example.com" %>
+            <%= link_to "登録情報編集", edit_user_path(@user), class: "btn btn-sm btn-success" %><br>
+          <% end %>
+          <%= @user.created_at.strftime("%Y/%m/%d") %>
+        </div>
+      </div>
     </div>
     <div class="col-2">
       <%= link_to user_followings_path(@user) do %>
@@ -22,10 +26,10 @@
         <%= render "public/relationships/btn", user: @user %>
       <% end %>
     </div>
-    <div class="col-4">
+    <div class="introduction col-4">
       <%= @user.introduction %>
     </div>
-    <div class="col-3">
+    <div class="total_meat col-3">
       累計食肉欄
     </div>
   </div>
@@ -36,20 +40,38 @@
   <% @tweets.each do |tweet| %>
     <div class="tweets row">
       <div class="col-2">
-        <i class="fas fa-heart"></i><%= tweet.favorites.count %><br>
         <div>
-        <%= link_to tweet_comments_path(tweet) do %>
-          コメント数:
-          <%= tweet.comments.count %>
-        <% end %>
+          いいね数:
+          <%= tweet.favorites.count %>
         </div>
-        投稿日:
-        <%= tweet.created_at.strftime("%Y/%m/%d") %>
+        <div>
+          <%= link_to tweet_comments_path(tweet) do %>
+            コメント数:
+            <%= tweet.comments.count %>
+          <% end %>
+        </div>
+        <div>
+          投稿日:
+          <%= tweet.created_at.strftime("%Y/%m/%d") %>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            設定
+          </button>
+          <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+            <div>
+              <%= link_to "Tweet編集", edit_tweet_path(tweet) %>
+            </div>
+            <div>
+              <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col-2">
         <%= image_tag tweet.get_meat_image(100, 100) %>
       </div>
-      <div class="col-4">
+      <div class="tweet_body col-4">
         <%= tweet.body %>
       </div>
       <div class="col-4">
