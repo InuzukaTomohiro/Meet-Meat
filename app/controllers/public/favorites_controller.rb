@@ -2,6 +2,7 @@ class Public::FavoritesController < ApplicationController
 
   def index
     @favorites = Favorite.all
+    @tweet_comment = Comment.new
   end
 
   def create

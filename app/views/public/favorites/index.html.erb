@@ -1,28 +1,45 @@
-<% @favorites.each do |favorite| %>
-  <div class="row">
-    <div class="col-2">
-      <%= favorite.tweet.user.nick_name %><br>
-      <%= image_tag favorite.tweet.user.get_profile_image(50, 50) %>
-      <div>コメント数</div>
-    </div>
-    <div class="col-8">
-      <div class="row">
-        <div class="col-6">
-          <%= image_tag favorite.tweet.get_meat_image(50, 50) %>
+<section>
+  <h2>ブックマーク</h2>
+  <% @favorites.each do |favorite| %>
+    <div class="tweets row">
+      <div class="col-2">
+        <%= link_to users_path(favorite.tweet.user) do %>
+          <%= favorite.tweet.user.nick_name %><br>
+          <%= image_tag favorite.tweet.user.get_profile_image(80, 80) %>
+        <% end %>
+        <div>
+          <%= render "public/favorites/favorite_btn", tweet: favorite.tweet %>
         </div>
-        <div class="col-6">
-          <div class="row">
+        <div>
+          <%= link_to tweet_comments_path(favorite.tweet) do %>
+            <span>コメント数:</span>
+            <%= favorite.tweet.comments.count %>
+          <% end %>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            コメント入力
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <%= render "public/comments/form", tweet: favorite.tweet, tweet_comment: @tweet_comment %>
+          </div>
+        </div>
+      </div>
+      <div class="col-10">
+        <div class="row">
+          <div class="col-2">
+            <%= image_tag favorite.tweet.get_meat_image(100, 100) %>
+          </div>
+          <div class="col-5">
             <%= favorite.tweet.body %>
           </div>
-          <div class="row">
+          <div class="col-5">
             <%= favorite.tweet.meat.meat_type %>
             <%= favorite.tweet.once_weight %><span>グラム</span>
           </div>
         </div>
       </div>
-      <div class="row">
-        コメントフォーム追加予定
-      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</section>
+
