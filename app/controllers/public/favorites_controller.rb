@@ -1,7 +1,7 @@
 class Public::FavoritesController < ApplicationController
 
   def index
-    @favorites = Favorite.all
+    @favorites = current_user.favorites.all
     @tweet_comment = Comment.new
   end
 
@@ -9,14 +9,14 @@ class Public::FavoritesController < ApplicationController
     tweet    = Tweet.find(params[:tweet_id])
     favorite = current_user.favorites.new(tweet_id: tweet.id)
     favorite.save
-    redirect_to tweets_path
+    redirect_back(fallback_location: root_path)
   end
 
   def destroy
     tweet = Tweet.find(params[:tweet_id])
     favorite = current_user.favorites.find_by(tweet_id: tweet.id)
     favorite.destroy
-    redirect_to tweets_path
+    redirect_back(fallback_location: root_path)
   end
 
 end
