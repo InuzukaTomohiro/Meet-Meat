@@ -1,0 +1,30 @@
+<% users.each do |user| %>
+  <div class="profile row align-items-center mb-2">
+    <div class="col-4">
+      <div class="row">
+        <div class="user_image col-5">
+          <%= link_to user_path(user) do %>
+            <%= user.nick_name %>
+            <%= image_tag user.get_profile_image(100, 100) %>
+          <% end %>
+        </div>
+        <div class="user-info col-6">
+          <div>投稿数：<%= user.tweets.count %></div>
+          <div>
+            <%= link_to user_followings_path(user) do %>
+              フォロー数：<%= user.followings.count %>
+            <% end %>
+          </div>
+          <div>
+            <%= link_to user_followers_path(user) do %>
+              フォロワー数：<%= user.followers.count %>
+            <% end %>
+          </div>
+          <div><%= render "public/relationships/btn", user: user %></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4"><%= user.introduction %></div>
+    <div class="col-4">累計食肉数欄</div>
+  </div>
+<% end %>

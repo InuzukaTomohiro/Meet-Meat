@@ -1,5 +1,8 @@
 <section>
-  <h2>ブックマーク</h2>
+  <div class="d-flex align-items-end">
+    <h2>ブックマーク</h2>
+    <h4>(全<%= @favorites.count %>件)</h4>
+  </div>
   <% @favorites.each do |favorite| %>
     <div class="tweets row">
       <div class="col-2">
@@ -12,7 +15,7 @@
         </div>
         <div>
           <%= link_to tweet_comments_path(favorite.tweet) do %>
-            <span>コメント数:</span>
+            コメント数:
             <%= favorite.tweet.comments.count %>
           <% end %>
         </div>
@@ -35,7 +38,7 @@
           </div>
           <div class="col-5">
             <%= favorite.tweet.meat.meat_type %>
-            <%= favorite.tweet.once_weight %><span>グラム</span>
+            <%= favorite.tweet.once_weight %>グラム
           </div>
         </div>
       </div>

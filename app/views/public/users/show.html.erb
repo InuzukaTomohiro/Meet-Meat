@@ -3,28 +3,34 @@
   <div class="profile row align-items-center mb-2">
     <div class="col-3">
       <div class="row">
-        <div class="col-6">
+        <div class="user_image col-6">
           <%= image_tag @user.get_profile_image(100, 100) %>
         </div>
-        <div class="col-6">
+        <div class="user-info col-6">
           <%= @user.nick_name %><br>
           <% if @user.email != "guest@example.com" %>
             <%= link_to "登録情報編集", edit_user_path(@user), class: "btn btn-sm btn-success" %><br>
           <% end %>
-          <%= @user.created_at.strftime("%Y/%m/%d") %>
+          <%= @user.created_at.strftime("%Y/%m") %>登録
         </div>
       </div>
     </div>
     <div class="col-2">
-      <%= link_to user_followings_path(@user) do %>
-        follow: <%= @user.followings.count %>
-      <% end %><br>
-      <%= link_to user_followers_path(@user) do %>
-        follower: <%= @user.followers.count %>
-      <% end %><br>
-      <% if @user != current_user %>
-        <%= render "public/relationships/btn", user: @user %>
-      <% end %>
+      <div>
+        <%= link_to user_followings_path(@user) do %>
+          <%= @user.followings.count %>フォロー
+        <% end %>
+      </div>
+      <div>
+        <%= link_to user_followers_path(@user) do %>
+          <%= @user.followers.count %>フォロワー
+        <% end %>
+      </div>
+      <div>
+        <% if @user != current_user %>
+          <%= render "public/relationships/btn", user: @user %>
+        <% end %>
+      </div>
     </div>
     <div class="introduction col-4">
       <%= @user.introduction %>
@@ -36,7 +42,10 @@
 </section>
 
 <section>
-  <h3>投稿履歴</h3>
+  <div class="d-flex align-items-end">
+    <h3>投稿履歴</h3>
+    <h5>(全<%= @tweets.count %>件)</h5>
+  </div>
   <% @tweets.each do |tweet| %>
     <div class="tweets row">
       <div class="col-2">
@@ -55,8 +64,14 @@
           <%= tweet.created_at.strftime("%Y/%m/%d") %>
         </div>
         <div class="dropdown">
-          <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            設定
+          <button
+            class="btn btn-warning btn-sm dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >設定
           </button>
           <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
             <div>

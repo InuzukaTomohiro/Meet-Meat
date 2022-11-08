@@ -1,4 +1,5 @@
 class Public::CommentsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @tweet          = Tweet.find(params[:tweet_id])
@@ -20,8 +21,8 @@ class Public::CommentsController < ApplicationController
 
   def update
     tweet         = Tweet.find(params[:tweet_id])
-    tweet_comment = tweet.comments.find_by(params[:id])
-    tweet_comment.update(comment_params)
+    @tweet_comment = tweet.comments.find_by(params[:id])
+    @tweet_comment.update(comment_params)
     redirect_to tweet_comments_path(tweet)
   end
 

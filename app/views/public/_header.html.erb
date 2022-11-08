@@ -42,7 +42,7 @@
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             <%= link_to "退会", users_confirm_path, class: "dropdown-item" %>
-            <%= form_with url: tweet_search_path, method: :get, class: "dropdown-item" do |f| %>
+            <%= form_with url: user_search_path, method: :get, class: "dropdown-item" do |f| %>
               <%= f.text_field :keyword, placeholder: "ユーザー検索" %>
               <%= f.submit "検索" %>
             <% end %>

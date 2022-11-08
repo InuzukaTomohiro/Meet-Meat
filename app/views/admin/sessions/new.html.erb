@@ -1,6 +1,32 @@
-<h2>管理者ログイン</h2>
+<div class="row">
+  <div class="col-12">
+    <h2 class="text-center">管理者ログイン</h2>
+  </div>
+</div>
 
 <%= form_with model: @admin, url: admin_session_path do |f| %>
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= f.label :email, "メールアドレス" %></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "管理アドレス" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :password %></td>
+        <td><%= f.password_field :password, autocomplete: "current-password", placeholder: "管理パスワード" %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><%= f.submit "ログイン", class: "btn btn-md btn-primary" %></td>
+      </tr>
+    </tbody>
+  </table>
   <div class="field">
     <%= f.label :email, "メールアドレス" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "管理アドレス" %>

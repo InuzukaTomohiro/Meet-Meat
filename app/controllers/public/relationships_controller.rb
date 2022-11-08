@@ -1,13 +1,14 @@
 class Public::RelationshipsController < ApplicationController
+  before_action :authenticate_user!
 
   def followings
-    user   = User.find(params[:user_id])
-    @users = user.followings
+    @user            = User.find(params[:user_id])
+    @following_users = @user.followings
   end
 
   def followers
-    user   = User.find(params[:user_id])
-    @users = user.followers
+    @user           = User.find(params[:user_id])
+    @follower_users = @user.followers
   end
 
   def create
