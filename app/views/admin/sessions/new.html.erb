@@ -5,7 +5,7 @@
 </div>
 
 <%= form_with model: @admin, url: admin_session_path do |f| %>
-  <table>
+  <table class="form">
     <thead>
       <tr>
         <th></th>
@@ -15,11 +15,11 @@
     <tbody>
       <tr>
         <td><%= f.label :email, "メールアドレス" %></td>
-        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "管理アドレス" %></td>
+        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "管理アドレス", class: "form-control" %></td>
       </tr>
       <tr>
-        <td><%= f.label :password %></td>
-        <td><%= f.password_field :password, autocomplete: "current-password", placeholder: "管理パスワード" %></td>
+        <td><%= f.label :password, "パスワード" %></td>
+        <td><%= f.password_field :password, autocomplete: "current-password", placeholder: "管理パスワード", class: "form-control" %></td>
       </tr>
       <tr>
         <td></td>
@@ -27,24 +27,4 @@
       </tr>
     </tbody>
   </table>
-  <div class="field">
-    <%= f.label :email, "メールアドレス" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "管理アドレス" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "管理パスワード" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "ログイン", class: "btn btn-md btn-primary" %>
-  </div>
 <% end %>

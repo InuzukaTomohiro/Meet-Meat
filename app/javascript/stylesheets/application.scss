@@ -4,6 +4,7 @@
 @import "favorite.scss";
 @import "tweet.scss";
 @import "comment.scss";
+@import "admin.scss";
 
 * {
   margin: 0;
@@ -24,4 +25,10 @@ body {
   background-color: white;
   padding: 10px;
   margin: 5px 0;
+}
+
+.form {
+  border-collapse: separate;
+  border-spacing: 30px 20px;
+  margin: 0 auto;
 }

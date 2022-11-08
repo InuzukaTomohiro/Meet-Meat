@@ -8,21 +8,17 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-    <div class="container">
-    <%= yield %>
-    </div>
-    <footer>
-      <%= form_with url: tweet_search_path, method: :get do |f| %>
-        <%= f.text_field :keyword, placeholder: "キーワード" %>
-        <%= f.submit "検索" %>
-      <% end %>
-      <% if admin_signed_in? %>
-        <%= link_to "ユーザー", admin_users_path %>
-        <%= link_to "投稿一覧", admin_tweets_path %>
-        <%= link_to "ログアウト用ボタン", destroy_admin_session_path, method: :delete %>
-      <% end %>
+  <body class="admin_body">
+    <header class="admin_header">
+      <%= render "admin/header" %>
+    </header>
+    <main>
+      <div class="container">
+      <%= yield %>
+      </div>
+    </main>
+    <footer class="admin_footer fixed-bottom">
+      <%= render "admin/footer" %>
     </footer>
   </body>
 </html>
