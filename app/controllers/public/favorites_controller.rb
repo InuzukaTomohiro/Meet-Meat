@@ -10,6 +10,7 @@ class Public::FavoritesController < ApplicationController
     tweet    = Tweet.find(params[:tweet_id])
     favorite = current_user.favorites.new(tweet_id: tweet.id)
     favorite.save
+    tweet.create_notification_like!(current_user)
     redirect_back(fallback_location: root_path)
   end
 

@@ -15,8 +15,12 @@ class Public::CommentsController < ApplicationController
     tweet            = Tweet.find(params[:tweet_id])
     comment          = current_user.comments.new(comment_params)
     comment.tweet_id = tweet.id
-    comment.save
-    redirect_to tweets_path
+    if comment.save
+      tweet.create_notification_comment(current_user, comment.id)
+      redirect_to tweets_path
+    else
+      render :index
+    end
   end
 
   def update

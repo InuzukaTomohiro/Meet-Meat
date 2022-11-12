@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_03_114037) do
+ActiveRecord::Schema.define(version: 2022_11_10_114404) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -60,6 +60,12 @@ ActiveRecord::Schema.define(version: 2022_11_03_114037) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "daily_eats", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "tweet_id", null: false
@@ -73,6 +79,21 @@ ActiveRecord::Schema.define(version: 2022_11_03_114037) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "tweet_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["tweet_id"], name: "index_notifications_on_tweet_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
+  end
+
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id", null: false
     t.integer "followed_id", null: false
@@ -83,15 +104,9 @@ ActiveRecord::Schema.define(version: 2022_11_03_114037) do
   create_table "tweets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "meat_id", null: false
+    t.integer "daily_eat_id", null: false
     t.string "body", null: false
     t.integer "once_weight", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_meats", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "daily_weight", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

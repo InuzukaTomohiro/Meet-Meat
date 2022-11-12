@@ -5,6 +5,7 @@ class Public::UsersController < ApplicationController
   def show
     @user          = User.find(params[:id])
     @tweets        = @user.tweets.all
+    @daily_eats = @user.daily_eats.all
   end
 
   def edit

@@ -15,8 +15,14 @@ class Public::TweetsController < ApplicationController
   end
 
   def create
-    @tweet = current_user.tweets.new(tweet_params)
-    if @tweet.save!
+    daily_eat = DailyEat.find_by(created_at: Date.current.in_time_zone.all_day)
+    if daily_eat.nil?
+      daily_eat = current_user.daily_eats.new
+      daily_eat.save
+    end
+    @tweet              = current_user.tweets.new(tweet_params)
+    @tweet.daily_eat_id =  daily_eat.id
+    if @tweet.save
       redirect_to tweets_path
     else
       render :new

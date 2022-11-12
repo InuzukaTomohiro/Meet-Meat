@@ -1,6 +1,6 @@
 require "test_helper"
 
-class UserMeatTest < ActiveSupport::TestCase
+class Public::DailyEatsControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

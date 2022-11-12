@@ -19,22 +19,9 @@
         <div class="col-2">
           <div>ID: <%= user.id %></div>
           <div><%= user.nick_name %></div>
-          <div>
-          フォロー:
-            <%= link_to user_followings_path(user) do %>
-              <%= user.followings.count %>
-            <% end %>
-          </div>
-          <div>
-          フォロワー:
-            <%= link_to user_followers_path(user) do %>
-              <%= user.followers.count %>
-            <% end %>
-          </div>
-          <div>
-          登録日:
-            <%= user.created_at.strftime("%Y/%m/%d") %>
-          </div>
+          <div>フォロー:<%= user.followings.count %></div>
+          <div>フォロワー:<%= user.followers.count %></div>
+          <div>登録日:<%= user.created_at.strftime("%Y/%m/%d") %></div>
         </div>
       <div class="introduction col-4">
         自己紹介文:

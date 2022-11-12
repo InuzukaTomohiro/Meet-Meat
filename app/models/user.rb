@@ -4,14 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :user_meats,    dependent: :destroy
   has_many :tweets,        dependent: :destroy
   has_many :comments,      dependent: :destroy
   has_many :favorites,     dependent: :destroy
+  has_many :daily_eats,    dependent: :destroy
   has_many :relationships,            class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :followings, through: :relationships,            source: :followed
   has_many :followers,  through: :reverse_of_relationships, source: :follower
+  has_many :active_notifications,  class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
 
   validates :nick_name,    uniqueness: true, length: { in: 1..20 }
   validates :phone_number, uniqueness: true, length: { in: 10..11 }, numericality: :only_integer
@@ -52,6 +54,20 @@ class User < ApplicationRecord
     find_or_create_by!(nick_name: 'guestuser', email: 'guest@example.com', phone_number: "0000000000") do |user|
       user.password  = SecureRandom.urlsafe_base64
       user.nick_name = "guestuser"
+    end
+  end
+
+  # 通知機能（フォロー時）
+  def create_notification_follow!(current_user)
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: 'follow'
+      )
+      if notification.valid?
+        notification.save
+      end
     end
   end
 
