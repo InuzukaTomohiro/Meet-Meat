@@ -2,6 +2,7 @@ class Tweet < ApplicationRecord
 
   belongs_to :user
   belongs_to :meat
+  belongs_to :daily_eat
   has_many   :comments,      dependent: :destroy
   has_many   :favorites,     dependent: :destroy
   has_many   :user_meats,    dependent: :destroy

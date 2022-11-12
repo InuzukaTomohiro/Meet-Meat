@@ -36,11 +36,8 @@
       <%= @user.introduction %>
     </div>
     <div class="total_meat col-3">
-      <% @daily_eats.each do |daily_eat| %>
-        <% daily_eat.tweets.each do |tweet| %>
-          <%= tweet.meat_id %>
-        <% end %>
-      <% end %>
+      <%= @meat_type %>
+      <%= @total_weight %>
     </div>
   </div>
 </section>

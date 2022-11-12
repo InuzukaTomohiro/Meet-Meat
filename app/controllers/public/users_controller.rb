@@ -6,6 +6,15 @@ class Public::UsersController < ApplicationController
     @user          = User.find(params[:id])
     @tweets        = @user.tweets.all
     @daily_eats = @user.daily_eats.all
+    @daily_eats.each do |daily_eat|
+      daily_eat.tweets.each do |tweet|
+        meat_id = tweet.meat_id
+        if meat_id == meat_id
+          @total_weight = tweet.once_weight += tweet.once_weight
+        end
+        @meat_type = Meat.find(@meat_id).meat_type
+      end
+    end
   end
 
   def edit
