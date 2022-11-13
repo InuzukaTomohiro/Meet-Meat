@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_10_114404) do
+ActiveRecord::Schema.define(version: 2022_11_10_055700) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 2022_11_10_114404) do
   create_table "tweets", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "meat_id", null: false
-    t.integer "daily_eat_id", null: false
     t.string "body", null: false
     t.integer "once_weight", null: false
     t.datetime "created_at", precision: 6, null: false

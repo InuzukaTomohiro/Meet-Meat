@@ -36,8 +36,10 @@
       <%= @user.introduction %>
     </div>
     <div class="total_meat col-3">
-      <%= @meat_type %>
-      <%= @total_weight %>
+      <% @total_weight.each do |total_weight| %>
+      <%= total_weight %><br>
+      <%= @meat %>
+      <% end %>
     </div>
   </div>
 </section>
