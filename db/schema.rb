@@ -60,12 +60,6 @@ ActiveRecord::Schema.define(version: 2022_11_10_055700) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "daily_eats", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "tweet_id", null: false

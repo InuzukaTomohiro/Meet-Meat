@@ -1,3 +1,10 @@
+<% if flash[:error].present? %>
+  <ul class="errors">
+    <% flash[:error].each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <% tweets.each do |tweet| %>
   <div class="tweets row">
     <div class="col-2">
@@ -5,7 +12,7 @@
         <%= tweet.user.nick_name %><br>
         <%= image_tag tweet.user.get_profile_image(80, 80) %>
       <% end %>
-      <div>
+      <div id="favorite_<%= tweet.id %>">
         <%= render "public/favorites/favorite_btn", tweet: tweet %>
       </div>
       <div>
@@ -31,13 +38,13 @@
     </div>
     <div class="col-10">
       <div class="tweet_content row">
-        <div class="col-2">
-          <%= image_tag tweet.get_meat_image(100, 100) %>
+        <div class="col-3">
+          <%= image_tag tweet.get_meat_image(100, 100), class: "meat_image" %>
         </div>
         <div class="tweet_body col-5">
           <%= tweet.body %>
         </div>
-        <div class="col-5">
+        <div class="col-4">
           <%= tweet.meat.meat_type %>
           <%= tweet.once_weight %><span>グラム</span>
         </div>

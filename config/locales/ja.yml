@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        nick_name: ニックネーム
+        phone_number: 電話番号
+      tweet:
+        meat_id: お肉の種類
+        body: 感想
+        once_weight: 食肉量
+      comment:
+        body: コメント

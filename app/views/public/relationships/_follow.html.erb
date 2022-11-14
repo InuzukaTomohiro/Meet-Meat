@@ -10,17 +10,14 @@
         </div>
         <div class="user-info col-6">
           <div>投稿数：<%= user.tweets.count %></div>
-          <div>
-            <%= link_to user_followings_path(user) do %>
-              フォロー数：<%= user.followings.count %>
+          <!--フォロー数　テンプレート-->
+          <div id="follow_counter"><%= render "public/relationships/counter", user: user %></div>
+          <!--フォローボタン　テンプレート-->
+          <div id="follow_<%= user.id %>">
+            <% if user != current_user %>
+              <%= render "public/relationships/btn", user: user %>
             <% end %>
           </div>
-          <div>
-            <%= link_to user_followers_path(user) do %>
-              フォロワー数：<%= user.followers.count %>
-            <% end %>
-          </div>
-          <div><%= render "public/relationships/btn", user: user %></div>
         </div>
       </div>
     </div>

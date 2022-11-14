@@ -16,19 +16,29 @@
       <% if user_signed_in? %>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <%= link_to "マイページ", user_path(current_user), class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to user_path(current_user), class: "nav-link border border-danger rounded-pill mr-2" do %>
+            <i class="fas fa-home"></i> マイページ
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to "ブックマーク", favorites_index_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to favorites_index_path, class: "nav-link border border-danger rounded-pill mr-2" do %>
+            <i class="fas fa-bookmark"></i> ブックマーク
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to "新規投稿", new_tweet_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to new_tweet_path, class: "nav-link border border-danger rounded-pill mr-2" do %>
+            <i class="fas fa-plus"></i> 新規投稿
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to "投稿一覧", tweets_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to tweets_path, class: "nav-link border border-danger rounded-pill mr-2" do %>
+            <i class="fas fa-th-list"></i> 投稿一覧
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to "通知", notifications_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to notifications_path, class: "nav-link border border-danger rounded-pill mr-2" do %>
+            <i class="fas fa-bell"></i> 通知
+          <% end %>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -40,7 +50,7 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            その他
+            <i class="far fa-question-circle"></i> その他
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
@@ -55,13 +65,17 @@
       <% else %>
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <%= link_to "新規登録", new_user_registration_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to new_user_registration_path, class: "nav-link border border-danger rounded-pill mr-2" do %>
+            <i class="fas fa-user-plus"></i> 新規登録
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to "ログイン", new_user_session_path, class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to new_user_session_path, class: "nav-link border border-danger rounded-pill mr-2" do %>
+            <i class="fas fa-sign-in-alt"></i> ログイン
+          <% end %>
         </li>
         <li class="nav-item">
-          <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "nav-link border border-danger rounded-pill mr-2" %>
+          <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "nav-link border border-danger rounded-pill mr-2" %>
         </li>
       </ul>
       <% end %>

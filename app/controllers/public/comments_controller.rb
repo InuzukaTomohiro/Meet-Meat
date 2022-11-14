@@ -7,27 +7,31 @@ class Public::CommentsController < ApplicationController
   end
 
   def edit
-    @tweet    = Tweet.find(params[:tweet_id])
-    @comment  = Comment.find(params[:id])
+    @tweet          = Tweet.find(params[:tweet_id])
+    @comment        = Comment.find(params[:id])
   end
 
   def create
     tweet            = Tweet.find(params[:tweet_id])
-    comment          = current_user.comments.new(comment_params)
-    comment.tweet_id = tweet.id
-    if comment.save
-      tweet.create_notification_comment(current_user, comment.id)
+    @comment          = current_user.comments.new(comment_params)
+    @comment.tweet_id = tweet.id
+    if @comment.save
+      tweet.create_notification_comment(current_user, @comment.id)
       redirect_to tweets_path
     else
-      render :index
+      flash[:error] = @comment.errors.full_messages
+      redirect_to controller: :tweets, action: :index
     end
   end
 
   def update
-    tweet         = Tweet.find(params[:tweet_id])
-    @tweet_comment = tweet.comments.find_by(params[:id])
-    @tweet_comment.update(comment_params)
-    redirect_to tweet_comments_path(tweet)
+    @tweet         = Tweet.find(params[:tweet_id])
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to tweet_comments_path(@tweet)
+    else
+      render :edit
+    end
   end
 
   def destroy

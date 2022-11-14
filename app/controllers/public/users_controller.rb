@@ -3,12 +3,9 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def show
-    @user  = User.find(params[:id])
-    @tweets = @user.tweets.all
-    @total_weight= @tweets.group(:meat_id).sum(:once_weight)
-    @total_weight.each do |total_weight|
-      @meat = Meat.find(total_weight[0]).meat_type
-    end
+    @user         = User.find(params[:id])
+    @tweets       = @user.tweets.all
+    @total_weight = @tweets.group(:meat_id).sum(:once_weight)
   end
 
   def edit
@@ -17,6 +14,12 @@ class Public::UsersController < ApplicationController
 
   def confirm
     @user = current_user
+  end
+
+  def user_meat
+    @user = User.find(params[:id])
+    @tweets       = @user.tweets.all
+    @total_weight = @tweets.group(:meat_id).sum(:once_weight)
   end
 
   def update

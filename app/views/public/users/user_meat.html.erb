@@ -1,0 +1,14 @@
+<section>
+  <h2><%= @user.nick_name %>さんの食肉量詳細</h2>
+  <table>
+    <% @total_weight.each do |total_weight|%>
+    <tr>
+      <th>
+        <%= image_tag "app/assets/images/ushi.jpeg", size: '100x200' %>
+        <%= Meat.find(total_weight[0]).meat_type %></th>
+      <td><%= number_with_delimiter total_weight[1] %>g</td>
+      <td>a</td>
+    </tr>
+    <% end %>
+  </table>
+</section>

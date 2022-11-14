@@ -10,7 +10,7 @@
           <%= favorite.tweet.user.nick_name %><br>
           <%= image_tag favorite.tweet.user.get_profile_image(80, 80) %>
         <% end %>
-        <div>
+        <div id="favorite_<%= favorite.tweet_id %>">
           <%= render "public/favorites/favorite_btn", tweet: favorite.tweet %>
         </div>
         <div>
@@ -30,13 +30,13 @@
       </div>
       <div class="col-10">
         <div class="tweet_content row">
-          <div class="col-2">
-            <%= image_tag favorite.tweet.get_meat_image(100, 100) %>
+          <div class="col-3">
+            <%= image_tag favorite.tweet.get_meat_image(100, 100), class: "meat_image" %>
           </div>
           <div class="tweet_body col-5">
             <%= favorite.tweet.body %>
           </div>
-          <div class="col-5">
+          <div class="col-4">
             <%= favorite.tweet.meat.meat_type %>
             <%= favorite.tweet.once_weight %>グラム
           </div>

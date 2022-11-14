@@ -1,0 +1,1 @@
+$("#favorite_<%= @favorite.tweet_id %>").html("<%= j(render "public/favorites/favorite_btn", tweet: @favorite.tweet ) %>")

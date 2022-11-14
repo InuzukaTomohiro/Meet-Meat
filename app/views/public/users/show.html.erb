@@ -16,17 +16,11 @@
       </div>
     </div>
     <div class="col-2">
-      <div>
-        <%= link_to user_followings_path(@user) do %>
-          <%= @user.followings.count %>フォロー
-        <% end %>
-      </div>
-      <div>
-        <%= link_to user_followers_path(@user) do %>
-          <%= @user.followers.count %>フォロワー
-        <% end %>
-      </div>
-      <div>
+      <div>投稿数：<%= @user.tweets.count %></div>
+      <!--フォロー数　テンプレート-->
+      <div id="follow_counter"><%= render "public/relationships/counter", user: @user %></div>
+      <!--フォローボタン　テンプレート-->
+      <div id="follow_<%= @user.id %>">
         <% if @user != current_user %>
           <%= render "public/relationships/btn", user: @user %>
         <% end %>
@@ -36,9 +30,9 @@
       <%= @user.introduction %>
     </div>
     <div class="total_meat col-3">
-      <% @total_weight.each do |total_weight| %>
-      <%= total_weight %><br>
-      <%= @meat %>
+      <%= link_to "累計食肉量", user_meat_path(@user) %><br>
+      <% @total_weight.each do |total_weight|%>
+      <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
       <% end %>
     </div>
   </div>
@@ -66,35 +60,36 @@
           投稿日:
           <%= tweet.created_at.strftime("%Y/%m/%d") %>
         </div>
-        <div class="dropdown">
-          <button
-            class="btn btn-warning btn-sm dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >設定
-          </button>
-          <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-            <div>
-              <%= link_to "Tweet編集", edit_tweet_path(tweet) %>
-            </div>
-            <div>
-              <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+        <% if tweet.user == current_user %>
+          <div class="dropdown">
+            <button
+              class="btn btn-warning btn-sm dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >設定
+            </button>
+            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+              <div>
+                <%= link_to "Tweet編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
+              </div>
+              <div>
+                <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
       <div class="col-2">
         <%= image_tag tweet.get_meat_image(100, 100) %>
       </div>
-      <div class="tweet_body col-4">
+      <div class="user_tweet_body col-4">
         <%= tweet.body %>
       </div>
       <div class="col-4">
-        <%= tweet.meat.meat_type %>
-        <%= tweet.once_weight %>
+        <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
       </div>
     </div>
   <% end %>
