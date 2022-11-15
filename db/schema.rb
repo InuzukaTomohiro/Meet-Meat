@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_055700) do
 
   create_table "meats", force: :cascade do |t|
     t.string "meat_type", null: false
+    t.integer "head_weight", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

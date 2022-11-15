@@ -1,0 +1,19 @@
+<section>
+  <div class="row">
+    <div class="col-11"><h2>お肉一覧</h2></div>
+    <%= link_to new_admin_meat_path do %>
+      <div class="new-btn">
+        <i class="fas fa-plus new_meat"></i>
+      </div>
+    <% end %>
+  </div>
+  <div class="meat-box">
+    <% @meats.each do |meat| %>
+      <div class="meat_item">
+        <%= image_tag meat.get_meat_profile_image(100, 100), class: "meat_profile_image" %><br>
+        <strong><%= meat.meat_type %></strong><br>
+        <%= link_to "編集", edit_admin_meat_path(meat), class: "btn btn-sm btn-success my-2" %>
+      </div>
+    <% end %>
+  </div>
+</section>

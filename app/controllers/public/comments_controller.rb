@@ -12,14 +12,15 @@ class Public::CommentsController < ApplicationController
   end
 
   def create
-    tweet            = Tweet.find(params[:tweet_id])
+    @tweet            = Tweet.find(params[:tweet_id])
     @comment          = current_user.comments.new(comment_params)
-    @comment.tweet_id = tweet.id
+    @comment.tweet_id = @tweet.id
     if @comment.save
-      tweet.create_notification_comment(current_user, @comment.id)
-      redirect_to tweets_path
+      @tweet.create_notification_comment(current_user, @comment.id)
+      render :create
     else
-      flash[:error] = @comment.errors.full_messages
+      # flash[:error] = @comment.errors.full_messages
+      flash[:error] = {id: @tweet.id, error: @comment.errors.full_messages}
       redirect_to controller: :tweets, action: :index
     end
   end

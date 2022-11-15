@@ -13,7 +13,7 @@
         <div id="favorite_<%= favorite.tweet_id %>">
           <%= render "public/favorites/favorite_btn", tweet: favorite.tweet %>
         </div>
-        <div>
+        <div id="comment_counter_<%= favorite.tweet_id %>">
           <%= link_to tweet_comments_path(favorite.tweet) do %>
             コメント数:
             <%= favorite.tweet.comments.count %>

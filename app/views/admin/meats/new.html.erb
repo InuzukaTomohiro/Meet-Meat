@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class=text-center>ミート新規登録</h2>
+    <%= form_with model: @meat, url: admin_meats_path do |f| %>
+      <%= render "layouts/errors", obj: @meat %>
+      <table class="form">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= f.label :meat_type, "お肉の種類" %></td>
+            <td><%= f.text_field :meat_type, autofocus: true, placeholder: "〇〇肉。", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :head_weight, "一頭分の重量" %></td>
+            <td><%= f.text_field :head_weight, autofocus: true, placeholder: "100,000(グラム)。", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :meat_profile_image, "動物の写真" %></td>
+            <td><%= f.file_field :meat_profile_image, accept: "image/*", class: "form-control-file" %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "新規登録", class: "btn btn-lg btn-success" %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>
+

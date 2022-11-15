@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -36,7 +37,7 @@ Rails.application.routes.draw do
     root "homes#top"
     resources :users,  only: [:index, :show, :edit, :update]
     resources :tweets, only: [:index, :show, :destroy]
-    resources :meats,  only: [:index, :create, :edit, :update]
+    resources :meats,  only: [:new, :index, :create, :edit, :update]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

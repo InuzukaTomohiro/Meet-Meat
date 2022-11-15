@@ -10,3 +10,6 @@ ja:
         once_weight: 食肉量
       comment:
         body: コメント
+      meat:
+        meat_type: お肉の種類
+        head_weight: 一頭分の重量

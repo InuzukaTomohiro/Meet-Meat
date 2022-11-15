@@ -1,14 +1,39 @@
-<section>
+<section class="row">
   <h2><%= @user.nick_name %>さんの食肉量詳細</h2>
-  <table>
-    <% @total_weight.each do |total_weight|%>
-    <tr>
-      <th>
-        <%= image_tag "app/assets/images/ushi.jpeg", size: '100x200' %>
-        <%= Meat.find(total_weight[0]).meat_type %></th>
-      <td><%= number_with_delimiter total_weight[1] %>g</td>
-      <td>a</td>
-    </tr>
-    <% end %>
+
+  <table class="meat_table col-12">
+    <thead>
+      <tr>
+        <th class="col-4" colspan=2>お肉の種類</th>
+        <th class="col-4">累計食肉量</th>
+        <th class="col-4">頭数換算</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @total_weight.each do |total_weight|%>
+        <!--meatにお肉の種類を代入-->
+        <% meat = Meat.find(total_weight[0]) %>
+        <!--ratioに累計食肉量を一頭あたりの比率に換算（小数）-->
+        <% ratio = (total_weight[1]).fdiv(meat.head_weight) %>
+        <tr class="my-3">
+          <td><%= image_tag meat.get_meat_profile_image(100, 100) %></td>
+          <td><strong><%= meat.meat_type %></strong></td>
+          <td><%= number_with_delimiter total_weight[1] %>g</td>
+          <td>
+            <!--1頭分以上の累計食肉量の場合-->
+            <% if ratio >= 1 %>
+              <!-- 商と余りに分割-->
+              <% head_count = ratio.divmod(1) %>
+              <%= head_count[0] %>頭分と<%= head_count[0] + 1 %>頭目の
+              <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>
+            <!--1頭分未満の累計食肉量の場合-->
+            <% else %>
+              1頭目の
+              <%= (ratio * 100).round(2).to_s + "%のお肉を食べました。" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </section>

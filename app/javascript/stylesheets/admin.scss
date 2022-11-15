@@ -44,3 +44,40 @@
   overflow-wrap: break-word;
   overflow-y: scroll;
 }
+
+.meat-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.meat_item {
+  width: 150px;
+  background-color: wheat;
+  text-align: center;
+  margin: 4px;
+}
+
+.meat_profile_image {
+  padding: 10px 0;
+}
+
+.new-btn {
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  box-shadow: 3px 3px 0px 0 grey;
+}
+
+.new_meat {
+  position: absolute;
+  top: 17px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  color: grey;
+  font-size: 15px;
+}
