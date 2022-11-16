@@ -1,7 +1,7 @@
 <section>
   <div class="d-flex align-items-end">
     <h2>ブックマーク</h2>
-    <h4>(全<%= @favorites.count %>件)</h4>
+    <h4>(<%= @favorites.count %>件)</h4>
   </div>
   <% @favorites.each do |favorite| %>
     <div class="tweets row">
@@ -44,5 +44,6 @@
       </div>
     </div>
   <% end %>
+  <%= paginate @favorites %>
 </section>
 

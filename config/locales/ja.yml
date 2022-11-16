@@ -2,14 +2,20 @@ ja:
   activerecord:
     attributes:
       user:
-        nick_name: ニックネーム
-        phone_number: 電話番号
+        nick_name: "ニックネーム"
+        phone_number: "電話番号"
       tweet:
-        meat_id: お肉の種類
-        body: 感想
-        once_weight: 食肉量
+        meat_id: "お肉の種類"
+        body: "感想"
+        once_weight: "食肉量"
       comment:
-        body: コメント
+        body: "コメント"
       meat:
-        meat_type: お肉の種類
-        head_weight: 一頭分の重量
+        meat_type: "お肉の種類"
+        head_weight: "1頭分の重量"
+  views:
+    pagination:
+      first: "最初"
+      last: "最後"
+      previous: "前"
+      next: "次"

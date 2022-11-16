@@ -26,6 +26,7 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user)
+      flash[:notice] = "登録情報の編集が完了しました。"
     else
       render :edit
     end

@@ -28,9 +28,10 @@ class Public::CommentsController < ApplicationController
 
   def update
     @tweet         = Tweet.find(params[:tweet_id])
-    @comment = Comment.find(params[:id])
+    @comment       = Comment.find(params[:id])
     if @comment.update(comment_params)
       redirect_to tweet_comments_path(@tweet)
+      flash[:notice] = "コメントの編集が完了しました。"
     else
       render :edit
     end

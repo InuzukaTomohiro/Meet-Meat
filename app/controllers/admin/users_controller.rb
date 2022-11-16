@@ -13,6 +13,7 @@ class Admin::UsersController < ApplicationController
     user = User.find(params[:id])
     user.update(user_params)
     redirect_to admin_users_path
+    flash[:notice] = "ユーザー情報の編集が完了しました。"
   end
 
   private

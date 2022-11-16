@@ -2,7 +2,7 @@ class Public::FavoritesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @favorites     = current_user.favorites.all
+    @favorites     = current_user.favorites.all.order(created_at: :desc).page(params[:page]).per(5)
     @tweet_comment = Comment.new
   end
 

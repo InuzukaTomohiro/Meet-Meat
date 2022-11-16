@@ -1,4 +1,7 @@
 <%= form_with model: @user, url: admin_user_path(@user) do |f| %>
+  <%= render "layouts/errors", obj: @user %>
+  <table>
+  </table>
   <div class="field">
     <%= f.label :nick_name, "ニックネーム" %><br>
     <%= f.text_field :nick_name, autofocus: true, placeholder: "ニックネーム" %>
