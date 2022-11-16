@@ -4,7 +4,6 @@ class Tweet < ApplicationRecord
   belongs_to :meat
   has_many   :comments,      dependent: :destroy
   has_many   :favorites,     dependent: :destroy
-  has_many   :user_meats,    dependent: :destroy
   has_many   :notifications, dependent: :destroy
 
   validates :body,        presence: :true

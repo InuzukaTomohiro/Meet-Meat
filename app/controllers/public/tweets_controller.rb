@@ -18,6 +18,7 @@ class Public::TweetsController < ApplicationController
     @tweet = current_user.tweets.new(tweet_params)
     if @tweet.save
       redirect_to tweets_path
+      flash[:notice] = "新規投稿が完了しました。"
     else
       render :new
     end
@@ -27,14 +28,17 @@ class Public::TweetsController < ApplicationController
     @tweet = Tweet.find(params[:id])
     if @tweet.update(tweet_params)
       redirect_to user_path(@tweet.user)
+      flash[:notice] = "投稿の編集が完了しました。"
     else
       render :edit
     end
   end
 
   def destroy
-    tweet = Tweet.find(params[:id]).destroy
+    tweet = Tweet.find(params[:id])
+    tweet.destroy
     redirect_to user_path(tweet.user)
+    flash[:notice] = "投稿の削除が完了しました。"
   end
 
   private

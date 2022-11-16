@@ -4,7 +4,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user         = User.find(params[:id])
-    @tweets       = @user.tweets.all
+    @tweets       = @user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
     @total_weight = @tweets.group(:meat_id).sum(:once_weight)
   end
 

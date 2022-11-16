@@ -22,6 +22,7 @@ class Public::CommentsController < ApplicationController
       # flash[:error] = @comment.errors.full_messages
       flash[:error] = {id: @tweet.id, error: @comment.errors.full_messages}
       redirect_to controller: :tweets, action: :index
+      # render :create_error
     end
   end
 
