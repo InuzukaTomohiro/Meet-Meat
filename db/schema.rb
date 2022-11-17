@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_055700) do
     t.string "body", null: false
     t.integer "once_weight", null: false
     t.boolean "on_display", default: true, null: false
+    t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_admin!
   layout "layouts/admin_application"
 
   def index
@@ -6,7 +7,7 @@ class Admin::UsersController < ApplicationController
     @users_all = User.all
   end
 
-  def close
+  def no_active
     @users      = User.all.page(params[:page]).per(10)
     @close_user = User.where(is_active: false)
   end

@@ -35,10 +35,11 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "homes#top"
-    get "users/close"
+    get "users/no_active"
+    get "tweets/no_active"
     resources :users,  only: [:index, :show, :edit, :update]
     resources :meats,  only: [:new, :index, :create, :edit, :update]
-    resources :tweets, only: [:index, :show, :destroy] do
+    resources :tweets, only: [:index, :update, :destroy] do
       resources :comments, only: [:index, :edit, :update, :destroy]
     end
   end
