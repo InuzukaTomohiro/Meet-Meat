@@ -37,10 +37,11 @@ Rails.application.routes.draw do
     root "homes#top"
     get "users/no_active"
     get "tweets/no_active"
+    patch "users/:id/update_status" => "users#update_status", as: "users_update_status"
     resources :users,  only: [:index, :show, :edit, :update]
     resources :meats,  only: [:new, :index, :create, :edit, :update]
     resources :tweets, only: [:index, :update, :destroy] do
-      resources :comments, only: [:index, :edit, :update, :destroy]
+      resources :comments, only: [:index, :update, :destroy]
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

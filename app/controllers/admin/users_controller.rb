@@ -23,6 +23,19 @@ class Admin::UsersController < ApplicationController
     flash[:notice] = "ユーザー情報の編集が完了しました。"
   end
 
+  def update_status
+    user = User.find(params[:id])
+    if user.is_active?
+      user.update(is_active: false)
+      redirect_to admin_users_path
+      flash[:notice] = "ユーザーを無効にしました。"
+    else
+      user.update(is_active: true)
+      redirect_to admin_users_path
+      flash[:notice] = "ユーザーを有効にしました。"
+    end
+  end
+
   private
 
   def user_params

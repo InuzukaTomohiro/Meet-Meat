@@ -9,11 +9,14 @@ class Admin::CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    if @comment.update(comment_params)
-      redirect_to admin_comments_path
-      flash[:notice] = "ID<%= @comment.id %>のコメントの編集が完了しました。"
+    if @comment.is_active?
+      @comment.update(is_active: false)
+      redirect_to admin_tweet_comments_path(@comment.tweet)
+      flash[:notice] = "コメントを無効にしました。"
     else
-      render :edit
+      @comment.update(is_active: true)
+      redirect_to admin_tweet_comments_path(@comment.tweet)
+      flash[:notice] = "コメントを有効にしました。"
     end
   end
 
@@ -22,12 +25,6 @@ class Admin::CommentsController < ApplicationController
     Comment.find(params[:id]).destroy
     redirect_to admin_tweet_comments_path(tweet)
     flash[:notice] = "コメントの削除が完了しました。"
-  end
-
-  private
-
-  def comment_params
-    params.require(:comment).permit(:body)
   end
 
 end

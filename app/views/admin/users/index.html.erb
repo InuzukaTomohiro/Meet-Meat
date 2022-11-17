@@ -7,12 +7,14 @@
   <% @users.each do |user| %>
     <div class="admin_users row">
       <div class="user_status col-1">
+        <%= link_to admin_users_update_status_path(user), method: :patch, class: "text-dark" do %>
         <% if user.is_active? %>
   				<div class="active"><strong>有効</strong></div>
   			<% else %>
   				<div class="no_active"><strong>無効</strong></div>
   			<% end %>
-  			<%= link_to "編集", edit_admin_user_path(user), class: "btn btn-sm btn-info" %>
+  			<% end %>
+  			<%= link_to "詳細", edit_admin_user_path(user), class: "btn btn-sm btn-info" %>
       </div>
       <div class="col-2">
         <%= image_tag user.get_profile_image(100, 100), class: "pl-4" %>
