@@ -2,7 +2,13 @@ class Admin::UsersController < ApplicationController
   layout "layouts/admin_application"
 
   def index
-    @users = User.all
+    @users     = User.all.page(params[:page]).per(10)
+    @users_all = User.all
+  end
+
+  def close
+    @users      = User.all.page(params[:page]).per(10)
+    @close_user = User.where(is_active: false)
   end
 
   def edit

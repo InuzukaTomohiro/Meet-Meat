@@ -1,11 +1,14 @@
+<section>
+  <h2>投稿</h2>
+</section>
 <% @tweets.each do |tweet| %>
   <div class="tweets row">
     <div class="text-center col-1">
       No.<%= tweet.id %>
-      <%= link_to "削除", admin_tweet_path(tweet), method: :delete, class: "btn btn-md btn-danger", data: {confirm: "コメントを削除しますか？"} %>
+      <%= link_to "削除", admin_tweet_path(tweet), method: :delete, class: "btn btn-md btn-danger", data: {confirm: "投稿を削除しますか？"} %>
     </div>
     <div class="col-2">
-      <%= link_to user_path(tweet.user) do %>
+      <%= link_to edit_admin_user_path(tweet.user) do %>
         <%= tweet.user.nick_name %><br>
         <%= image_tag tweet.user.get_profile_image(80, 80) %>
       <% end %>
@@ -15,7 +18,7 @@
           <%= tweet.favorites.count %>
         </div>
         <div>
-          <%= link_to tweet_comments_path(tweet) do %>
+          <%= link_to admin_tweet_comments_path(tweet) do %>
             コメント数:
             <%= tweet.comments.count %>
           <% end %>
@@ -38,3 +41,4 @@
     </div>
   </div>
 <% end %>
+<%= paginate @tweets %>

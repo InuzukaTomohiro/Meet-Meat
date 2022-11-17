@@ -17,6 +17,7 @@ class Admin::MeatsController < ApplicationController
     @meat = Meat.new(meat_params)
     if @meat.save
       redirect_to admin_meats_path
+      flash[:notice] = "ミートの登録が完了しました。"
     else
       render :new
     end
@@ -26,6 +27,7 @@ class Admin::MeatsController < ApplicationController
     @meat = Meat.find(params[:id])
     if @meat.update(meat_params)
       redirect_to admin_meats_path
+      flash[:notice] = "ミートの編集が完了しました。"
     else
       render :edit
     end

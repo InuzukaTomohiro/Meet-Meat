@@ -13,8 +13,9 @@
       <%= render "admin/header" %>
     </header>
     <main>
+      <%= flash[:notice] %>
       <div class="container mt-5">
-      <%= yield %>
+        <%= yield %>
       </div>
     </main>
     <footer class="admin_footer fixed-bottom">

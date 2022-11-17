@@ -1,10 +1,4 @@
-<section>
-  <div class="d-flex align-items-end">
-    <h2>ユーザー　一覧</h2>
-    <h5 class="ml-5">現在の登録者は、<%= @users_all.count %>名です。</h5>
-    <%= link_to "無効ユーザー　一覧", admin_users_close_path, class: "btn btn-md btn-outline-danger mb-1" %>
-  </div>
-  <% @users.each do |user| %>
+<% @users.each do |user| %>
     <div class="admin_users row">
       <div class="user_status col-1">
         <% if user.is_active? %>
@@ -33,5 +27,3 @@
       </div>
     </div>
   <% end %>
-  <%= paginate @users %>
-</section>

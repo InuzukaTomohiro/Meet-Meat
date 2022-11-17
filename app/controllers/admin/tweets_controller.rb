@@ -2,7 +2,7 @@ class Admin::TweetsController < ApplicationController
   layout "layouts/admin_application"
 
   def index
-    @tweets = Tweet.all
+    @tweets = Tweet.all.page(params[:page]).per(10)
   end
 
   def destroy

@@ -32,7 +32,7 @@
     <div class="total_meat col-3">
       <%= link_to "累計食肉量", user_meat_path(@user) %><br>
       <% @total_weight.each do |total_weight|%>
-      <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
+        <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
       <% end %>
     </div>
   </div>
@@ -44,54 +44,121 @@
     <h5>(<%= @tweets.count %>件)</h5>
   </div>
   <% @tweets.each do |tweet| %>
-    <div class="tweets row">
-      <div class="col-2">
-        <div>
-          いいね数:
-          <%= tweet.favorites.count %>
-        </div>
-        <div>
-          <%= link_to tweet_comments_path(tweet) do %>
-            コメント数:
-            <%= tweet.comments.count %>
-          <% end %>
-        </div>
-        <div>
-          投稿日:
-          <%= tweet.created_at.strftime("%Y/%m/%d") %>
-        </div>
-        <% if tweet.user == current_user %>
-          <div class="dropdown">
-            <button
-              class="btn btn-warning btn-sm dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >設定
-            </button>
-            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-              <div>
-                <%= link_to "Tweet編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
-              </div>
-              <div>
-                <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+    <% if tweet.user == current_user %>
+      <div class="tweets row">
+        <div class="col-2">
+          <div>
+            いいね数:
+            <%= tweet.favorites.count %>
+          </div>
+          <div>
+            <%= link_to tweet_comments_path(tweet) do %>
+              コメント数:
+              <%= tweet.comments.count %>
+            <% end %>
+          </div>
+          <div>
+            投稿日:
+            <%= tweet.created_at.strftime("%Y/%m/%d") %>
+          </div>
+          <% if tweet.user == current_user %>
+            <div id="tweet_set" class="dropdown">
+              <button
+                class="btn btn-warning btn-sm dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >設定
+              </button>
+              <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                <div>
+                  <%= link_to "Tweet編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
+                </div>
+                <div>
+                  <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+                </div>
               </div>
             </div>
+            <div class="display_set">
+              <% if tweet.on_display? %>
+                <div class="btn btn-sm btn-outline-primary">公開中</div>
+              <% else %>
+                <div class="btn btn-sm btn-outline-danger">非公開</div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-2">
+          <%= image_tag tweet.get_meat_image(100, 100) %>
+        </div>
+        <div class="user_tweet_body col-4">
+          <%= tweet.body %>
+        </div>
+        <div class="col-4">
+          <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
+        </div>
+      </div>
+    <% else %>
+      <% if tweet.on_display? %>
+        <div class="tweets row">
+          <div class="col-2">
+            <div>
+              いいね数:
+              <%= tweet.favorites.count %>
+            </div>
+            <div>
+              <%= link_to tweet_comments_path(tweet) do %>
+                コメント数:
+                <%= tweet.comments.count %>
+              <% end %>
+            </div>
+            <div>
+              投稿日:
+              <%= tweet.created_at.strftime("%Y/%m/%d") %>
+            </div>
+            <% if tweet.user == current_user %>
+              <div id="tweet_set" class="dropdown">
+                <button
+                  class="btn btn-warning btn-sm dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >設定
+                </button>
+                <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+                  <div>
+                    <%= link_to "Tweet編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
+                  </div>
+                  <div>
+                    <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+                  </div>
+                </div>
+              </div>
+              <div class="display_set">
+                <% if tweet.on_display? %>
+                  <div class="btn btn-sm btn-outline-primary">公開中</div>
+                <% else %>
+                  <div class="btn btn-sm btn-outline-danger">非公開</div>
+                <% end %>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-      <div class="col-2">
-        <%= image_tag tweet.get_meat_image(100, 100) %>
-      </div>
-      <div class="user_tweet_body col-4">
-        <%= tweet.body %>
-      </div>
-      <div class="col-4">
-        <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
-      </div>
-    </div>
+          <div class="col-2">
+            <%= image_tag tweet.get_meat_image(100, 100) %>
+          </div>
+          <div class="user_tweet_body col-4">
+            <%= tweet.body %>
+          </div>
+          <div class="col-4">
+            <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
   <%= paginate @tweets %>
 </section>

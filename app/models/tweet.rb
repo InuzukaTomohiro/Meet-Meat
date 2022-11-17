@@ -7,7 +7,6 @@ class Tweet < ApplicationRecord
   has_many   :notifications, dependent: :destroy
 
   validates :body,        presence: :true
-  validates :meat_id,     presence: :true
   validates :once_weight, presence: :true, numericality: :only_integer
 
   has_one_attached :meat_image

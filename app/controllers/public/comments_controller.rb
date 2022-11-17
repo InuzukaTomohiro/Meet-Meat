@@ -17,12 +17,9 @@ class Public::CommentsController < ApplicationController
     @comment.tweet_id = @tweet.id
     if @comment.save
       @tweet.create_notification_comment(current_user, @comment.id)
-      render :create
+      @errors = []
     else
-      # flash[:error] = @comment.errors.full_messages
-      flash[:error] = {id: @tweet.id, error: @comment.errors.full_messages}
-      redirect_to controller: :tweets, action: :index
-      # render :create_error
+      @errors = @comment.errors.full_messages
     end
   end
 

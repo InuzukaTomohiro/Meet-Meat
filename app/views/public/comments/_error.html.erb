@@ -1,3 +1,4 @@
-<% if flash[:error].present? && flash[:error]["id"] == tweet.id %>
-  <%= flash[:error]["error"][0] %>
-<% end %>
+<% errors.each do |error| %>
+  <%= error %>
+<%end%>
+

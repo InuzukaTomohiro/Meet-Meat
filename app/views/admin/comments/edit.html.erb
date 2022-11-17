@@ -1,0 +1,8 @@
+<section>
+  <h2>コメント編集</h2>
+  <%= render "layouts/errors", obj: @comment %>
+  <%= form_with model: [tweet, tweet_comment], local: false do |f| %>
+    <%= f.text_area :body, placeholder: "コメント", class: "form-control form-control-sm comment_style" %>
+    <%= f.submit "コメントする", class: "btn btn-sm btn-success mt-2" %>
+  <% end %>
+</section>

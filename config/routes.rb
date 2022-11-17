@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users,skip: [:passwords], controllers: {
     registrations: "public/registrations",
     sessions: 'public/sessions'
@@ -35,9 +35,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root "homes#top"
+    get "users/close"
     resources :users,  only: [:index, :show, :edit, :update]
-    resources :tweets, only: [:index, :show, :destroy]
     resources :meats,  only: [:new, :index, :create, :edit, :update]
+    resources :tweets, only: [:index, :show, :destroy] do
+      resources :comments, only: [:index, :edit, :update, :destroy]
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

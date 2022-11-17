@@ -44,7 +44,7 @@ class Public::TweetsController < ApplicationController
   private
 
   def tweet_params
-    params.require(:tweet).permit(:meat_id, :body, :once_weight, :meat_image)
+    params.require(:tweet).permit(:meat_id, :body, :once_weight, :meat_image, :on_display)
   end
 
 end

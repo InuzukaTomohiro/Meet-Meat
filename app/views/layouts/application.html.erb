@@ -11,7 +11,7 @@
 
   <body>
     <%= render "public/header" %>
-    <%= notice %>
+    <%= flash[:notice] %>
     <div class="container mt-5">
       <%= yield %>
     </div>

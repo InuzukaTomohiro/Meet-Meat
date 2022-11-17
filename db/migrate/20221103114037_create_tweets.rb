@@ -6,6 +6,7 @@ class CreateTweets < ActiveRecord::Migration[6.1]
       t.integer :meat_id,      null: false
       t.string  :body,         null: false
       t.integer :once_weight,  null: false
+      t.boolean :on_display,   null: false, default: true
       t.timestamps
     end
   end

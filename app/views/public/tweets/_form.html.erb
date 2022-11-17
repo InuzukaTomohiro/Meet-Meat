@@ -18,11 +18,20 @@
       </tr>
       <tr>
         <td><%= f.label :meat_id, "お肉の種類" %></td>
-        <td><%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type), {include_blank: '選択してください'}, {class: "form-control"} %></td>
+        <td><%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type), {include_blank: "選択してください"}, {class: "form-control"} %></td>
       </tr>
       <tr>
         <td><%= f.label :once_weight, "お肉の量(グラム)" %></td>
         <td><%= f.text_field :once_weight, placeholder: "300", class: "form-control" %></td>
+      </tr>
+      <tr>
+        <td><%= f.label :on_display, "公開設定" %></td>
+        <td>
+          <%= f.radio_button :on_display, :true, checked: true %>
+          <%= f.label :on_display, "公開" %>
+          <%= f.radio_button :on_display, :false %>
+          <%= f.label :on_display, "非公開" %>
+        </td>
       </tr>
       <tr>
         <td></td>

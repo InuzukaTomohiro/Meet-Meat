@@ -4,6 +4,7 @@ class Public::RelationshipsController < ApplicationController
   def followings
     @user            = User.find(params[:user_id])
     @following_users = @user.followings
+    # @total_weight = @uesr.tweets.group(:meat_id).sum(:once_weight)
   end
 
   def followers

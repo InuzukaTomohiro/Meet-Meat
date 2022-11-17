@@ -24,8 +24,13 @@
             <% if ratio >= 1 %>
               <!-- 商と余りに分割-->
               <% head_count = ratio.divmod(1) %>
-              <%= head_count[0] %>頭分と<%= head_count[0] + 1 %>頭目の
-              <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>
+              <% unless meat.meat_type == "鶏肉" %>
+                <%= head_count[0] %>頭分と<%= head_count[0] + 1 %>頭目の
+                <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>
+              <% else %>
+                <%= head_count[0] %>羽分と<%= head_count[0] + 1 %>羽目の
+                <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>
+              <% end %>
             <!--1頭分未満の累計食肉量の場合-->
             <% else %>
               1頭目の
