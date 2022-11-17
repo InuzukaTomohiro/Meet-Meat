@@ -1,7 +1,7 @@
 <section>
   <div class="d-flex align-items-end">
     <h2>無効ユーザー　一覧</h2>
-    <h5 class="ml-5">現在の無効ユーザーは、<%= @close_user.count %>名です。</h5>
+    <h5 class="ml-5">現在の無効ユーザーは、<%= @no_active_users.count %>名です。</h5>
     <%= link_to "ユーザー　一覧", admin_users_path, class: "btn btn-md btn-outline-success mb-1" %>
   </div>
   <% @users.each do |user| %>

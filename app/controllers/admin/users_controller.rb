@@ -8,8 +8,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def no_active
-    @users      = User.all.page(params[:page]).per(10)
-    @close_user = User.where(is_active: false)
+    @users           = User.all.page(params[:page]).per(10)
+    @no_active_users = User.where(is_active: false)
   end
 
   def edit

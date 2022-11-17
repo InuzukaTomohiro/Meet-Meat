@@ -1,12 +1,14 @@
 <div class="tweets row">
   <div class="text-center col-1">
     No.<%= tweet.id %>
-    <% if tweet.is_active? %>
-			<div class="active"><strong>有効</strong></div>
-		<% else %>
-			<div class="no_active"><strong>無効</strong></div>
+    <%= link_to admin_tweet_path(tweet), method: :patch, class: "text-dark" do %>
+      <% if tweet.is_active? %>
+  			<div class="active "><strong>有効</strong></div>
+  		<% else %>
+  			<div class="no_active"><strong>無効</strong></div>
+  		<% end %>
 		<% end %>
-    <%= link_to "削除", admin_tweet_path(tweet), method: :delete, class: "btn btn-md btn-danger", data: {confirm: "投稿を削除しますか？"} %>
+    <%= link_to "削除", admin_tweet_path(tweet), method: :delete, class: "btn btn-md btn-outline-danger mt-4", data: {confirm: "投稿を削除しますか？"} %>
   </div>
   <div class="col-2">
     <%= link_to edit_admin_user_path(tweet.user) do %>

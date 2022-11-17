@@ -8,17 +8,16 @@ class Admin::TweetsController < ApplicationController
   end
 
   def no_active
-    @tweets     = Tweet.all.page(params[:page]).per(10)
-    @tweets_all = Tweet.all
+    @tweets           = Tweet.all.page(params[:page]).per(10)
+    @no_active_tweets = Tweet.where(is_active: false)
   end
 
   def update
     tweet = Tweet.find(params[:id])
-    status = tweet.find_by(is_active)
-    if status == true
-      tweet(is_active: false).update(tweet_params)
-    elsif status == false
-      tweet(is_active: true).update(tweet_params)
+    if tweet.is_active == true
+      tweet.update(is_active: false)
+    elsif tweet.is_active == false
+      tweet.update(is_active: true)
     end
     redirect_to admin_tweets_path
   end
