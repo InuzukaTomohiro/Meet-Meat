@@ -1,0 +1,7 @@
+<%= link_to admin_tweet_comment_path(tweet, tweet_comment), method: :patch, remote: true, class: "text-dark" do %>
+  <% if tweet_comment.is_active? %>
+		<div class="active "><strong>有効</strong></div>
+	<% else %>
+		<div class="no_active"><strong>無効</strong></div>
+	<% end %>
+<% end %>

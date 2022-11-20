@@ -24,15 +24,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def update_status
-    user = User.find(params[:id])
-    if user.is_active?
-      user.update(is_active: false)
-      redirect_to admin_users_path
-      flash[:notice] = "ユーザーを無効にしました。"
+    @user = User.find(params[:id])
+    if @user.is_active?
+      @user.update(is_active: false)
     else
-      user.update(is_active: true)
-      redirect_to admin_users_path
-      flash[:notice] = "ユーザーを有効にしました。"
+      @user.update(is_active: true)
     end
   end
 

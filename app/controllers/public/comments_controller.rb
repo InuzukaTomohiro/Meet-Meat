@@ -35,8 +35,9 @@ class Public::CommentsController < ApplicationController
   end
 
   def destroy
+    @tweet          = Tweet.find(params[:tweet_id])
+    @tweet_comments = @tweet.comments.all
     Comment.find(params[:id]).destroy
-    redirect_to tweet_comments_path(params[:tweet_id])
   end
 
   private

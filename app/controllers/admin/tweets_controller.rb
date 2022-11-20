@@ -13,13 +13,12 @@ class Admin::TweetsController < ApplicationController
   end
 
   def update
-    tweet = Tweet.find(params[:id])
-    if tweet.is_active?
-      tweet.update(is_active: false)
+    @tweet = Tweet.find(params[:id])
+    if @tweet.is_active?
+      @tweet.update(is_active: false)
     else
-      tweet.update(is_active: true)
+      @tweet.update(is_active: true)
     end
-    redirect_to admin_tweets_path
   end
 
   def destroy

@@ -1,0 +1,23 @@
+<div class="admin_users row">
+  <div class="user_status col-1">
+    <div id="display_<%= user.id %>"><%= render "admin/users/active", user: user %></div>
+		<%= link_to "編集", edit_admin_user_path(user), class: "btn btn-sm btn-info" %>
+  </div>
+  <div class="col-2">
+    <%= image_tag user.get_profile_image(100, 100), class: "pl-4" %>
+  </div>
+    <div class="col-2">
+      <div>ID: <%= user.id %></div>
+      <div><%= user.nick_name %></div>
+      <div>フォロー:<%= user.followings.count %></div>
+      <div>フォロワー:<%= user.followers.count %></div>
+      <div>登録日:<%= user.created_at.strftime("%Y/%m/%d") %></div>
+    </div>
+  <div class="introduction col-4">
+    自己紹介文:
+    <%= user.introduction %>
+  </div>
+  <div class="total_meat col-3">
+    累計食肉欄
+  </div>
+</div>

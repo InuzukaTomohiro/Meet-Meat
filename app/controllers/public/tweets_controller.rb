@@ -34,10 +34,19 @@ class Public::TweetsController < ApplicationController
     end
   end
 
+  def update_display
+    @tweet = Tweet.find(params[:id])
+    if @tweet.on_display?
+      @tweet.update(on_display: false)
+    else
+      @tweet.update(on_display: true)
+    end
+  end
+
   def destroy
-    tweet = Tweet.find(params[:id])
-    tweet.destroy
-    redirect_to user_path(tweet.user)
+    @tweet = Tweet.find(params[:id])
+    @tweet.destroy
+    redirect_to user_path(@tweet.user)
     flash[:notice] = "投稿の削除が完了しました。"
   end
 

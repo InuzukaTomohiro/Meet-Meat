@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get "tweet_search"  => "searches#tweet_search"
     get "user_search"   => "searches#user_search"
     get "user_meat/:id" => "users#user_meat", as: "user_meat"
+    patch "tweet/:id/update_display" => "tweets#update_display", as: "tweet_update_display"
     resources :notifications, only: [:index]
     resources :users, only: [:index, :show, :edit, :update, :destroy] do
       resource :relationships, only: [:create, :destroy]

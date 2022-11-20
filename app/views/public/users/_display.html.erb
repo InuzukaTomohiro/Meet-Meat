@@ -1,0 +1,7 @@
+<%= link_to tweet_update_display_path(tweet), method: :patch, remote: true do %>
+  <% if tweet.on_display? %>
+    <div class="btn btn-sm btn-outline-primary">公開中</div>
+  <% else %>
+    <div class="btn btn-sm btn-outline-danger">非公開</div>
+  <% end %>
+<% end %>

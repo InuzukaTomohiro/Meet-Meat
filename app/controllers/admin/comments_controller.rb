@@ -8,15 +8,12 @@ class Admin::CommentsController < ApplicationController
 
 
   def update
+    @tweet   = Tweet.find(params[:tweet_id])
     @comment = Comment.find(params[:id])
     if @comment.is_active?
       @comment.update(is_active: false)
-      redirect_to admin_tweet_comments_path(@comment.tweet)
-      flash[:notice] = "コメントを無効にしました。"
     else
       @comment.update(is_active: true)
-      redirect_to admin_tweet_comments_path(@comment.tweet)
-      flash[:notice] = "コメントを有効にしました。"
     end
   end
 

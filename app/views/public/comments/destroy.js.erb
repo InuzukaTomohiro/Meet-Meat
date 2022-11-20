@@ -1,1 +1,1 @@
-$("#comment_error_<%= @tweet.id %>").html("<%= j(render "public/comments/error", errors: @errors) %>")
+$("#comments").html("<%= j(render "public/comments/index", tweet_comments: @tweet_comments, tweet: @tweet) %>")

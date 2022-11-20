@@ -1,0 +1,1 @@
+$("#display_<%= @comment.id %>").html("<%= j(render "admin/comments/active", tweet: @tweet, tweet_comment: @comment ) %>")
