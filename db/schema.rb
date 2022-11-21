@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2022_11_10_055700) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "nick_name", null: false
-    t.text "introduction", default: "よろしくお願いします。", null: false
+    t.string "introduction", default: "よろしくお願いします。", null: false
     t.string "phone_number", null: false
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
