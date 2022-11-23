@@ -2,7 +2,7 @@ class Meat < ApplicationRecord
 
   has_many :tweets
 
-  validates :meat_type,   presence: :true
+  validates :meat_type,   presence: :true, uniqueness: true
   validates :head_weight, presence: :true, numericality: :only_integer
 
   # ミートプロフィール画像
