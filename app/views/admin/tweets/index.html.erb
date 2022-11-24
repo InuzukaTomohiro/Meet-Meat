@@ -5,9 +5,7 @@
     <%= link_to "無効投稿一覧", admin_tweets_no_active_path, class: "btn btn-md btn-outline-danger mb-1" %>
   </div>
   <% @tweets.each do |tweet| %>
-    <% if tweet.on_display? %>
-      <%= render "admin/tweets/index", tweet: tweet %>
-    <% end %>
+    <%= render "admin/tweets/index", tweet: tweet %>
   <% end %>
   <%= paginate @tweets %>
 </section>

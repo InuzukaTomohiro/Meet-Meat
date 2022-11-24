@@ -32,7 +32,7 @@
       </div>
       <div class="total_meat col-3">
         <%= link_to "累計食肉量", user_meat_path(@user) %><br>
-        <% @total_weight.each do |total_weight|%>
+        <% @total_weights.each do |total_weight|%>
           <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
         <% end %>
       </div>

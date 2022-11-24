@@ -1,0 +1,80 @@
+<section>
+  <h2><%= @user.nick_name %>さんのページ</h2>
+  <div class="row align-items-center mb-2 profile <%= "stop_display" unless @user.is_active? %>">
+    <div class="user_status col-1">
+      <div id="display_<%= @user.id %>"><%= render "admin/users/active", user: @user %></div>
+		  <%= link_to "編集", edit_admin_user_path(@user), class: "btn btn-sm btn-info" %>
+    </div>
+    <div class="col-4">
+      <div class="row">
+        <div class="user_image col-4">
+          <%= image_tag @user.get_profile_image(100, 100) %>
+        </div>
+        <div class="user-info col-8">
+          <%= @user.nick_name %><br>
+          <div>投稿数：<%= @user.tweets.count %></div>
+          <div>フォロー:<%= @user.followings.count %></div>
+          <div>フォロワー:<%= @user.followers.count %></div>
+          <%= @user.created_at.strftime("%Y/%m/%d") %>登録
+        </div>
+      </div>
+    </div>
+    <div class="introduction col-4">
+      <%= @user.introduction %>
+    </div>
+    <div class="total_meat col-3">
+      累計食肉量<br>
+      <% @total_weights.each do |total_weight|%>
+        <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="d-flex align-items-end">
+    <h3>投稿履歴</h3>
+    <h5>(<%= @tweets.count %>件)</h5>
+  </div>
+  <% @tweets.each do |tweet| %>
+    <div class="row tweets">
+      <div class="text-center col-1">
+        <div id="display_<%= tweet.id %>"><%= render "admin/tweets/active", tweet: tweet %></div>
+        <%= link_to "削除", admin_tweet_path(tweet), method: :delete, class: "btn btn-md btn-outline-danger py-1", data: {confirm: "投稿を削除しますか？"} %>
+      </div>
+      <div class="col-2">
+        <div>
+          いいね数:
+          <%= tweet.favorites.count %>
+        </div>
+        <div>
+          <%= link_to admin_tweet_comments_path(tweet) do %>
+            コメント数:
+            <%= tweet.comments.count %>
+          <% end %>
+        </div>
+        <div>
+          投稿日:
+          <%= tweet.created_at.strftime("%Y/%m/%d") %>
+        </div>
+        <div class="display_set mt-2">
+          <% if tweet.on_display? %>
+            <div class="btn btn-sm btn-outline-primary">公開中</div>
+          <% else %>
+            <div class="btn btn-sm btn-outline-danger">非公開</div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-2">
+        <%= image_tag tweet.get_meat_image(100, 100) %>
+      </div>
+      <div class="user_tweet_body col-4">
+        <%= tweet.body %>
+      </div>
+      <div class="col-3">
+        <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
+      </div>
+    </div>
+  <% end %>
+  <%= paginate @tweets %>
+</section>

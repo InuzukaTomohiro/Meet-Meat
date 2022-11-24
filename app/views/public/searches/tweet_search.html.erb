@@ -1,7 +1,7 @@
 <section>
   <div class="d-flex align-items-end">
-    <h2>キーワード検索結果</h2>
-    <h4>「<%= @keyword %>」を含む投稿は、<%= @keyword_tweets.count %>個です。</h4>
+    <h2 class="text-nowrap">キーワード検索結果</h2>
+    <h4 class="keyword">「<%= @keyword %>」を含む投稿は、<%= @keyword_tweets.count %>個です。</h4>
     <div class="ml-auto mb-2">
       <%= form_with url: tweet_search_path, method: :get do |f| %>
         <%= f.text_field :keyword, placeholder: "キーワード検索" %>

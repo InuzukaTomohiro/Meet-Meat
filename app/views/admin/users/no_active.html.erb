@@ -4,10 +4,10 @@
     <h5 class="ml-5">現在の無効ユーザーは、<%= @no_active_users.count %>名です。</h5>
     <%= link_to "ユーザー　一覧", admin_users_path, class: "btn btn-md btn-outline-success mb-1" %>
   </div>
-  <% @users.each do |user| %>
+  <% @no_active_users.each do |user| %>
     <% unless user.is_active? %>
-      <%= render "admin/users/index", user: user %>
+      <%= render "admin/users/info", user: user %>
     <% end %>
   <% end %>
-  <%= paginate @users %>
+  <%= paginate @no_active_users %>
 </section>

@@ -1,0 +1,40 @@
+<section>
+  <div class="d-flex align-items-end">
+    <h2 class="text-nowrap">ユーザー検索結果</h2>
+    <h4 class="keyword">「<%= @keyword %>」を含むニックネームのユーザーは、<%= @keyword_users.count %>人です。</h4>
+    <div class="ml-auto mb-2">
+      <%= form_with url: admin_user_search_path, method: :get do |f| %>
+        <%= f.text_field :keyword, placeholder: "ユーザー検索" %>
+        <%= f.submit "検索" %>
+      <% end %>
+    </div>
+  </div>
+  <% @keyword_users.each do |user| %>
+    <div class="row align-items-center mb-2 profile <%= "stop_display" unless user.is_active? %>">
+      <div class="user_status col-1">
+        <div id="display_<%= user.id %>"><%= render "admin/users/active", user: user %></div>
+    		<%= link_to "編集", edit_admin_user_path(user), class: "btn btn-sm btn-info" %>
+      </div>
+      <div class="col-2 text-center">
+        <%= link_to admin_user_path(user) do %>
+          <%= user.nick_name %><br>
+          <%= image_tag user.get_profile_image(100, 100) %>
+        <% end %>
+      </div>
+      <div class="user-info col-2">
+        <div>投稿数：<%= user.tweets.count %></div>
+        <div>フォロー:<%= user.followings.count %></div>
+        <div>フォロワー:<%= user.followers.count %></div>
+      </div>
+      <div class="introduction col-4"><%= user.introduction %></div>
+      <div class="total_meat col-3">
+        累計食肉数欄<br>
+        <% total_weight = user.tweets.group(:meat_id).sum(:once_weight) %>
+        <% total_weight.each do |total_weight|%>
+          <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate @keyword_users %>
+</section>

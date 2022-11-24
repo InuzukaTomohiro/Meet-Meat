@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     root "homes#top"
     get "users/no_active"
     get "tweets/no_active"
+    get "tweet_search"  => "searches#tweet_search"
+    get "user_search"   => "searches#user_search"
     patch "users/:id/update_status" => "users#update_status", as: "users_update_status"
     resources :users,  only: [:index, :show, :edit, :update]
     resources :meats,  only: [:new, :index, :create, :edit, :update]

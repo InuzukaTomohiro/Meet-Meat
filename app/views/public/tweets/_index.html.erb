@@ -1,7 +1,6 @@
 <% tweets.each do |tweet| %>
   <% if tweet.on_display? %>
     <% if tweet.is_active? %>
-      <div id="comment_error_<%= tweet.id %>"></div>
       <div class="tweets row">
         <div class="col-2">
           <%= link_to user_path(tweet.user) do %>
@@ -25,6 +24,7 @@
             >コメント入力
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div id="comment_error_<%= tweet.id %>"></div>
               <%= render "public/comments/form", tweet: tweet, tweet_comment: tweet_comment %>
             </div>
           </div>

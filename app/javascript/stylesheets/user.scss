@@ -53,3 +53,9 @@
 .profile.stop_display {
   background-color: #aca8a8;
 }
+
+.nickname {
+  white-space: nowrap;
+  overflow-x: scroll;
+  height: 25px;
+}

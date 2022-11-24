@@ -4,10 +4,10 @@
     <h5 class="ml-5">無効投稿総数は、「<%= @no_active_tweets.count %>」件です。</h5>
     <%= link_to "投稿一覧", admin_tweets_path, class: "btn btn-md btn-outline-success mb-1" %>
   </div>
-  <% @tweets.each do |tweet| %>
+  <% @no_active_tweets.each do |tweet| %>
     <% unless tweet.is_active? %>
       <%= render "admin/tweets/index", tweet: tweet %>
     <% end %>
   <% end %>
-  <%= paginate @tweets %>
+  <%= paginate @no_active_tweets %>
 </section>

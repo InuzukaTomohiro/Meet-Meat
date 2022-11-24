@@ -3,9 +3,9 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit]
 
   def show
-    @user         = User.find(params[:id])
-    @tweets       = @user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
-    @total_weight = @tweets.group(:meat_id).sum(:once_weight)
+    @user          = User.find(params[:id])
+    @tweets        = @user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
+    @total_weights = @tweets.group(:meat_id).sum(:once_weight)
   end
 
   def edit
@@ -17,9 +17,9 @@ class Public::UsersController < ApplicationController
   end
 
   def user_meat
-    @user = User.find(params[:id])
-    @tweets       = @user.tweets.all
-    @total_weight = @tweets.group(:meat_id).sum(:once_weight)
+    @user          = User.find(params[:id])
+    @tweets        = @user.tweets.all
+    @total_weights = @tweets.group(:meat_id).sum(:once_weight)
   end
 
   def update

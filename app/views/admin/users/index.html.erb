@@ -5,7 +5,7 @@
     <%= link_to "無効ユーザー　一覧", admin_users_no_active_path, class: "btn btn-md btn-outline-danger mb-1" %>
   </div>
   <% @users.each do |user| %>
-    <%= render "admin/users/index", user: user %>
+    <%= render "admin/users/info", user: user %>
   <% end %>
   <%= paginate @users %>
 </section>

@@ -6,6 +6,7 @@
 @import "comment.scss";
 @import "admin.scss";
 @import "home.scss";
+@import "search.scss";
 
 * {
   margin: 0;
@@ -16,7 +17,7 @@
 body {
   background-color: #ffe5f2;
   margin-bottom: 100px;
-  font-size: clamp(1px, 1vw, 16px);
+  // font-size: clamp(1px, 1vw, 16px);
 }
 
 .public_header, .public_footer {
@@ -37,33 +38,10 @@ body {
 
 .meat_image {
   width: 180px;
+  height: 180px;
 }
 
 .pagination {
   justify-content: center;
   margin-top: 30px;
 }
-
-// @media (min-width: 992px) {
-// body {
-//   font-size: 1rem;
-// }
-// }
-
-// @media (max-width: 991.98px) {
-// .title {
-//   font-size: 0.7rem;
-// }
-// }
-
-// @media (max-width: 767.98px) {
-// .title {
-//   font-size: 0.4rem;
-// }
-// }
-
-// @media (max-width: 575.98px) {
-// body {
-//   font-size: 0.1rem;
-// }
-// }

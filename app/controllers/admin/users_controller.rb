@@ -7,20 +7,29 @@ class Admin::UsersController < ApplicationController
     @users_all = User.all
   end
 
+  def show
+    @user          = User.find(params[:id])
+    @tweets        = @user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
+    @total_weights = @tweets.group(:meat_id).sum(:once_weight)
+  end
+
   def no_active
-    @users           = User.all.page(params[:page]).per(10)
-    @no_active_users = User.where(is_active: false)
+    @no_active_users = User.where(is_active: false).page(params[:page]).per(10)
   end
 
   def edit
     @user = User.find(params[:id])
+    session[fallback_location: root_path] = request.referer
   end
 
   def update
-    user = User.find(params[:id])
-    user.update(user_params)
-    redirect_to admin_users_path
-    flash[:notice] = "ユーザー情報の編集が完了しました。"
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to session[fallback_location: root_path]
+      flash[:notice] = "ユーザー情報の編集が完了しました。"
+    else
+      render :edit
+    end
   end
 
   def update_status

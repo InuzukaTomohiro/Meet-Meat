@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @total_weight.each do |total_weight|%>
+      <% @total_weights.each do |total_weight|%>
         <!--meatにお肉の種類を代入-->
         <% meat = Meat.find(total_weight[0]) %>
         <!--ratioに累計食肉量を一頭あたりの比率に換算（小数）-->

@@ -30,7 +30,7 @@ class Public::CommentsController < ApplicationController
       redirect_to tweet_comments_path(@tweet)
       flash[:notice] = "コメントの編集が完了しました。"
     else
-      render :edit
+      @errors = @comment.errors.full_messages
     end
   end
 

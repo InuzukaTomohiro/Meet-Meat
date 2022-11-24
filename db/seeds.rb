@@ -34,7 +34,6 @@ meats.each do |meat|
   meat_meat_type = Meat.find_by(meat_type: meat[:meat_type])
   if meat_meat_type.nil?
     Meat.create!(
-
       meat_type:          meat[:meat_type],
       head_weight:        meat[:head_weight],
       meat_profile_image: meat[:meat_profile_image]
@@ -56,19 +55,24 @@ users.each do |user|
   user_nick_name = User.find_by(nick_name: user[:nick_name])
   if user_nick_name.nil?
     User.create!(
-       nick_name:     user[:nick_name],
-       email:         user[:email],
-       password:      user[:password],
-       phone_number:  user[:phone_number],
-       is_active:     user[:is_active],
-       profile_image: user[:profile_image]
+      id:            user[:id],
+      nick_name:     user[:nick_name],
+      email:         user[:email],
+      password:      user[:password],
+      phone_number:  user[:phone_number],
+      is_active:     user[:is_active],
+      profile_image: user[:profile_image]
     )
   end
 end
 
+
+# user = User.create(id: 1, nick_name: "山田です。", email: "user1@example.com", password: "passw@rd", phone_number: "0000000001")
+# user.profile_image.attach(io: File.open("#{Rails.root}/db/fixtures/users/sample.jpeg"), filename: "sample.jpeg")
+
 # Tweetのテストデータ
 tweets = [
-  {id: 1,  user_id: 1, meat_id: 1, body: "今日は焼肉でーす。",           once_weight: 500,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
+  {id: 1,  user_id: 1, meat_id: 1, body: "今日は焼肉でーす。",           once_weight: 500,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg") },
   {id: 2,  user_id: 1, meat_id: 1, body: "今日も焼肉でーす。",           once_weight: 600,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
   {id: 3,  user_id: 1, meat_id: 5, body: "初めての馬肉",                 once_weight: 100,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/馬肉（外）.jpg"), filename: "sample-author1.馬肉（外）.jpg")},
   {id: 4,  user_id: 2, meat_id: 2, body: "今日は豚肉食べやす",           once_weight: 300,  on_display: true,  is_active: false, meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/豚肉（外）.jpg"), filename: "sample-author1.豚肉（外）.jpg")},
@@ -85,24 +89,48 @@ tweets = [
   {id: 15, user_id: 5, meat_id: 1, body: "牛肉祭り",                     once_weight: 5000, on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
   {id: 16, user_id: 6, meat_id: 1, body: "牛肉食べました。",             once_weight: 5000, on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
   {id: 17, user_id: 6, meat_id: 1, body: "牛肉食べました。",             once_weight: 5000, on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
-
 ]
 # Tweetのデータがない場合のみ作成
 tweets.each do |tweet|
   tweet_id = Tweet.find_by(id: tweet[:id])
   if tweet_id.nil?
     Tweet.create!(
-       user_id:     tweet[:user_id],
-       meat_id:     tweet[:meat_id],
-       body:        tweet[:body],
-       once_weight: tweet[:once_weight],
-       on_display:  tweet[:on_display],
-       is_active:   tweet[:is_active],
-       meat_image:  tweet[:meat_image]
+      user_id:     tweet[:user_id],
+      meat_id:     tweet[:meat_id],
+      body:        tweet[:body],
+      once_weight: tweet[:once_weight],
+      on_display:  tweet[:on_display],
+      is_active:   tweet[:is_active],
+      meat_image:  tweet[:meat_image]
     )
   end
 end
 
+# Commentのテストデータ
+comments = [
+  {id: 1,  user_id: 1, tweet_id: 1, body: "美味しそう。",   is_active: true},
+  {id: 2,  user_id: 2, tweet_id: 1, body: "グッドグッド。", is_active: true},
+  {id: 3,  user_id: 3, tweet_id: 1, body: "食べたいです。", is_active: false},
+  {id: 4,  user_id: 4, tweet_id: 1, body: "いいですねー。", is_active: true},
+  {id: 5,  user_id: 5, tweet_id: 1, body: "最&高",          is_active: true}
+]
+# Commentのデータがない場合のみ作成
+comments.each do |comment|
+  Comment.find_or_create_by(comment)
+end
 
-
-
+# Relationshipのテストデータ
+relationships = [
+  {id: 1,  follower_id: 1, followed_id: 2},
+  {id: 2,  follower_id: 2, followed_id: 3},
+  {id: 3,  follower_id: 3, followed_id: 4},
+  {id: 4,  follower_id: 4, followed_id: 5},
+  {id: 5,  follower_id: 5, followed_id: 1},
+  {id: 6,  follower_id: 1, followed_id: 3},
+  {id: 7,  follower_id: 2, followed_id: 4},
+  {id: 8,  follower_id: 3, followed_id: 5}
+]
+# Relationshipのデータがない場合のみ作成
+relationships.each do |relationship|
+  Relationship.find_or_create_by(relationship)
+end
