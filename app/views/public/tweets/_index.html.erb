@@ -1,50 +1,46 @@
 <% tweets.each do |tweet| %>
-  <% if tweet.on_display? %>
-    <% if tweet.is_active? %>
-      <div class="tweets row">
-        <div class="col-2">
-          <%= link_to user_path(tweet.user) do %>
-            <%= tweet.user.nick_name %><br>
-            <%= image_tag tweet.user.get_profile_image(80, 80) %>
-          <% end %>
-          <div id="favorite_<%= tweet.id %>">
-            <%= render "public/favorites/favorite_btn", tweet: tweet %>
-          </div>
-          <div id="comment_counter_<%= tweet.id %>">
-            <%= render "public/comments/counter", tweet: tweet %>
-          </div>
-          <div class="dropdown">
-            <button
-            class="btn btn-warning btn-sm dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-            >コメント入力
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div id="comment_error_<%= tweet.id %>"></div>
-              <%= render "public/comments/form", tweet: tweet, tweet_comment: tweet_comment %>
-            </div>
-          </div>
-        </div>
-        <div class="col-10">
-          <div class="tweet_content row">
-            <div class="col-3">
-              <%= image_tag tweet.get_meat_image(100, 100), class: "meat_image" %>
-            </div>
-            <div class="tweet_body col-5">
-              <%= tweet.body %>
-            </div>
-            <div class="col-4">
-              <%= tweet.meat.meat_type %>
-              <%= tweet.once_weight %><span>グラム</span>
-            </div>
-          </div>
+  <div class="tweets row">
+    <div class="col-2">
+      <%= link_to user_path(tweet.user) do %>
+        <%= tweet.user.nick_name %><br>
+        <%= image_tag tweet.user.get_profile_image(80, 80) %>
+      <% end %>
+      <div id="favorite_<%= tweet.id %>">
+        <%= render "public/favorites/favorite_btn", tweet: tweet %>
+      </div>
+      <div id="comment_counter_<%= tweet.id %>">
+        <%= render "public/comments/counter", tweet: tweet %>
+      </div>
+      <div class="dropdown">
+        <button
+        class="btn btn-warning btn-sm dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+        >コメント入力
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div id="comment_error_<%= tweet.id %>"></div>
+          <%= render "public/comments/form", tweet: tweet, tweet_comment: tweet_comment %>
         </div>
       </div>
-    <% end %>
-  <% end %>
+    </div>
+    <div class="col-10">
+      <div class="tweet_content row">
+        <div class="col-3">
+          <%= image_tag tweet.get_meat_image(180, 180), class: "meat_image" %>
+        </div>
+        <div class="tweet_body col-5">
+          <%= tweet.body %>
+        </div>
+        <div class="col-4">
+          <%= tweet.meat.meat_type %>
+          <%= tweet.once_weight %><span>グラム</span>
+        </div>
+      </div>
+    </div>
+  </div>
 <% end %>
 <%= paginate tweets %>

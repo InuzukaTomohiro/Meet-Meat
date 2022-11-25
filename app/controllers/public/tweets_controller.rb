@@ -6,9 +6,8 @@ class Public::TweetsController < ApplicationController
   end
 
   def index
-    # @tweets        = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
     @tweet_comment = Comment.new
-    @tweets = Tweet.where(is_active: true).where(on_display: true).page(params[:page]).per(10)
+    @tweets        = Tweet.where(is_active: true, on_display: true).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit

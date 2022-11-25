@@ -37,7 +37,12 @@
         <% end %>
       </div>
     <% else %>
-      <p class="text-danger">管理者により表示制限されています。</p>
+      <div class="col-9">
+        <p class="text-danger">現在管理者により凍結されています。</p>
+        <div id="follow_<%= @user.id %>">
+          <%= render "public/relationships/btn", user: @user %>
+        </div>
+      </div>
     <% end %>
   </div>
 </section>
