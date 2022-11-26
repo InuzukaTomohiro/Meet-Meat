@@ -1,6 +1,5 @@
 <section class="row">
   <h2><%= @user.nick_name %>さんの食肉量詳細</h2>
-
   <table class="meat_table col-12">
     <thead>
       <tr>
@@ -24,9 +23,11 @@
             <% if ratio >= 1 %>
               <!-- 商と余りに分割-->
               <% head_count = ratio.divmod(1) %>
-              <% unless meat.meat_type == "鶏肉" %>
+              <!--お肉の種類が鶏ではない場合-->
+              <% unless meat.meat_type == "鶏" %>
                 <%= head_count[0] %>頭分と<%= head_count[0] + 1 %>頭目の
                 <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>
+              <!--お肉の種類が鶏の場合-->
               <% else %>
                 <%= head_count[0] %>羽分と<%= head_count[0] + 1 %>羽目の
                 <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>

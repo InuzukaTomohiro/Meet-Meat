@@ -24,24 +24,24 @@ body {
   background-color: #e5ffcc;
 }
 
-.tweets, .comments {
-  background-color: white;
-  padding: 10px;
-  margin: 5px 0;
-}
-
 .form {
   border-collapse: separate;
   border-spacing: 30px 20px;
   margin: 0 auto;
 }
 
-.meat_image {
-  width: 180px;
-  height: 180px;
-}
-
 .pagination {
   justify-content: center;
   margin-top: 30px;
+}
+
+.notification_icon{
+  position: relative;
+}
+
+.fa-exclamation-circle{
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: red;
 }

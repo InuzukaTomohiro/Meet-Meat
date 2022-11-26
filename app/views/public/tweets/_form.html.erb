@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <td><%= f.label :meat_id, "お肉の種類" %></td>
-        <td><%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type), {include_blank: "選択してください"}, {class: "form-control"} %></td>
+        <td><%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type, {:selected => tweet.meat_id.to_i}), {include_blank: "選択してください"}, {class: "form-control"} %></td>
       </tr>
       <tr>
         <td><%= f.label :once_weight, "お肉の量(グラム)" %></td>

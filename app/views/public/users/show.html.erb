@@ -1,6 +1,8 @@
 <section>
   <h2><%= @user.nick_name %>さんのページ</h2>
+  <!--アカウントが停止されていた場合に表示停止クラスを追加-->
   <div class="row align-items-center mb-2 profile <%= "stop_display" unless @user.is_active? %>">
+    <!--userのプロフィール情報-->
     <div class="col-3">
       <div class="row">
         <div class="user_image col-6">
@@ -8,6 +10,7 @@
         </div>
         <div class="user-info col-6">
           <%= @user.nick_name %><br>
+          <!--ゲストユーザーではなく、なおかつカレントユーザーの場合に情報編集ボタンを表示-->
           <% if @user.email != "guest@example.com" && @user == current_user %>
             <%= link_to "登録情報編集", edit_user_path(@user), class: "btn btn-sm btn-success" %><br>
           <% end %>
@@ -15,30 +18,34 @@
         </div>
       </div>
     </div>
+    <!--アカウントが有効の場合-->
     <% if @user.is_active? %>
       <div class="col-2">
         <div>投稿数：<%= @user.tweets.count %></div>
-        <!--フォロー数　テンプレート-->
+        <!--フォロー数　テンプレート（非同期）-->
         <div id="follow_counter_<%= @user.id %>"><%= render "public/relationships/counter", user: @user %></div>
-        <!--フォローボタン　テンプレート-->
-        <div id="follow_<%= @user.id %>">
-          <% if @user != current_user %>
+        <!--フォローボタン　テンプレート（非同期）-->
+        <% if @user != current_user %>
+          <div id="follow_<%= @user.id %>">
             <%= render "public/relationships/btn", user: @user %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div>
       <div class="introduction col-4">
         <%= @user.introduction %>
       </div>
+      <!--累計食肉欄-->
       <div class="total_meat col-3">
         <%= link_to "累計食肉量", user_meat_path(@user) %><br>
         <% @total_weights.each do |total_weight|%>
           <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
         <% end %>
       </div>
+    <!--アカウントが有効ではない場合-->
     <% else %>
       <div class="col-9">
         <p class="text-danger">現在管理者により凍結されています。</p>
+        <!--フォローボタンテンプレート（非同期）（フォロー解除のみ可能）-->
         <div id="follow_<%= @user.id %>">
           <%= render "public/relationships/btn", user: @user %>
         </div>
@@ -46,130 +53,12 @@
     <% end %>
   </div>
 </section>
-
+<!--userの投稿一覧-->
 <section>
   <div class="d-flex align-items-end">
     <h3>投稿履歴</h3>
-    <h5>(<%= @tweets.count %>件)</h5>
+    <h5>(<%= @tweets_all.count %>件)</h5>
   </div>
-  <% @tweets.each do |tweet| %>
-    <% if tweet.user == current_user %>
-      <div class="row tweets <%= "stop_display" unless tweet.is_active? %>">
-        <div class="col-2">
-          <div>
-            いいね数:
-            <%= tweet.favorites.count %>
-          </div>
-          <div>
-            <%= link_to tweet_comments_path(tweet) do %>
-              コメント数:
-              <%= tweet.comments.count %>
-            <% end %>
-          </div>
-          <div>
-            投稿日:
-            <%= tweet.created_at.strftime("%Y/%m/%d") %>
-          </div>
-          <div id="tweet_set" class="dropdown">
-            <button
-              class="btn btn-warning btn-sm dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >設定
-            </button>
-            <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-              <div>
-                <%= link_to "Tweet編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
-              </div>
-              <div>
-                <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
-              </div>
-            </div>
-          </div>
-          <div id="display_<%= tweet.id %>" class="display_set">
-            <%= render "public/users/display", tweet: tweet %>
-          </div>
-        </div>
-        <% if tweet.is_active? %>
-          <div class="col-2">
-            <%= image_tag tweet.get_meat_image(100, 100) %>
-          </div>
-          <div class="user_tweet_body col-4">
-            <%= tweet.body %>
-          </div>
-          <div class="col-4">
-            <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
-          </div>
-        <% else %>
-          <p class="text-danger">管理者により表示制限されています。</p>
-        <% end %>
-      </div>
-    <% else %>
-      <% if tweet.on_display? %>
-        <div class="row tweets <%= "stop_display" unless tweet.is_active? %>">
-          <div class="col-2">
-            <div>
-              いいね数:
-              <%= tweet.favorites.count %>
-            </div>
-            <div>
-              <%= link_to tweet_comments_path(tweet) do %>
-                コメント数:
-                <%= tweet.comments.count %>
-              <% end %>
-            </div>
-            <div>
-              投稿日:
-              <%= tweet.created_at.strftime("%Y/%m/%d") %>
-            </div>
-            <% if tweet.user == current_user %>
-              <div id="tweet_set" class="dropdown">
-                <button
-                  class="btn btn-warning btn-sm dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >設定
-                </button>
-                <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-                  <div>
-                    <%= link_to "Tweet編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
-                  </div>
-                  <div>
-                    <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
-                  </div>
-                </div>
-              </div>
-              <div class="display_set">
-                <% if tweet.on_display? %>
-                  <div class="btn btn-sm btn-outline-primary">公開中</div>
-                <% else %>
-                  <div class="btn btn-sm btn-outline-danger">非公開</div>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-          <% if tweet.is_active? %>
-            <div class="col-2">
-              <%= image_tag tweet.get_meat_image(100, 100) %>
-            </div>
-            <div class="user_tweet_body col-4">
-              <%= tweet.body %>
-            </div>
-            <div class="col-4">
-              <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
-            </div>
-          <% else %>
-            <p class="text-danger">管理者により表示制限されています。</p>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
-  <%= paginate @tweets %>
+  <!--userの投稿一覧テンプレート-->
+  <%= render "public/users/user_tweets", tweets: @tweets %>
 </section>

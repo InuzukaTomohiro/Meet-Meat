@@ -33,7 +33,7 @@
         <div class="tweet_content row">
           <% if favorite.tweet.is_active? %>
             <div class="col-3">
-              <%= image_tag favorite.tweet.get_meat_image(100, 100), class: "meat_image" %>
+              <%= image_tag favorite.tweet.get_meat_image(180, 180), class: "meat_image" %>
             </div>
             <div class="tweet_body col-5">
               <%= favorite.tweet.body %>

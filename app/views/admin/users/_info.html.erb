@@ -1,6 +1,8 @@
 <div class="admin_users row">
   <div class="user_status col-1">
-    <div id="display_<%= user.id %>"><%= render "admin/users/active", user: user %></div>
+    <div id="display_<%= user.id %>">
+      <%= render "admin/users/active", user: user %>
+    </div>
 		<%= link_to "編集", edit_admin_user_path(user), class: "btn btn-sm btn-info" %>
   </div>
   <div class="col-2 text-center">

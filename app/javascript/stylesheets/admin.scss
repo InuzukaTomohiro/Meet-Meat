@@ -6,7 +6,7 @@
   background-color: #ffe5f2;
 }
 
-.admin_users {
+.admin_users, .admin_tweets {
   background-color: white;
   padding: 10px;
   margin-bottom: 10px;
@@ -80,4 +80,8 @@
   margin: auto;
   color: grey;
   font-size: 15px;
+}
+
+.table_style {
+  table-layout: fixed;
 }

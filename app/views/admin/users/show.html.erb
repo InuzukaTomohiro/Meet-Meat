@@ -37,9 +37,9 @@
     <h5>(<%= @tweets.count %>件)</h5>
   </div>
   <% @tweets.each do |tweet| %>
-    <div class="row tweets">
+    <div class="row admin_tweets">
       <div class="text-center col-1">
-        <div id="display_<%= tweet.id %>"><%= render "admin/tweets/active", tweet: tweet %></div>
+        <div id="display_<%= tweet.id %>"><%= render "admin/tweets/active_btn", tweet: tweet %></div>
         <%= link_to "削除", admin_tweet_path(tweet), method: :delete, class: "btn btn-md btn-outline-danger py-1", data: {confirm: "投稿を削除しますか？"} %>
       </div>
       <div class="col-2">

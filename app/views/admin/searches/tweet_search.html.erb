@@ -10,46 +10,7 @@
     </div>
   </div>
   <% @keyword_tweets.each do |tweet| %>
-    <div id="comment_error_<%= tweet.id %>"></div>
-    <div class="tweets row">
-      <div class="text-center col-1">
-        No.<%= tweet.id %>
-        <div id="display_<%= tweet.id %>"><%= render "admin/tweets/active", tweet: tweet %></div>
-        <% if tweet.on_display? %>
-          <div class="btn btn-sm btn-outline-primary">公開中</div>
-        <% else %>
-          <div class="btn btn-sm btn-outline-danger">非公開</div>
-        <% end %>
-        <%= link_to "削除", admin_tweet_path(tweet), method: :delete, class: "btn btn-md btn-outline-danger mt-3", data: {confirm: "投稿を削除しますか？"} %>
-      </div>
-      <div class="col-2">
-        <%= link_to admin_user_path(tweet.user) do %>
-          <%= tweet.user.nick_name %><br>
-          <%= image_tag tweet.user.get_profile_image(100, 100) %>
-        <% end %>
-        <div>
-          いいね:
-          <%= tweet.favorites.count %>
-        </div>
-        <div>
-          <%= render "admin/comments/counter", tweet: tweet %>
-        </div>
-      </div>
-      <div class="col-9">
-        <div class="tweet_content row">
-          <div class="col-3">
-            <%= image_tag tweet.get_meat_image(180, 180), class: "meat_image" %>
-          </div>
-          <div class="tweet_body col-5">
-            <%= tweet.body %>
-          </div>
-          <div class="col-4">
-            <%= tweet.meat.meat_type %>
-            <%= tweet.once_weight %><span>グラム</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render "admin/tweets/index", tweet: tweet %>
   <% end %>
   <%= paginate @keyword_tweets %>
 </section>

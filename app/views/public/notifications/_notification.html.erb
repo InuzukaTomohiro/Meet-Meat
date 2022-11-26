@@ -1,32 +1,27 @@
 
 <div class="col-md-6.mx-auto">
-  <!--.form-inline-->
-    <!--span-->
-      <%= link_to user_path(visitor) do %>
-        <!--= image_tag avatar_url(visitor).to_s, class: "icon_mini"-->
-        <!--strong-->
-          <%= visitor.nick_name %>さんが
-      <% end %>
+  <%= link_to user_path(visitor) do %>
+    <%= visitor.nick_name %>さんが
+  <% end %>
 
-      <% if notification.params(action: "follow") %>
-        あなたをフォローしました
-      <% elsif notification.params(action: "like") %>
-        <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
-        にいいねしました
-      <% elsif notification.params(action: "comment") %>
-        <% if notification.post.user_id == visited.id %>
-          <% link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
-        <% else %>
-          <%= ink_to post_path(notification.post) do %>
-              = image_tag avatar_url(notification.post.user).to_s, class: "icon_mini"
-              strong
-            <%= notification.post.user.nick_name %> + 'さんの投稿'
-            にコメントしました"
-        <p class="text-muted.mb-0">
-          <%= Comment.find_by(id: notification.comment_id)&.comment %>
-        </p>
-        </div>
+  <% if notification.params(action: "follow") %>
+    あなたをフォローしました
+  <% elsif notification.params(action: "like") %>
+    <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
+    にいいねしました
+  <% elsif notification.params(action: "comment") %>
+    <% if notification.post.user_id == visited.id %>
+      <% link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
+    <% else %>
+      <%= notification.post.user.nick_name %> + 'さんの投稿'
+      にコメントしました"
+    <% end %>
+  <% end %>
+  <p class="text-muted.mb-0">
+    <%= Comment.find_by(id: notification.comment_id)&.comment %>
+  </p>
+</div>
 
-  <div class="small text-muted text-right">
-    <%= time_ago_in_words(notification.created_at).upcase %>
-  </div>
+<div class="small text-muted text-right">
+  <%= time_ago_in_words(notification.created_at).upcase %>
+</div>

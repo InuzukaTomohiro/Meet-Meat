@@ -34,25 +34,6 @@
           <i class="fas fa-sign-out-alt"></i> ログアウト
         <% end %>
       </li>
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          href="#"
-          id="navbarDropdownMenuLink"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          その他
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <%= form_with url: admin_user_search_path, method: :get, class: "dropdown-item" do |f| %>
-            <%= f.text_field :keyword, placeholder: "ユーザー検索" %>
-            <%= f.submit "検索" %>
-          <% end %>
-        </div>
-      </li>
     </ul>
     <% else %>
     <ul class="navbar-nav ml-auto">
@@ -60,10 +41,6 @@
         <%= link_to "ログイン", new_admin_session_path, class: "nav-link border border-danger rounded-pill mr-2" %>
       </li>
     </ul>
-    <% end %>
-    <%= form_with url: admin_tweet_search_path, method: :get do |f| %>
-      <%= f.text_field :keyword, placeholder: "キーワード" %>
-      <%= f.submit "検索" %>
     <% end %>
   </div>
 </nav>

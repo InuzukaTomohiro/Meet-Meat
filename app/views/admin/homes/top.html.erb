@@ -1,1 +1,87 @@
-aaaa
+<h2>管理者トップ</h2>
+<section>
+  <h4>会員状況</h4>
+  <table class="table table-hover table_style">
+    <thead class="thead-light">
+      <tr>
+        <th>会員登録者</th>
+        <th>有効会員</th>
+        <th>停止会員</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @users.count %></td>
+        <td><%= @active_users.count %></td>
+        <td><%= @stop_users.count %></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>投稿状況</h4>
+  <table class="table table-hover table_style">
+    <thead class="thead-light">
+      <tr>
+        <th>総投稿</th>
+        <th>公開中投稿</th>
+        <th>非公開中投稿</th>
+        <th>有効投稿</th>
+        <th>停止投稿</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @tweets.count %></td>
+        <td><%= @on_display.count %></td>
+        <td><%= @no_display.count %></td>
+        <td><%= @active_tweets.count %></td>
+        <td><%= @stop_tweets.count %></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h4>累計食肉量</h4>
+  <table class="table table-hover table_style">
+    <thead class="thead-light">
+      <tr>
+        <th>お肉の種類</th>
+        <th>食肉量</th>
+        <th>頭数換算</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @total_weights.each do |total_weight|%>
+        <% meat = Meat.find(total_weight[0]) %>
+        <% ratio = (total_weight[1]).fdiv(meat.head_weight) %>
+        <tr>
+          <td><%= meat.meat_type %></td>
+          <td><%= number_with_delimiter total_weight[1] %>g</td>
+          <td>
+            <!--1頭分以上の累計食肉量の場合-->
+            <% if ratio >= 1 %>
+              <!-- 商と余りに分割-->
+              <% head_count = ratio.divmod(1) %>
+              <!--お肉の種類が鶏ではない場合-->
+              <% unless meat.meat_type == "鶏" %>
+                <%= head_count[0] %>頭分と<%= head_count[0] + 1 %>頭目の
+                <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>
+              <!--お肉の種類が鶏の場合-->
+              <% else %>
+                <%= head_count[0] %>羽分と<%= head_count[0] + 1 %>羽目の
+                <%= (head_count[1] * 100).round(2).to_s + "%のお肉を食べました。" %>
+              <% end %>
+            <!--1頭分未満の累計食肉量の場合-->
+            <% else %>
+              1頭目の
+              <%= (ratio * 100).round(2).to_s + "%のお肉を食べました。" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

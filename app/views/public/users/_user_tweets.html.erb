@@ -1,0 +1,67 @@
+<% tweets.each do |tweet| %>
+  <!--投稿が制限されていた場合に表示停止クラスを追加-->
+  <div class="row tweets <%= "stop_display" unless tweet.is_active? %>">
+    <div class="col-2">
+      <div>
+        いいね数:
+        <%= tweet.favorites.count %>
+      </div>
+      <div>
+        <%= link_to tweet_comments_path(tweet) do %>
+          コメント数:
+          <%= tweet.comments.count %>
+        <% end %>
+      </div>
+      <div>
+        投稿日:
+        <%= tweet.created_at.strftime("%Y/%m/%d") %>
+      </div>
+      <!--カレントユーザーの投稿だった場合-->
+      <% if tweet.user == current_user %>
+        <!--ドロップダウンで投稿編集・削除ボタン-->
+        <div id="tweet_set" class="dropdown">
+          <button
+            class="btn btn-warning btn-sm dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >設定
+          </button>
+          <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+            <div>
+              <%= link_to "Tweet編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
+            </div>
+            <div>
+              <%= link_to "Tweet削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+            </div>
+          </div>
+        </div>
+        <!--投稿の公開・非公開ボタンのテンプレート（非同期）-->
+        <div id="display_<%= tweet.id %>" class="display_set">
+          <%= render "public/users/display", tweet: tweet %>
+        </div>
+      <% end %>
+    </div>
+    <!--投稿が有効な場合-->
+    <% if tweet.is_active? %>
+      <!--投稿画像-->
+      <div class="col-2 d-flex align-items-center">
+        <%= image_tag tweet.get_meat_image(100, 100) %>
+      </div>
+      <!--投稿内容-->
+      <div class="user_tweet_body col-4">
+        <%= tweet.body %>
+      </div>
+      <!--投稿食肉数-->
+      <div class="col-4">
+        <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
+      </div>
+    <!--投稿が制限されていた場合-->
+    <% else %>
+      <p class="text-danger">管理者により表示制限されています。</p>
+    <% end %>
+  </div>
+<% end %>
+<%= paginate tweets %>
