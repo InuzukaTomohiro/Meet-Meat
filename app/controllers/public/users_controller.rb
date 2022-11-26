@@ -11,7 +11,7 @@ class Public::UsersController < ApplicationController
     @user          = User.find(params[:id])
     @tweets        = @user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
     @tweets_all    = @user.tweets.all
-    @total_weights = @tweets.group(:meat_id).sum(:once_weight)
+    @total_weights = @tweets_all.group(:meat_id).sum(:once_weight)
   end
   # user情報編集画面
   def edit
