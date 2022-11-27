@@ -1,0 +1,2 @@
+$("#admin_comments").html("<%= j(render "admin/comments/index", tweet: @tweet, tweet_comments: @tweet_comments ) %>")
+$("#admin_comment_counter").html("<h5>コメント数は、「<%= @tweet_comments.count %>」件です。</h5>")

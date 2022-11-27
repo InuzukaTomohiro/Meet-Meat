@@ -2,10 +2,11 @@
   <div class="d-flex align-items-end">
     <h2>コメント一覧</h2>
     <div id="comment_counter">
-      <h4>(全<%= @tweet_comments.count %>件)</h4>
+      <h4>(全<%= @comments_all.count %>件)</h4>
     </div>
   </div>
   <div id="comments">
     <%= render "public/comments/index", tweet_comments: @tweet_comments, tweet: @tweet %>
   </div>
+  <%= paginate @tweet_comments %>
 </section>

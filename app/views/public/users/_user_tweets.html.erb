@@ -34,7 +34,7 @@
               <%= link_to "投稿編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
             </div>
             <div>
-              <%= link_to "投稿削除", tweet_path(tweet), method: :delete, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+              <%= link_to "投稿削除", tweet_path(tweet), method: :delete, remote: true, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
             </div>
           </div>
         </div>

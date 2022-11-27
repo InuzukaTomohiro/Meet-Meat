@@ -1,0 +1,2 @@
+$("#user_tweets").html("<%= j(render "public/users/user_tweets", tweets: @tweets ) %>")
+$("#user_tweet_counter").html("<h5>(<%= @tweets_all.count %>件)</h5>")

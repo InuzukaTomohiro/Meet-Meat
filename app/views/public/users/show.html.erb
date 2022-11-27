@@ -57,8 +57,12 @@
 <section>
   <div class="d-flex align-items-end">
     <h3>投稿履歴</h3>
-    <h5>(<%= @tweets_all.count %>件)</h5>
+    <div id="user_tweet_counter">
+      <h5>(<%= @tweets_all.count %>件)</h5>
+    </div>
   </div>
   <!--userの投稿一覧テンプレート-->
-  <%= render "public/users/user_tweets", tweets: @tweets %>
+  <div id="user_tweets">
+    <%= render "public/users/user_tweets", tweets: @tweets %>
+  </div>
 </section>

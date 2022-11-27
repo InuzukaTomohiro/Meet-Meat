@@ -3,12 +3,12 @@ class Admin::TweetsController < ApplicationController
   layout "layouts/admin_application"
 
   def index
-    @tweets     = Tweet.all.page(params[:page]).per(10)
+    @tweets     = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
     @tweets_all = Tweet.all
   end
 
   def no_active
-    @no_active_tweets = Tweet.where(is_active: false).page(params[:page]).per(10)
+    @no_active_tweets = Tweet.where(is_active: false).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def update
@@ -21,8 +21,8 @@ class Admin::TweetsController < ApplicationController
   end
 
   def destroy
-    @tweets           = Tweet.all.page(params[:page]).per(10)
-    @no_active_tweets = Tweet.where(is_active: false).page(params[:page]).per(10)
+    @tweets           = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
+    @no_active_tweets = Tweet.where(is_active: false).order(created_at: :desc).page(params[:page]).per(10)
     @tweets_all       = Tweet.all
     Tweet.find(params[:id]).destroy
     # redirect_back(fallback_location: root_path)

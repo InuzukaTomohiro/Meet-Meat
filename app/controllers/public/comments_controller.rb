@@ -3,7 +3,8 @@ class Public::CommentsController < ApplicationController
 
   def index
     @tweet          = Tweet.find(params[:tweet_id])
-    @tweet_comments = @tweet.comments.all
+    @tweet_comments = @tweet.comments.all.order(created_at: :desc).page(params[:page]).per(10)
+    @comments_all   = @tweet.comments.all
   end
 
   def edit
@@ -36,7 +37,8 @@ class Public::CommentsController < ApplicationController
 
   def destroy
     @tweet          = Tweet.find(params[:tweet_id])
-    @tweet_comments = @tweet.comments.all
+    @tweet_comments = @tweet.comments.all.order(created_at: :desc).page(params[:page]).per(10)
+    @comments_all   = @tweet.comments.all
     Comment.find(params[:id]).destroy
   end
 

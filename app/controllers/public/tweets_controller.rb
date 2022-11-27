@@ -44,10 +44,13 @@ class Public::TweetsController < ApplicationController
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
-    @tweet.destroy
-    redirect_to user_path(@tweet.user)
-    flash[:notice] = "投稿の削除が完了しました。"
+    tweet       = Tweet.find(params[:id])
+    user        = tweet.user
+    @tweets     = user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
+    @tweets_all = user.tweets.all
+    tweet.destroy
+    # redirect_to user_path(@tweet.user)
+    # flash[:notice] = "投稿の削除が完了しました。"
   end
 
   private

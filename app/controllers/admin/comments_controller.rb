@@ -3,7 +3,8 @@ class Admin::CommentsController < ApplicationController
 
   def index
     @tweet          = Tweet.find(params[:tweet_id])
-    @tweet_comments = @tweet.comments.all
+    @tweet_comments = @tweet.comments.all.order(created_at: :desc).page(params[:page]).per(10)
+    @comments_all   =@tweet.comments.all
   end
 
 
@@ -18,10 +19,9 @@ class Admin::CommentsController < ApplicationController
   end
 
   def destroy
-    tweet = Tweet.find(params[:tweet_id])
+    @tweet = Tweet.find(params[:tweet_id])
+    @tweet_comments = @tweet.comments.all.order(created_at: :desc).page(params[:page]).per(10)
     Comment.find(params[:id]).destroy
-    redirect_to admin_tweet_comments_path(tweet)
-    flash[:notice] = "コメントの削除が完了しました。"
   end
 
 end

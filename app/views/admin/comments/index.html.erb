@@ -1,21 +1,11 @@
 <section>
   <div class="d-flex align-items-end">
     <h2>コメント一覧</h2>
-    <h5 class="ml-5">コメント数は、「<%= @tweet_comments.count %>」件です。</h5>
-  </div>
-  <% @tweet_comments.each do |tweet_comment| %>
-    <div class="comments comment_content row">
-      <div class="col-1 text-center">
-        <div id="display_<%= tweet_comment.id %>"><%= render "admin/comments/active", tweet: @tweet, tweet_comment: tweet_comment %></div>
-        <%= link_to "削除", admin_tweet_comment_path(@tweet, tweet_comment), method: :delete, class: "btn btn-sm btn-danger", data: {confirm: "コメントを削除します。よろしいですか？"} %>
-      </div>
-      <div class="col-2 text-center">
-        <%= tweet_comment.user.nick_name %><br>
-        <%= image_tag tweet_comment.user.get_profile_image(100, 100) %>
-      </div>
-      <div class="comment_body col-9">
-        <%= tweet_comment.body %>
-      </div>
+    <div id="admin_comment_counter" class="ml-5">
+      <h5>コメント数は、「<%= @comments_all.count %>」件です。</h5>
     </div>
-  <% end %>
+  </div>
+  <div id="admin_comments">
+    <%= render "admin/comments/index", tweet_comments: @tweet_comments, tweet: @tweet %>
+  </div>
 </section>

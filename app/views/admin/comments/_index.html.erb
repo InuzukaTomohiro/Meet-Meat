@@ -1,0 +1,15 @@
+<% tweet_comments.each do |tweet_comment| %>
+  <div class="comments comment_content row">
+    <div class="col-1 text-center">
+      <div id="display_<%= tweet_comment.id %>"><%= render "admin/comments/active", tweet: tweet, tweet_comment: tweet_comment %></div>
+      <%= link_to "削除", admin_tweet_comment_path(tweet, tweet_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger", data: {confirm: "コメントを削除します。よろしいですか？"} %>
+    </div>
+    <div class="col-2 text-center">
+      <%= tweet_comment.user.nick_name %><br>
+      <%= image_tag tweet_comment.user.get_profile_image(100, 100) %>
+    </div>
+    <div class="comment_body col-9">
+      <%= tweet_comment.body %>
+    </div>
+  </div>
+<% end %>
