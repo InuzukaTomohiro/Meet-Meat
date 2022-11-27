@@ -4,7 +4,7 @@
     <h4 class="keyword">「<%= @keyword %>」を含む投稿は、<%= @keyword_tweets.count %>個です。</h4>
     <div class="ml-auto mb-2">
       <%= form_with url: tweet_search_path, method: :get do |f| %>
-        <%= f.text_field :keyword, placeholder: "キーワード検索" %>
+        <%= f.text_field :keyword, placeholder: "投稿内容検索" %>
         <%= f.submit "検索" %>
       <% end %>
     </div>

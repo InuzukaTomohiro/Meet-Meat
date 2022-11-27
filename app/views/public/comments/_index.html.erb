@@ -14,7 +14,7 @@
       <% end %>
     </div>
     <div class="col-1 d-flex align-items-center">
-      <div class="row">
+      <div>
         <% if tweet_comment.user == current_user %>
           <div class="mb-3">
             <%= link_to "編集", edit_tweet_comment_path(tweet, tweet_comment), class: "btn btn-sm btn-primary" %>

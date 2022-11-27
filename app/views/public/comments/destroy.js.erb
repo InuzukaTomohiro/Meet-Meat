@@ -1,1 +1,2 @@
 $("#comments").html("<%= j(render "public/comments/index", tweet_comments: @tweet_comments, tweet: @tweet) %>")
+$("#comment_counter").html("<h4>(全<%= @tweet_comments.count %>件)</h4>")
