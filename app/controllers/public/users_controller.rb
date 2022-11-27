@@ -2,7 +2,7 @@ class Public::UsersController < ApplicationController
   # ログイン済みuserのみアクセス許可
   before_action :authenticate_user!
   # ゲストユーザーの情報編集制限
-  before_action :ensure_guest_user, only: [:edit, :update, :destroy]
+  before_action :ensure_guest_user, only: [:edit, :update]
   # 他ユーザ情報編集へのアクセス制限
   before_action :correct_user,      only: [:edit, :update, :destroy]
 
