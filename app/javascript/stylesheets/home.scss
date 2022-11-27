@@ -1,6 +1,17 @@
 .top_bg {
   background-image: url("../../javascript/images/onikuimages-1129003_S.jpg");
   height: 100%;
-
   background-size: cover;
+}
+
+.top_font {
+  color: #f01218;
+  text-shadow: white 2px 0px,  white -2px 0px,
+               white 0px -2px, white 0px 2px,
+               white 2px 2px,  white -2px 2px,
+               white 2px -2px, white -2px -2px,
+               white 1px 2px,  white -1px 2px,
+               white 1px -2px, white -1px -2px,
+               white 2px 1px,  white -2px 1px,
+               white 2px -1px, white -2px -1px;
 }

@@ -1,0 +1,6 @@
+<!--投稿一覧-->
+$("#tweets").html("<%= j(render "admin/tweets/index", tweets: @tweets ) %>")
+$("#admin_tweet_counter").html("<h5>現在の投稿総数は、「<%= @tweets_all.count %>」件です。</h5>")
+<!--無効投稿一覧-->
+$("#no_active_tweets").html("<%= j(render "admin/tweets/index", tweets: @no_active_tweets ) %>")
+$("#admin_no_active_tweet_counter").html("<h5>無効投稿総数は、「<%= @no_active_tweets.count %>」件です。</h5>")

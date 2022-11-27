@@ -21,9 +21,12 @@ class Admin::TweetsController < ApplicationController
   end
 
   def destroy
-    tweet = Tweet.find(params[:id]).destroy
-    redirect_back(fallback_location: root_path)
-    flash[:notice] = "No." + (tweet.id).to_s + "のTweetを削除しました。"
+    @tweets           = Tweet.all.page(params[:page]).per(10)
+    @no_active_tweets = Tweet.where(is_active: false).page(params[:page]).per(10)
+    @tweets_all       = Tweet.all
+    Tweet.find(params[:id]).destroy
+    # redirect_back(fallback_location: root_path)
+    # flash[:notice] = "No." + (@tweet.id).to_s + "のTweetを削除しました。"
   end
 
   private
