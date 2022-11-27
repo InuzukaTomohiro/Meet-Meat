@@ -49,8 +49,6 @@ class Public::TweetsController < ApplicationController
     @tweets     = user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
     @tweets_all = user.tweets.all
     tweet.destroy
-    # redirect_to user_path(@tweet.user)
-    # flash[:notice] = "投稿の削除が完了しました。"
   end
 
   private

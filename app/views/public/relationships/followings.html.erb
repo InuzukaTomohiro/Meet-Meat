@@ -10,6 +10,7 @@
     </div>
   </div>
   <% if @following_users.exists? %>
+    <!--フォロー一覧テンプレート-->
     <%= render "follow", users: @following_users %>
   <% else %>
   フォローをしている人がいません。

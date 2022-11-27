@@ -72,7 +72,7 @@
         <%= tweet.body %>
       </div>
       <div class="col-3">
-        <%= tweet.meat.meat_type %>：<%= tweet.once_weight %>g
+        <%= tweet.meat.meat_type %>：<%= number_with_delimiter tweet.once_weight %>g
       </div>
     </div>
   <% end %>

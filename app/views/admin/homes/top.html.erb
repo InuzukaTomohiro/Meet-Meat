@@ -11,9 +11,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @users.count %></td>
-        <td><%= @active_users.count %></td>
-        <td><%= @stop_users.count %></td>
+        <td><%= number_with_delimiter @users.count %></td>
+        <td><%= number_with_delimiter @active_users.count %></td>
+        <td><%= number_with_delimiter @stop_users.count %></td>
       </tr>
     </tbody>
   </table>
@@ -33,11 +33,11 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @tweets.count %></td>
-        <td><%= @on_display.count %></td>
-        <td><%= @no_display.count %></td>
-        <td><%= @active_tweets.count %></td>
-        <td><%= @stop_tweets.count %></td>
+        <td><%= number_with_delimiter @tweets.count %></td>
+        <td><%= number_with_delimiter @on_display.count %></td>
+        <td><%= number_with_delimiter @no_display.count %></td>
+        <td><%= number_with_delimiter @active_tweets.count %></td>
+        <td><%= number_with_delimiter @stop_tweets.count %></td>
       </tr>
     </tbody>
   </table>

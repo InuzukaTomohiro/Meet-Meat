@@ -9,11 +9,11 @@
     <% if user.is_active? %>
       <div class="user-info col-2">
         <div>投稿数：<%= user.tweets.count %></div>
-        <!--フォロー数　テンプレート-->
+        <!--フォロー数　テンプレート（非同期）-->
         <div id="follow_counter_<%= user.id %>">
           <%= render "public/relationships/counter", user: user %>
         </div>
-        <!--フォローボタン　テンプレート-->
+        <!--フォローボタン　テンプレート（非同期）-->
         <div id="follow_<%= user.id %>">
           <% if user != current_user %>
             <%= render "public/relationships/btn", user: user %>
@@ -24,8 +24,8 @@
       <div class="total_meat col-4">
         累計食肉数欄<br>
         <% total_weight = user.tweets.group(:meat_id).sum(:once_weight) %>
-        <% total_weight.each do |total_weight|%>
-          <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
+        <% total_weight.each do |id, total_weight|%>
+          <%= Meat.find(id).meat_type %>：<%= number_with_delimiter total_weight %>g<br>
         <% end %>
       </div>
     <% else %>

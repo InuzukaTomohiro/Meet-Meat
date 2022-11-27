@@ -1,7 +1,9 @@
 <section>
   <div class="d-flex align-items-end">
     <h2 class="text-nowrap">キーワード検索結果</h2>
-    <h4 class="keyword">「<%= @keyword %>」を含む投稿は、<%= @keyword_tweets.count %>個です。</h4>
+    <div class="keyword">
+      <h5>「<%= @keyword %>」を含む投稿は、「<%= @keyword_tweets.count %>」件です。</h5>
+    </div>
     <div class="ml-auto mb-2">
       <%= form_with url: admin_tweet_search_path, method: :get do |f| %>
         <%= f.text_field :keyword, placeholder: "キーワード検索" %>
@@ -9,9 +11,55 @@
       <% end %>
     </div>
   </div>
-  <% @keyword_tweets.each do |tweet| %>
-    <%= render "admin/tweets/index", tweet: tweet %>
-  <% end %>
+  <div>
+    <% @keyword_tweets.each do |tweet| %>
+      <div class="admin_tweets row">
+        <div class="text-center col-1">
+          No.<%= tweet.id %>
+          <div id="display_<%= tweet.id %>"><%= render "admin/tweets/active_btn", tweet: tweet %></div>
+          <% if tweet.on_display? %>
+            <div class="btn btn-sm btn-outline-primary">公開中</div>
+          <% else %>
+            <div class="btn btn-sm btn-outline-danger">非公開</div>
+          <% end %>
+          <%= link_to "削除", admin_search_tweet_destroy_path(tweet), method: :delete, class: "btn btn-md btn-outline-danger mt-3", data: {confirm: "投稿を削除しますか？"} %>
+        </div>
+        <div class="col-2">
+          <%= link_to admin_user_path(tweet.user) do %>
+            <div class="nickname"><%= tweet.user.nick_name %></div>
+            <%= image_tag tweet.user.get_profile_image(100, 100) %>
+          <% end %>
+          <div>
+            <div>
+              いいね:
+              <%= tweet.favorites.count %>
+            </div>
+            <div>
+              <%= link_to admin_tweet_comments_path(tweet) do %>
+                コメント数:
+                <%= tweet.comments.count %>
+              <% end %>
+            </div>
+            <div>登録日:<%= tweet.created_at.strftime("%Y/%m/%d") %></div>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="row">
+            <div class="col-3">
+              <%= image_tag tweet.get_meat_image(180, 180), class: "meat_image" %>
+            </div>
+            <div class="admin_tweet_body col-5">
+                <%= tweet.body %>
+            </div>
+            <div class="col-4">
+              <%= tweet.meat.meat_type %>
+              <%= number_with_delimiter tweet.once_weight %><span>グラム</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
   <%= paginate @keyword_tweets %>
 </section>
 

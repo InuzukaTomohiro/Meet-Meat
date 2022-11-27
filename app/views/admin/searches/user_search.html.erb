@@ -30,8 +30,8 @@
       <div class="total_meat col-3">
         累計食肉数欄<br>
         <% total_weight = user.tweets.group(:meat_id).sum(:once_weight) %>
-        <% total_weight.each do |total_weight|%>
-          <%= Meat.find(total_weight[0]).meat_type %>：<%= number_with_delimiter total_weight[1] %>g<br>
+        <% total_weight.each do |id, total_weight|%>
+          <%= Meat.find(id).meat_type %>：<%= number_with_delimiter total_weight %>g<br>
         <% end %>
       </div>
     </div>
