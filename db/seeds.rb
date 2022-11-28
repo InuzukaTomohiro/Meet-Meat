@@ -48,7 +48,8 @@ users = [
   {id: 3, nick_name: "佐藤です。", email: "user3@example.com", password: "passw@rd", phone_number: "0000000003", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author3.jpg"), filename: "sample-author3.jpg")},
   {id: 4, nick_name: "斉藤ママ",   email: "user4@example.com", password: "passw@rd", phone_number: "0000000004", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author4.jpg"), filename: "sample-author4.jpg")},
   {id: 5, nick_name: "相田ママ",   email: "user5@example.com", password: "passw@rd", phone_number: "0000000005", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author5.jpg"), filename: "sample-author5.jpg")},
-  {id: 6, nick_name: "ユーザー",   email: "user6@example.com", password: "passw@rd", phone_number: "0000000006", is_active: false, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/default-image.jpeg"), filename: "default-image.jpeg")}
+  {id: 6, nick_name: "ユーザー",   email: "user6@example.com", password: "passw@rd", phone_number: "0000000006", is_active: false, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/default-image.jpeg"), filename: "default-image.jpeg")},
+  {id: 7, nick_name: "guestuser",  email: "guest@example.com", password: "aaaaaa",   phone_number: "0000000000", is_active: true, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/default-image.jpeg"), filename: "default-image.jpeg")}
 ]
 # Userのデータがない場合のみ作成(nick_nameは一意性)
 users.each do |user|
@@ -72,7 +73,7 @@ end
 
 # Tweetのテストデータ
 tweets = [
-  {id: 1,  user_id: 1, meat_id: 1, body: "今日は焼肉でーす。",           once_weight: 500,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg") },
+  {id: 1,  user_id: 1, meat_id: 1, body: "今日は焼肉でーす。",           once_weight: 500,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
   {id: 2,  user_id: 1, meat_id: 1, body: "今日も焼肉でーす。",           once_weight: 600,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
   {id: 3,  user_id: 1, meat_id: 5, body: "初めての馬肉",                 once_weight: 100,  on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/馬肉（外）.jpg"), filename: "sample-author1.馬肉（外）.jpg")},
   {id: 4,  user_id: 2, meat_id: 2, body: "今日は豚肉食べやす",           once_weight: 300,  on_display: true,  is_active: false, meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/豚肉（外）.jpg"), filename: "sample-author1.豚肉（外）.jpg")},
@@ -89,6 +90,8 @@ tweets = [
   {id: 15, user_id: 5, meat_id: 1, body: "牛肉祭り",                     once_weight: 5000, on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
   {id: 16, user_id: 6, meat_id: 1, body: "牛肉食べました。",             once_weight: 5000, on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
   {id: 17, user_id: 6, meat_id: 1, body: "牛肉食べました。",             once_weight: 5000, on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
+  {id: 18, user_id: 7, meat_id: 1, body: "牛肉食べました。",             once_weight: 5000, on_display: false, is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")},
+  {id: 19, user_id: 7, meat_id: 1, body: "牛肉食べました。",             once_weight: 5000, on_display: true,  is_active: true,  meat_image:ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/tweets/牛肉（外）.jpg"), filename: "sample-author1.牛肉（外）.jpg")}
 ]
 # Tweetのデータがない場合のみ作成
 tweets.each do |tweet|
@@ -108,11 +111,13 @@ end
 
 # Commentのテストデータ
 comments = [
-  {id: 1,  user_id: 1, tweet_id: 1, body: "美味しそう。",   is_active: true},
-  {id: 2,  user_id: 2, tweet_id: 1, body: "グッドグッド。", is_active: true},
-  {id: 3,  user_id: 3, tweet_id: 1, body: "食べたいです。", is_active: false},
-  {id: 4,  user_id: 4, tweet_id: 1, body: "いいですねー。", is_active: true},
-  {id: 5,  user_id: 5, tweet_id: 1, body: "最&高",          is_active: true}
+  {id: 1,  user_id: 1, tweet_id: 1,  body: "美味しそう。",   is_active: true},
+  {id: 2,  user_id: 2, tweet_id: 1,  body: "グッドグッド。", is_active: true},
+  {id: 3,  user_id: 3, tweet_id: 1,  body: "食べたいです。", is_active: false},
+  {id: 4,  user_id: 4, tweet_id: 1,  body: "いいですねー。", is_active: true},
+  {id: 5,  user_id: 5, tweet_id: 1,  body: "最&高",          is_active: true},
+  {id: 6,  user_id: 3, tweet_id: 19, body: "食べたいです。", is_active: false},
+  {id: 7,  user_id: 4, tweet_id: 19, body: "いいですねー。", is_active: true}
 ]
 # Commentのデータがない場合のみ作成
 comments.each do |comment|
@@ -121,16 +126,36 @@ end
 
 # Relationshipのテストデータ
 relationships = [
-  {id: 1,  follower_id: 1, followed_id: 2},
-  {id: 2,  follower_id: 2, followed_id: 3},
-  {id: 3,  follower_id: 3, followed_id: 4},
-  {id: 4,  follower_id: 4, followed_id: 5},
-  {id: 5,  follower_id: 5, followed_id: 1},
-  {id: 6,  follower_id: 1, followed_id: 3},
-  {id: 7,  follower_id: 2, followed_id: 4},
-  {id: 8,  follower_id: 3, followed_id: 5}
+  {id: 1,   follower_id: 1, followed_id: 2},
+  {id: 2,   follower_id: 2, followed_id: 3},
+  {id: 3,   follower_id: 3, followed_id: 4},
+  {id: 4,   follower_id: 4, followed_id: 5},
+  {id: 5,   follower_id: 5, followed_id: 1},
+  {id: 6,   follower_id: 1, followed_id: 3},
+  {id: 7,   follower_id: 2, followed_id: 4},
+  {id: 8,   follower_id: 3, followed_id: 5},
+  {id: 9,   follower_id: 7, followed_id: 1},
+  {id: 10,  follower_id: 7, followed_id: 2},
+  {id: 11,  follower_id: 7, followed_id: 3},
+  {id: 12,  follower_id: 7, followed_id: 4},
+  {id: 13,  follower_id: 7, followed_id: 5},
+  {id: 14,  follower_id: 7, followed_id: 6},
+  {id: 15,  follower_id: 6, followed_id: 7}
 ]
 # Relationshipのデータがない場合のみ作成
 relationships.each do |relationship|
   Relationship.find_or_create_by(relationship)
+end
+
+notifications = [
+  {id: 1, visitor_id: 1, visited_id: 7, tweet_id: 19,   action: "favorite"},
+  {id: 2, visitor_id: 3, visited_id: 7, tweet_id: 19, comment_id: 6,  action: "comment"},
+  {id: 3, visitor_id: 4, visited_id: 7, tweet_id: 19, comment_id: 7,  action: "comment"},
+  {id: 4, visitor_id: 1, visited_id: 7, action: "follow"},
+  {id: 5, visitor_id: 2, visited_id: 7, action: "follow"},
+  {id: 6, visitor_id: 3, visited_id: 7, action: "follow"},
+]
+
+notifications.each do |notification|
+  Notification.find_or_create_by(notification)
 end

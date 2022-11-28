@@ -50,19 +50,19 @@ class User < ApplicationRecord
   end
   # ゲストログインデータ
   def self.guest
-    find_or_create_by!(nick_name: 'guestuser', email: 'guest@example.com', phone_number: "0000000000") do |user|
-      user.password  = SecureRandom.urlsafe_base64
+    find_or_create_by!(nick_name: "guestuser", email: "guest@example.com", phone_number: "0000000000") do |user|
+      user.password  = "aaaaaa"
       user.nick_name = "guestuser"
     end
   end
 
   # 通知機能（フォロー時）
   def create_notification_follow!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
-    if temp.blank?
+    checking_follow = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, "follow"])
+    if checking_follow.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,
-        action: 'follow'
+        action: "follow"
       )
       if notification.valid?
         notification.save
