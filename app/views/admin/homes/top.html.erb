@@ -54,12 +54,12 @@
       </tr>
     </thead>
     <tbody>
-      <% @total_weights.each do |total_weight|%>
-        <% meat = Meat.find(total_weight[0]) %>
-        <% ratio = (total_weight[1]).fdiv(meat.head_weight) %>
+      <% @total_weights.each do |id, total_weight|%>
+        <% meat = Meat.find(id) %>
+        <% ratio = (total_weight).fdiv(meat.head_weight) %>
         <tr>
           <td><%= meat.meat_type %></td>
-          <td><%= number_with_delimiter total_weight[1] %>g</td>
+          <td><%= number_with_delimiter total_weight %>g</td>
           <td>
             <!--1頭分以上の累計食肉量の場合-->
             <% if ratio >= 1 %>

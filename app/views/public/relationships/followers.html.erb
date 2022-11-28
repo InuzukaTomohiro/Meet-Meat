@@ -11,7 +11,7 @@
   </div>
   <% if @follower_users.exists? %>
     <!--フォロワー一覧テンプレート-->
-    <%= render "follow", users: @follower_users %>
+    <%= render "follow", users: @follower_users, total_weights: @total_weights %>
   <% else %>
   フォロワーがいません。
   <% end %>

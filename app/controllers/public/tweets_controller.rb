@@ -1,15 +1,15 @@
 class Public::TweetsController < ApplicationController
   before_action :authenticate_user!
-
+  # 新規投稿画面
   def new
     @tweet = Tweet.new
   end
-
+  # 投稿一覧画面
   def index
     @tweet_comment = Comment.new
     @tweets        = Tweet.where(is_active: true, on_display: true).order(created_at: :desc).page(params[:page]).per(10)
   end
-
+  # 投稿編集画面
   def edit
     @tweet = Tweet.find(params[:id])
   end
@@ -33,7 +33,7 @@ class Public::TweetsController < ApplicationController
       render :edit
     end
   end
-
+  # 公開設定更新
   def update_display
     @tweet = Tweet.find(params[:id])
     if @tweet.on_display?
@@ -46,7 +46,9 @@ class Public::TweetsController < ApplicationController
   def destroy
     tweet       = Tweet.find(params[:id])
     user        = tweet.user
+    # ユーザー詳細画面の投稿一覧非同期化用
     @tweets     = user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
+    # ユーザー詳細画面の投稿数非同期化用
     @tweets_all = user.tweets.all
     tweet.destroy
   end

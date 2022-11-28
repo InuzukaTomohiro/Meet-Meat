@@ -1,33 +1,36 @@
-
-   <% if @notifications.exists? %>
+  <% if @notifications.exists? %>
     <div class="col-md-6 mx-auto">
       <% @notifications.each do |notification| %>
+      <!--通知を送った人-->
         <%= link_to user_path(notification.visitor), class: "font-weight-bold" do %>
+          <%= image_tag notification.visitor.get_profile_image(30, 30), class: "rounded-circle mb-1" %>
           <%= notification.visitor.nick_name %>
         <% end %>
-        さんが
+        さんが<br>
+        <!--通知内容-->
         <% if notification.action == "follow" %>
-          あなたをフォローしました
-        <% elsif notification.action == "like" %>
-          <div class="font-weight-bold">あなたの投稿</div>
-          にいいねしました
+          <p><strong>あなたをフォロー</strong>しました</p>
+        <% elsif notification.action == "favorite" %>
+          <p><strong>あなたの投稿</strong>にいいねしました</p>
         <% elsif notification.action == "comment" %>
           <% if notification.tweet.user_id == notification.visited_id %>
-            <div class="font-weight-bold">あなたの投稿</div>
+            <p><strong>あなたの投稿</strong>にコメントしました</p>
           <% else %>
-            <%= link_to user_path(notification.visitor) do %>
+            <!--コメントした投稿に他の人がコメントした際の通知-->
+            <%= link_to user_path(notification.visitor), class: "font-weight-bold" do %>
+              <%= image_tag notification.tweet.user.get_profile_image(30, 30), class: "rounded-circle" %>
               <%= notification.tweet.user.nick_name %>
             <% end %>
-            さんの投稿
+            <strong>さんの投稿</strong>にコメントしました
           <% end %>
-          にコメントしました"
+
           <p class="text-muted.mb-0">
             <% comment_id = notification.comment_id %>
-            「<%= Comment.find(comment_id).body %>」
+            <p>コメント内容：「<%= Comment.find(comment_id).body %>」</p>
           </p>
         <% end %>
         <div class="small text-muted text-right">
-          <%= time_ago_in_words(notification.created_at).upcase %>
+          <%= time_ago_in_words(notification.created_at).upcase %>前
         </div>
       <% end %>
     </div>

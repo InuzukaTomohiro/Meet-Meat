@@ -1,15 +1,15 @@
 class Admin::MeatsController < ApplicationController
   before_action :authenticate_admin!
   layout "layouts/admin_application"
-
+  # ミート新規登録画面
   def new
     @meat = Meat.new
   end
-
+  # ミート編集画面
   def edit
     @meat = Meat.find(params[:id])
   end
-
+  # ミート一覧画面
   def index
     @meats = Meat.all
   end

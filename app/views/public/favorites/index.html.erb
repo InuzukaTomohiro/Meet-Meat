@@ -4,6 +4,7 @@
     <h4>(<%= @favorites.count %>件)</h4>
   </div>
   <% @favorites.each do |favorite| %>
+    <!--投稿が停止中の場合にクラスを追加、追加したクラスに非表示設定-->
     <div class="row tweets <%= "stop_display" unless favorite.tweet.is_active? %>">
       <div class="col-2">
         <%= link_to user_path(favorite.tweet.user) do %>
@@ -20,9 +21,16 @@
           <% end %>
         </div>
         <div class="dropdown">
-          <button class="btn btn-warning btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            コメント入力
+          <button class="btn btn-warning btn-sm dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+          >
+            <span>コメント入力</span>
           </button>
+          <!--ドロップダウンでコメント入力フォームを格納（非同期）-->
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <div id="comment_error_<%= favorite.tweet.id %>"></div>
             <%= render "public/comments/form", tweet: favorite.tweet, tweet_comment: @tweet_comment %>
