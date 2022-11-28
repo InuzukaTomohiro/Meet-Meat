@@ -1,8 +1,8 @@
 <% users.each do |user| %>
   <div class="row align-items-center mb-2 profile <%= "stop_display" unless user.is_active? %>">
-    <div class="user_image col-2">
+    <div class="col-2">
       <%= link_to user_path(user) do %>
-        <%= user.nick_name %><br>
+        <div class="nickname"><%= user.nick_name %></div>
         <%= image_tag user.get_profile_image(100, 100) %>
       <% end %>
     </div>

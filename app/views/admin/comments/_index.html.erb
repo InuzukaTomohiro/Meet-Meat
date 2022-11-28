@@ -5,8 +5,10 @@
       <%= link_to "削除", admin_tweet_comment_path(tweet, tweet_comment), method: :delete, remote: true, class: "btn btn-sm btn-danger", data: {confirm: "コメントを削除します。よろしいですか？"} %>
     </div>
     <div class="col-2 text-center">
-      <%= tweet_comment.user.nick_name %><br>
-      <%= image_tag tweet_comment.user.get_profile_image(100, 100) %>
+      <%= link_to admin_user_path(tweet_comment.user) do %>
+        <div class="nickname"><%= tweet_comment.user.nick_name %></div>
+        <%= image_tag tweet_comment.user.get_profile_image(100, 100) %>
+      <% end %>
     </div>
     <div class="comment_body col-9">
       <%= tweet_comment.body %>

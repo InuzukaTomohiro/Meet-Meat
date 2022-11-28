@@ -8,7 +8,7 @@
     <div class="row tweets <%= "stop_display" unless favorite.tweet.is_active? %>">
       <div class="col-2">
         <%= link_to user_path(favorite.tweet.user) do %>
-          <%= favorite.tweet.user.nick_name %><br>
+          <div class="nickname"><%= favorite.tweet.user.nick_name %></div>
           <%= image_tag favorite.tweet.user.get_profile_image(80, 80) %>
         <% end %>
         <div id="favorite_<%= favorite.tweet_id %>">

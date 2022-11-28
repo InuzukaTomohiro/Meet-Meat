@@ -9,7 +9,7 @@
           <%= image_tag @user.get_profile_image(100, 100) %>
         </div>
         <div class="user-info col-6">
-          <%= @user.nick_name %><br>
+          <div class="nickname"><%= @user.nick_name %></div>
           <!--ゲストユーザーではなく、なおかつカレントユーザーの場合に情報編集ボタンを表示-->
           <% if @user.email != "guest@example.com" && @user == current_user %>
             <%= link_to "登録情報編集", edit_user_path(@user), class: "btn btn-sm btn-success" %><br>
