@@ -28,6 +28,8 @@
 - 累計食肉量を確認したい時
 
 ## 設計書
+- ER図
+　<img width="830" alt="スクリーンショット 2022-11-28 19 14 18" src="https://user-images.githubusercontent.com/112403230/204252749-4a1a3202-d5c1-4526-928f-30b2147c4329.png">
 
 ## 開発環境
 - OS：Linux(CentOS)
@@ -37,4 +39,6 @@
 - IDE：Cloud9
 
 ## 使用素材
-- 使用検討中です
+- user画像（github meshiterroサンプル画像を使用）
+- top画面背景画像（お肉のフリー素材サイトoniku imagesから使用）
+- meat画像（photACから使用）
