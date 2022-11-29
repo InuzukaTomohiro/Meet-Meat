@@ -21,12 +21,12 @@ class Admin::TweetsController < ApplicationController
   end
   # 投稿削除機能、非同期化済み
   def destroy
+    @tweet            = Tweet.find(params[:id])
     @tweets           = Tweet.all.order(created_at: :desc).page(params[:page]).per(10)
-    @tweet = Tweet.find(params[:id])
-    user = @tweet.user
-    @user_tweets      = user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
     @tweets_all       = Tweet.all
     @no_active_tweets = Tweet.where(is_active: false).order(created_at: :desc).page(params[:page]).per(10)
+    user              = @tweet.user
+    @user_tweets      = user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
     @tweet.destroy
   end
 
