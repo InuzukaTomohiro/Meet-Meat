@@ -1,1 +1,1 @@
-$("#display_<%= @tweet.id %>").html("<%= j(render "admin/tweets/active_btn", tweet: @tweet ) %>")
+$("#tweet_display_<%= @tweet.id %>").html("<%= j(render "admin/tweets/active_btn", tweet: @tweet ) %>")

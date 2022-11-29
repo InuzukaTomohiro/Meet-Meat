@@ -1,8 +1,7 @@
 <% tweets.each do |tweet| %>
     <div class="row admin_tweets">
       <div class="text-center col-1">
-        <div id="display_<%= tweet.id %>"><%= render "admin/tweets/active_btn", tweet: tweet %></div>
-        <div id="aaa"></div>
+        <div id="tweet_display_<%= tweet.id %>"><%= render "admin/tweets/active_btn", tweet: tweet %></div>
         <%= link_to "削除", admin_tweet_path(tweet), method: :delete, remote: true, class: "btn btn-md btn-outline-danger py-1", data: {confirm: "投稿を削除しますか？"} %>
       </div>
       <div class="col-2">
