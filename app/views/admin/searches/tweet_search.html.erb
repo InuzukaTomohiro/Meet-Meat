@@ -16,7 +16,7 @@
       <div class="admin_tweets row">
         <div class="text-center col-1">
           No.<%= tweet.id %>
-          <div id="display_<%= tweet.id %>"><%= render "admin/tweets/active_btn", tweet: tweet %></div>
+          <div id="tweet_display_<%= tweet.id %>"><%= render "admin/tweets/active_btn", tweet: tweet %></div>
           <% if tweet.on_display? %>
             <div class="btn btn-sm btn-outline-primary">公開中</div>
           <% else %>
