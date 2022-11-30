@@ -7,65 +7,65 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # .envに記載
-admins = [
-  {email: ENV["SECRET_EMAIL"], password: ENV["SECRET_PASSWORD"]}
-]
-# 管理者のデータがない場合のみ作成
-admins.each do |admin|
-  admin_email = Admin.find_by(email: admin[:email])
-  if admin_email.nil?
-    Admin.create!(
-      email:    admin[:email],
-      password: admin[:password]
-    )
-  end
-end
+# admins = [
+#   {email: ENV["SECRET_EMAIL"], password: ENV["SECRET_PASSWORD"]}
+# ]
+# # 管理者のデータがない場合のみ作成
+# admins.each do |admin|
+#   admin_email = Admin.find_by(email: admin[:email])
+#   if admin_email.nil?
+#     Admin.create!(
+#       email:    admin[:email],
+#       password: admin[:password]
+#     )
+#   end
+# end
 
-# Meatのテストデータ
-meats = [
-  {id: 1, meat_type: "牛", head_weight: 300000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/牛アイコン.jpeg"), filename: "牛アイコン.jpeg")},
-  {id: 2, meat_type: "豚", head_weight: 60000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/豚アイコン.jpeg"), filename: "豚アイコン.jpeg")},
-  {id: 3, meat_type: "鶏", head_weight: 1200,   meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/鶏アイコン.jpeg"), filename: "鶏アイコン.jpeg")},
-  {id: 4, meat_type: "羊", head_weight: 50000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/羊アイコン.jpeg"), filename: "羊アイコン.jpeg")},
-  {id: 5, meat_type: "馬", head_weight: 400000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/馬アイコン.jpeg"), filename: "馬アイコン.jpeg")}
-]
-# Meatのデータがない場合のみ作成(meat_typeは一意性)
-meats.each do |meat|
-  meat_meat_type = Meat.find_by(meat_type: meat[:meat_type])
-  if meat_meat_type.nil?
-    Meat.create!(
-      meat_type:          meat[:meat_type],
-      head_weight:        meat[:head_weight],
-      meat_profile_image: meat[:meat_profile_image]
-    )
-  end
-end
+# # Meatのテストデータ
+# meats = [
+#   {id: 1, meat_type: "牛", head_weight: 300000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/牛アイコン.jpeg"), filename: "牛アイコン.jpeg")},
+#   {id: 2, meat_type: "豚", head_weight: 60000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/豚アイコン.jpeg"), filename: "豚アイコン.jpeg")},
+#   {id: 3, meat_type: "鶏", head_weight: 1200,   meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/鶏アイコン.jpeg"), filename: "鶏アイコン.jpeg")},
+#   {id: 4, meat_type: "羊", head_weight: 50000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/羊アイコン.jpeg"), filename: "羊アイコン.jpeg")},
+#   {id: 5, meat_type: "馬", head_weight: 400000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/馬アイコン.jpeg"), filename: "馬アイコン.jpeg")}
+# ]
+# # Meatのデータがない場合のみ作成(meat_typeは一意性)
+# meats.each do |meat|
+#   meat_meat_type = Meat.find_by(meat_type: meat[:meat_type])
+#   if meat_meat_type.nil?
+#     Meat.create!(
+#       meat_type:          meat[:meat_type],
+#       head_weight:        meat[:head_weight],
+#       meat_profile_image: meat[:meat_profile_image]
+#     )
+#   end
+# end
 
-# ユーザーテストデータ
-users = [
-  {id: 1, nick_name: "山田です。", email: "user1@example.com", password: "passw@rd", phone_number: "0000000001", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author1.jpg"), filename: "sample-author1.jpg")},
-  {id: 2, nick_name: "鈴木です。", email: "user2@example.com", password: "passw@rd", phone_number: "0000000002", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author2.jpg"), filename: "sample-author2.jpg")},
-  {id: 3, nick_name: "佐藤です。", email: "user3@example.com", password: "passw@rd", phone_number: "0000000003", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author3.jpg"), filename: "sample-author3.jpg")},
-  {id: 4, nick_name: "斉藤ママ",   email: "user4@example.com", password: "passw@rd", phone_number: "0000000004", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author4.jpg"), filename: "sample-author4.jpg")},
-  {id: 5, nick_name: "相田ママ",   email: "user5@example.com", password: "passw@rd", phone_number: "0000000005", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author5.jpg"), filename: "sample-author5.jpg")},
-  {id: 6, nick_name: "ユーザー",   email: "user6@example.com", password: "passw@rd", phone_number: "0000000006", is_active: false, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/default-image.jpeg"), filename: "default-image.jpeg")},
-  {id: 7, nick_name: "guestuser",  email: "guest@example.com", password: "aaaaaa",   phone_number: "0000000000", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/default-image.jpeg"), filename: "default-image.jpeg")}
-]
-# Userのデータがない場合のみ作成(nick_nameは一意性)
-users.each do |user|
-  user_nick_name = User.find_by(nick_name: user[:nick_name])
-  if user_nick_name.nil?
-    User.create!(
-      id:            user[:id],
-      nick_name:     user[:nick_name],
-      email:         user[:email],
-      password:      user[:password],
-      phone_number:  user[:phone_number],
-      is_active:     user[:is_active],
-      profile_image: user[:profile_image]
-    )
-  end
-end
+# # ユーザーテストデータ
+# users = [
+#   {id: 1, nick_name: "山田です。", email: "user1@example.com", password: "passw@rd", phone_number: "0000000001", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author1.jpg"), filename: "sample-author1.jpg")},
+#   {id: 2, nick_name: "鈴木です。", email: "user2@example.com", password: "passw@rd", phone_number: "0000000002", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author2.jpg"), filename: "sample-author2.jpg")},
+#   {id: 3, nick_name: "佐藤です。", email: "user3@example.com", password: "passw@rd", phone_number: "0000000003", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author3.jpg"), filename: "sample-author3.jpg")},
+#   {id: 4, nick_name: "斉藤ママ",   email: "user4@example.com", password: "passw@rd", phone_number: "0000000004", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author4.jpg"), filename: "sample-author4.jpg")},
+#   {id: 5, nick_name: "相田ママ",   email: "user5@example.com", password: "passw@rd", phone_number: "0000000005", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author5.jpg"), filename: "sample-author5.jpg")},
+#   {id: 6, nick_name: "ユーザー",   email: "user6@example.com", password: "passw@rd", phone_number: "0000000006", is_active: false, profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/default-image.jpeg"), filename: "default-image.jpeg")},
+#   {id: 7, nick_name: "guestuser",  email: "guest@example.com", password: "aaaaaa",   phone_number: "0000000000", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/default-image.jpeg"), filename: "default-image.jpeg")}
+# ]
+# # Userのデータがない場合のみ作成(nick_nameは一意性)
+# users.each do |user|
+#   user_nick_name = User.find_by(nick_name: user[:nick_name])
+#   if user_nick_name.nil?
+#     User.create!(
+#       id:            user[:id],
+#       nick_name:     user[:nick_name],
+#       email:         user[:email],
+#       password:      user[:password],
+#       phone_number:  user[:phone_number],
+#       is_active:     user[:is_active],
+#       profile_image: user[:profile_image]
+#     )
+#   end
+# end
 
 # Tweetのテストデータ
 tweets = [
