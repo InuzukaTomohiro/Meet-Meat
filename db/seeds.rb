@@ -23,11 +23,11 @@ end
 
 # Meatのテストデータ
 meats = [
-  {id: 1, meat_type: "牛", head_weight: 300000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/牛アイコン.jpeg"), filename: "牛アイコン.jpeg")},
-  {id: 2, meat_type: "豚", head_weight: 60000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/豚アイコン.jpeg"), filename: "豚アイコン.jpeg")},
-  {id: 3, meat_type: "鶏", head_weight: 1200,   meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/鶏アイコン.jpeg"), filename: "鶏アイコン.jpeg")},
-  {id: 4, meat_type: "羊", head_weight: 50000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/羊アイコン.jpeg"), filename: "羊アイコン.jpeg")},
-  {id: 5, meat_type: "馬", head_weight: 400000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/馬アイコン.jpeg"), filename: "馬アイコン.jpeg")}
+  {id: 1, meat_type: "牛", head_weight: 300000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/牛アイコン.jpg"), filename: "牛アイコン.jpg")},
+  {id: 2, meat_type: "豚", head_weight: 60000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/豚アイコン.jpg"), filename: "豚アイコン.jpg")},
+  {id: 3, meat_type: "鶏", head_weight: 1200,   meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/鶏アイコン.jpg"), filename: "鶏アイコン.jpg")},
+  {id: 4, meat_type: "羊", head_weight: 50000,  meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/羊アイコン.jpg"), filename: "羊アイコン.jpg")},
+  {id: 5, meat_type: "馬", head_weight: 400000, meat_profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/meats/馬アイコン.jpg"), filename: "馬アイコン.jpg")}
 ]
 # Meatのデータがない場合のみ作成(meat_typeは一意性)
 meats.each do |meat|
