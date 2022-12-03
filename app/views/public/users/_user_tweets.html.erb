@@ -3,18 +3,20 @@
   <div class="row tweets <%= "stop_display" unless tweet.is_active? %>">
     <div class="col-2">
       <div>
-        いいね数:
-        <%= tweet.favorites.count %>
-      </div>
-      <div>
-        <%= link_to tweet_comments_path(tweet) do %>
-          コメント数:
-          <%= tweet.comments.count %>
+        <%= link_to tweet_favorites_path(tweet), class: "text-secondary" do %>
+          <%= tweet.favorites.count %> いいね
+          <i class="fas fa-heart text-danger"></i>
         <% end %>
       </div>
       <div>
-        投稿日:
+        <%= link_to tweet_comments_path(tweet), class: "text-secondary" do %>
+          <%= tweet.comments.count %> コメント
+          <i class="far fa-comment text-info"></i>
+        <% end %>
+      </div>
+      <div>
         <%= tweet.created_at.strftime("%Y/%m/%d") %>
+        <i class="fas fa-pen"></i>
       </div>
       <!--カレントユーザーの投稿だった場合-->
       <% if tweet.user == current_user %>
