@@ -4,9 +4,17 @@
   <table class="table table-bordered table_style">
     <thead class="thead-light">
       <tr>
-        <th><%= link_to admin_users_path do %>登録者<% end %></th>
-        <th>有効会員</th>
-        <th><%= link_to admin_users_no_active_path do %>停止会員<% end %></th>
+        <th>
+          <%= link_to admin_users_path do %>
+            <i class="fas fa-users"></i> 登録者
+          <% end %>
+        </th>
+        <th><i class="fas fa-user"></i> 有効会員</th>
+        <th>
+          <%= link_to admin_users_no_active_path do %>
+            <i class="fas fa-ban"></i> 停止会員
+          <% end %>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -24,11 +32,19 @@
   <table class="table table-bordered table_style">
     <thead class="thead-light">
       <tr>
-        <th><%= link_to admin_tweets_path do %>総投稿<% end %></th>
-        <th>公開中投稿</th>
-        <th>非公開中投稿</th>
-        <th>有効投稿</th>
-        <th><%= link_to admin_tweets_no_active_path do %>停止投稿<% end %></th>
+        <th>
+          <%= link_to admin_tweets_path do %>
+            <i class="fas fa-th-list"></i> 総投稿
+          <% end %>
+        </th>
+        <th><i class="fas fa-lock-open"></i> 公開中投稿</th>
+        <th><i class="fas fa-lock"></i> 非公開中投稿</th>
+        <th><i class="fas fa-check-square"></i> 有効投稿</th>
+        <th>
+          <%= link_to admin_tweets_no_active_path do %>
+            <i class="fas fa-ban"></i> 停止投稿
+          <% end %>
+        </th>
       </tr>
     </thead>
     <tbody>
