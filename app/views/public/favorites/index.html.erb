@@ -7,28 +7,28 @@
     <!--投稿が停止中の場合にクラスを追加、追加したクラスに非表示設定-->
     <div class="row tweets <%= "stop_display" unless favorite.tweet.is_active? %>">
       <div class="col-2">
-        <%= link_to user_path(favorite.tweet.user) do %>
-          <div class="nickname"><%= favorite.tweet.user.nick_name %></div>
-          <%= image_tag favorite.tweet.user.get_profile_image(80, 80) %>
-        <% end %>
-        <div id="favorite_<%= favorite.tweet_id %>">
-          <%= render "public/favorites/favorite_btn", tweet: favorite.tweet %>
-        </div>
-        <div id="comment_counter_<%= favorite.tweet_id %>">
-          <%= link_to tweet_comments_path(favorite.tweet) do %>
-            コメント数:
-            <%= favorite.tweet.comments.count %>
+        <div>
+          <%= link_to user_path(favorite.tweet.user) do %>
+            <div class="nickname"><%= favorite.tweet.user.nick_name %></div>
+            <%= image_tag favorite.tweet.user.get_profile_image(80, 80) %>
           <% end %>
         </div>
+        <div id="favorite_<%= favorite.tweet_id %>" class="d-inline-block mr-2">
+          <%= render "public/favorites/favorite_btn", tweet: favorite.tweet %>
+        </div>
+        <div id="comment_counter_<%= favorite.tweet_id %>" class="d-inline-block mr-2">
+          <%= render "public/comments/counter", tweet: favorite.tweet %>
+        </div>
         <div class="dropdown">
-          <button class="btn btn-warning btn-sm dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
+          <button
+          class="btn btn-warning btn-sm dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
           >
-            <span>コメント入力</span>
+            <i class="far fa-comment-dots"></i>コメント
           </button>
           <!--ドロップダウンでコメント入力フォームを格納（非同期）-->
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">

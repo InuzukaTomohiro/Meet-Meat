@@ -2,16 +2,18 @@
   <!--投稿全体のrow-->
   <div class="tweets row">
     <div class="col-2">
-      <%= link_to user_path(tweet.user) do %>
-        <div class="nickname"><%= tweet.user.nick_name %></div>
-        <%= image_tag tweet.user.get_profile_image(80, 80) %>
-      <% end %>
+      <div>
+        <%= link_to user_path(tweet.user) do %>
+          <div class="nickname"><%= tweet.user.nick_name %></div>
+          <%= image_tag tweet.user.get_profile_image(80, 80) %>
+        <% end %>
+      </div>
       <!--いいねボタンのテンプレート（非同期）-->
-      <div id="favorite_<%= tweet.id %>">
+      <div id="favorite_<%= tweet.id %>" class="d-inline-block mr-2">
         <%= render "public/favorites/favorite_btn", tweet: tweet %>
       </div>
       <!--コメント数のテンプレート（非同期）-->
-      <div id="comment_counter_<%= tweet.id %>">
+      <div id="comment_counter_<%= tweet.id %>"  class="d-inline-block">
         <%= render "public/comments/counter", tweet: tweet %>
       </div>
       <!--ドロップダウンでコメント入力フォームを格納-->
@@ -23,7 +25,8 @@
         data-toggle="dropdown"
         aria-haspopup="true"
         aria-expanded="false"
-        >コメント入力
+        >
+          <i class="far fa-comment-dots"></i>コメント
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <div id="comment_error_<%= tweet.id %>"></div>
