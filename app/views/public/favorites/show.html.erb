@@ -1,5 +1,8 @@
 <section>
-  <h2>いいねをしたユーザー一覧</h2>
+  <div class="d-flex align-items-end">
+    <h2>いいねをしたユーザー 一覧</h2>
+    <h4>(<%= @favorites.count %>件)</h4>
+  </div>
   <% @favorites.each do |favorite| %>
     <div class="d-inline-block my-1 mx-1">
       <%= link_to user_path(favorite.user), class: "text-secondary" do %>

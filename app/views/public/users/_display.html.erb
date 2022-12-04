@@ -2,9 +2,15 @@
 <%= link_to tweet_update_display_path(tweet), method: :patch, remote: true do %>
   <!--投稿が公開の場合-->
   <% if tweet.on_display? %>
-    <div class="btn btn-sm btn-outline-primary">公開中</div>
+    <div class="btn btn-sm btn-outline-primary">
+      <i class="fas fa-lock-open"></i>
+      公開中
+    </div>
   <!--投稿が非公開の場合-->
   <% else %>
-    <div class="btn btn-sm btn-outline-danger">非公開</div>
+    <div class="btn btn-sm btn-outline-danger">
+      <i class="fas fa-lock"></i>
+      非公開
+    </div>
   <% end %>
 <% end %>

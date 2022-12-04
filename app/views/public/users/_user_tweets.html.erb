@@ -21,23 +21,28 @@
       <!--カレントユーザーの投稿だった場合-->
       <% if tweet.user == current_user %>
         <!--ドロップダウンで投稿編集・削除ボタン-->
-        <div id="tweet_set" class="dropdown">
+        <div class="dropdown d-inline-block">
           <button
-            class="btn btn-warning btn-sm dropdown-toggle"
+            class="btn btn-warning btn-sm dogle-"
             type="button"
             id="dropdownMenuButton"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <i class="fas fa-tools"></i> 設定
+            <i class="fas fa-toolbox"></i>
+            設定
           </button>
           <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
             <div>
-              <%= link_to "投稿編集", edit_tweet_path(tweet), class: "btn btn-success mb-1" %>
+              <%= link_to edit_tweet_path(tweet), class: "btn btn-success mb-1" do %>
+              <i class="fas fa-tools"></i> 編集
+              <% end %>
             </div>
             <div>
-              <%= link_to "投稿削除", tweet_path(tweet), method: :delete, remote: true, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } %>
+              <%= link_to tweet_path(tweet), method: :delete, remote: true, class: "btn btn-danger", data: { confirm: "Tweetを削除しますよろしいですか？" } do %>
+                <i class="fas fa-trash-alt"></i> 削除
+              <% end %>
             </div>
           </div>
         </div>
