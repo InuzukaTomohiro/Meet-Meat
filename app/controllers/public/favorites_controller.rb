@@ -5,6 +5,11 @@ class Public::FavoritesController < ApplicationController
     @favorites     = current_user.favorites.all.order(created_at: :desc).page(params[:page]).per(5)
     @tweet_comment = Comment.new
   end
+  #いいね登録者画面
+  def show
+    tweet = Tweet.find(params[:tweet_id])
+    @favorites = tweet.favorites.all
+  end
   # いいね登録
   def create
     tweet     = Tweet.find(params[:tweet_id])
