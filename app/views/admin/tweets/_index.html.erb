@@ -11,18 +11,20 @@
       <%= link_to "削除", admin_tweet_path(tweet), method: :delete, remote: true, class: "btn btn-md btn-outline-danger mt-3", data: {confirm: "投稿を削除しますか？"} %>
     </div>
     <div class="col-2">
-      <%= link_to admin_user_path(tweet.user) do %>
-        <div class="nickname"><%= tweet.user.nick_name %></div>
-        <%= image_tag tweet.user.get_profile_image(100, 100) %>
-      <% end %>
       <div>
-        <div>
-          いいね:
+        <%= link_to admin_user_path(tweet.user) do %>
+          <div class="nickname"><%= tweet.user.nick_name %></div>
+          <%= image_tag tweet.user.get_profile_image(100, 100) %>
+        <% end %>
+      </div>
+      <div>
+        <div class="text-danger d-inline-block mr-2">
+          <i class="fas fa-heart"></i>
           <%= tweet.favorites.count %>
         </div>
-        <div>
+        <div class="text-info d-inline-block">
           <%= link_to admin_tweet_comments_path(tweet) do %>
-            コメント数:
+            <i class="far fa-comments"></i>
             <%= tweet.comments.count %>
           <% end %>
         </div>
@@ -31,7 +33,7 @@
     </div>
     <div class="col-9">
       <div class="row">
-        <div class="col-3">
+        <div class="col-3 d-flex">
           <%= image_tag tweet.get_meat_image(180, 180), class: "meat_image" %>
         </div>
         <div class="admin_tweet_body col-5">
