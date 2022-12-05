@@ -14,7 +14,7 @@ class Tweet < ApplicationRecord
   # 投稿画像設定
   def get_meat_image(width, height)
     unless meat_image.attached?
-      file_path = Rails.root.join("app/javascript/images/default-image.jpeg")
+      file_path = Rails.root.join("app/asset/images/default-image.jpeg")
       meat_image.attach(io: File.open(file_path), filename: "default-image.jpeg", content_type: "image/jpeg")
     end
     meat_image.variant(resize_to_limit: [width, height]).processed

@@ -10,11 +10,11 @@
       <% end %>
       <%= link_to "削除", admin_tweet_path(tweet), method: :delete, remote: true, class: "btn btn-md btn-outline-danger mt-3", data: {confirm: "投稿を削除しますか？"} %>
     </div>
-    <div class="col-2">
+    <div class="col-2 text-center">
       <div>
         <%= link_to admin_user_path(tweet.user) do %>
-          <div class="nickname"><%= tweet.user.nick_name %></div>
-          <%= image_tag tweet.user.get_profile_image(100, 100) %>
+          <%= image_tag tweet.user.get_profile_image(100, 100), class: "border border-dark rounded-circle" %>
+          <div class="nickname text-secondary"><%= tweet.user.nick_name %></div>
         <% end %>
       </div>
       <div>

@@ -10,7 +10,7 @@ class Meat < ApplicationRecord
   # ミートプロフィール画像設定
   def get_meat_profile_image(width, height)
     unless meat_profile_image.attached?
-      file_path = Rails.root.join("app/javascript/images/default-image.jpeg")
+      file_path = Rails.root.join("app/asset/images/default-image.jpeg")
       meat_profile_image.attach(io: File.open(file_path), filename: "default-image.jpeg", content_type: "image/jpeg")
     end
     meat_profile_image.variant(resize_to_fill: [width, height]).processed
