@@ -72,7 +72,7 @@ class Public::UsersController < ApplicationController
     user = User.find(params[:id])
     unless current_user.following?(user) && user.following?(current_user) || user == current_user
       redirect_to user_path(user)
-      flash[:notice] = "指定されたURLにはアクセスできません"
+      flash[:notice] = "相互フォロー者以外、アクセスできません。"
     end
   end
 
