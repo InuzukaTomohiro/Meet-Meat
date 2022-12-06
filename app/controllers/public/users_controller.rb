@@ -5,6 +5,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :update]
   # 他ユーザ情報編集へのアクセス制限
   before_action :correct_user,      only: [:edit, :update, :destroy]
+  # 相互フォロー以外、累計食肉へのアクセス制限
   before_action :friend_user, only: [:user_meat]
 
   # user詳細画面
