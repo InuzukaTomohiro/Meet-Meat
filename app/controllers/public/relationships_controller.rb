@@ -4,7 +4,7 @@ class Public::RelationshipsController < ApplicationController
   # 　フォロー一覧画面
   def followings
     @user            = User.find(params[:user_id])
-    @following_users = @user.followings
+    @following_users = @user.followings.all
   end
   # フォロワー一覧画面
   def followers
@@ -15,15 +15,14 @@ class Public::RelationshipsController < ApplicationController
   def create
     @user   = User.find(params[:user_id])
     @follow = current_user.follow(params[:user_id])
-    @follow.save
+    # @follow.save
     # 通知のデータを作成
     @user.create_notification_follow!(current_user)
   end
   # フォロー解除（非同期）
   def destroy
     @user   = User.find(params[:user_id])
-    @follow = current_user.unfollow(params[:user_id])
-    @follow.destroy
+    @follow = current_user.unfollow(@user)
   end
 
 end
