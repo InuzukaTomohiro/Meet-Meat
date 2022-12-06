@@ -5,6 +5,7 @@ class Public::UsersController < ApplicationController
   before_action :ensure_guest_user, only: [:edit, :update]
   # 他ユーザ情報編集へのアクセス制限
   before_action :correct_user,      only: [:edit, :update, :destroy]
+  before_action :friend_user, only: [:user_meat]
 
   # user詳細画面
   def show
@@ -60,11 +61,20 @@ class Public::UsersController < ApplicationController
   end
   # 他ユーザ情報編集へのアクセス制限
   def correct_user
-    @user = User.find(params[:id])
-    if @user != current_user
-      redirect_to(user_path(current_user))
+    user = User.find(params[:id])
+    if user != current_user
+      redirect_to user_path(current_user)
       flash[:notice] = "指定されたURLにはアクセスできません"
     end
   end
+
+  def friend_user
+    user = User.find(params[:id])
+    unless current_user.following?(user) && user.following?(current_user) || user == current_user
+      redirect_to user_path(user)
+      flash[:notice] = "指定されたURLにはアクセスできません"
+    end
+  end
+
 
 end
