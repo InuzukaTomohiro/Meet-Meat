@@ -7,7 +7,9 @@ class Public::TweetsController < ApplicationController
   # 投稿一覧画面
   def index
     @tweet_comment = Comment.new
-    @tweets        = Tweet.where(is_active: true, on_display: true).order(created_at: :desc).page(params[:page]).per(10)
+    @tweets        = Tweet.where(is_active: true, on_display: true)
+                          .order(created_at: :desc)
+                          .page(params[:page]).per(10)
   end
   # 投稿編集画面
   def edit
