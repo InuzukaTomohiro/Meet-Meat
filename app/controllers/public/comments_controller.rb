@@ -1,5 +1,7 @@
 class Public::CommentsController < ApplicationController
   before_action :authenticate_user!
+  # コメント編集のアクセス制限
+  before_action :correct_comment, only: [:edit]
   # コメント一覧機能
   def index
     @tweet          = Tweet.find(params[:tweet_id])
@@ -47,6 +49,16 @@ class Public::CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:body)
+  end
+
+  def correct_comment
+    comment = Comment.find(params[:id])
+    tweet   = comment.tweet
+    user    = comment.user
+    if user != current_user
+      redirect_to tweet_comments_path(tweet)
+      flash[:notice] = "指定されたURLはアクセスできません。"
+    end
   end
 
 end
