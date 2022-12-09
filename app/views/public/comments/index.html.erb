@@ -1,6 +1,41 @@
 <section>
   <div class="d-flex align-items-end">
-    <h2>コメント一覧</h2>
+    <h2>投稿</h2>
+  </div>
+  <div class="tweets row">
+    <div class="col-2">
+      <div>
+        <%= link_to user_path(@tweet.user) do %>
+          <div class="nickname"><%= @tweet.user.nick_name %></div>
+          <%= image_tag @tweet.user.get_profile_image(80, 80) %>
+        <% end %>
+      </div>
+      <!--いいねボタンのテンプレート（非同期）-->
+      <div id="favorite_<%= @tweet.id %>" class="d-inline-block mr-2">
+        <%= render "public/favorites/favorite_btn", tweet: @tweet %>
+      </div>
+      <!--コメント数のテンプレート（非同期）-->
+      <div id="comment_counter_<%= @tweet.id %>"  class="d-inline-block">
+        <%= render "public/comments/counter", tweet: @tweet %>
+      </div>
+    </div>
+    <div class="col-10">
+      <div class="tweet_content row">
+        <div class="col-3">
+          <%= image_tag @tweet.get_meat_image(180, 180), class: "meat_image" %>
+        </div>
+        <div class="tweet_body col-5">
+          <%= @tweet.body %>
+        </div>
+        <div class="col-4">
+          <%= @tweet.meat.meat_type %>
+          <%= @tweet.once_weight %><span>グラム</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-flex align-items-end">
+    <h4>コメント一覧</h4>
     <div id="comment_counter">
       <h4>(全<%= @comments_all.count %>件)</h4>
     </div>

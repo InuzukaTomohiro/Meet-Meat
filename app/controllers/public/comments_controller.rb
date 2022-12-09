@@ -5,6 +5,7 @@ class Public::CommentsController < ApplicationController
     @tweet          = Tweet.find(params[:tweet_id])
     @tweet_comments = @tweet.comments.all.order(created_at: :desc).page(params[:page]).per(10)
     @comments_all   = @tweet.comments.all
+    @tweet_comment  = Comment.new
   end
   # コメント編集機能
   def edit

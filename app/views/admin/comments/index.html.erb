@@ -5,6 +5,7 @@
       <h5>コメント数は、「<%= @comments_all.count %>」件です。</h5>
     </div>
   </div>
+  
   <div id="admin_comments">
     <%= render "admin/comments/index", tweet_comments: @tweet_comments, tweet: @tweet %>
   </div>
