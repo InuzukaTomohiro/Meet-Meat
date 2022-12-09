@@ -1,5 +1,10 @@
 class Public::TweetsController < ApplicationController
+  # ログインユーザーのみ閲覧可能
   before_action :authenticate_user!
+  # 投稿編集のアクセス制限
+  before_action :correct_tweet, only: [:edit]
+
+
   # 新規投稿画面
   def new
     @tweet = Tweet.new
@@ -7,9 +12,7 @@ class Public::TweetsController < ApplicationController
   # 投稿一覧画面
   def index
     @tweet_comment = Comment.new
-    @tweets        = Tweet.where(is_active: true, on_display: true)
-                          .order(created_at: :desc)
-                          .page(params[:page]).per(10)
+    @tweets        = Tweet.where(is_active: true, on_display: true).order(created_at: :desc).page(params[:page]).per(10)
   end
   # 投稿編集画面
   def edit
@@ -59,6 +62,15 @@ class Public::TweetsController < ApplicationController
 
   def tweet_params
     params.require(:tweet).permit(:meat_id, :body, :once_weight, :meat_image, :on_display)
+  end
+
+  def correct_tweet
+    tweet = Tweet.find(params[:id])
+    user  = tweet.user
+    if user != current_user
+      redirect_to user_path(current_user)
+      flash[:notice] = "指定されたURLはアクセスできません。"
+    end
   end
 
 end

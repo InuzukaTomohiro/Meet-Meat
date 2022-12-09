@@ -1,4 +1,5 @@
 class Public::CommentsController < ApplicationController
+  # ログインユーザーのみ閲覧可能
   before_action :authenticate_user!
   # コメント編集のアクセス制限
   before_action :correct_comment, only: [:edit]
