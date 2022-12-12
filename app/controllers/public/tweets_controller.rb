@@ -4,7 +4,6 @@ class Public::TweetsController < ApplicationController
   # 投稿編集のアクセス制限
   before_action :correct_tweet, only: [:edit]
 
-
   # 新規投稿画面
   def new
     @tweet = Tweet.new
@@ -12,7 +11,11 @@ class Public::TweetsController < ApplicationController
   # 投稿一覧画面
   def index
     @tweet_comment = Comment.new
-    @tweets        = Tweet.where(is_active: true, on_display: true).order(created_at: :desc).page(params[:page]).per(10)
+    tweets        = Tweet.where(is_active: true, on_display: true).sort {|a,b|
+      b.favorites.size <=>
+      a.favorites.size
+    }
+    @tweets = Kaminari.paginate_array(tweets).page(params[:page]).per(8)
   end
   # 投稿編集画面
   def edit
