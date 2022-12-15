@@ -1,4 +1,8 @@
 <section>
   <h2>投稿一覧</h2>
+  | <%= link_to "新しい順", tweets_path(latest: "true") %> |
+  <%= link_to "古い順", tweets_path(old: "true") %> |
+  <%= link_to "評価の高い順", tweets_path(favorite_count: "true") %> |
+  <%= link_to "コメント数順", tweets_path(comment_count: "true") %> |
   <%= render "index", tweets: @tweets, tweet_comment: @tweet_comment%>
 </section>

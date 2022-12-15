@@ -9,6 +9,10 @@ class Tweet < ApplicationRecord
   validates :body,        presence: :true
   validates :once_weight, presence: :true, numericality: :only_integer
 
+  scope :active_display, -> {where(is_active: true, on_display: true)}
+  scope :latest,         -> {order(created_at: :desc)}
+  scope :old,            -> {order(created_at: :asc)}
+
   # 投稿画像
   has_one_attached :meat_image
   # 投稿画像設定
