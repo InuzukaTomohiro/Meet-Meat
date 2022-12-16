@@ -10,6 +10,10 @@
       <%= f.submit "検索" %>
     <% end %>
   </div>
+  | <%= link_to "新しい順", admin_tweets_path(latest: "true") %> |
+  <%= link_to "古い順", admin_tweets_path(old: "true") %> |
+  <%= link_to "評価の高い順", admin_tweets_path(favorite_count: "true") %> |
+  <%= link_to "コメント数順", admin_tweets_path(comment_count: "true") %> |
   <div id="tweets">
     <%= render "admin/tweets/index", tweets: @tweets %>
   </div>

@@ -12,19 +12,19 @@ class Public::TweetsController < ApplicationController
   def index
     @tweet_comment = Comment.new
     if    params[:latest]
-      @tweets = Tweet.active_display.latest.page(params[:page]).per(8)
+      @tweets = Tweet.active_tweets.latest.page(params[:page]).per(8)
     elsif params[:old]
-      @tweets = Tweet.active_display.old.page(params[:page]).per(8)
+      @tweets = Tweet.active_tweets.old.page(params[:page]).per(8)
     elsif params[:favorite_count]
-      tweets  = Tweet.active_display
+      tweets  = Tweet.active_tweets
                      .sort{|a,b| b.favorites.size <=> a.favorites.size}
       @tweets = Kaminari.paginate_array(tweets).page(params[:page]).per(8)
     elsif params[:comment_count]
-      tweets  = Tweet.active_display
+      tweets  = Tweet.active_tweets
                      .sort{|a,b| b.comments.size <=> a.comments.size}
       @tweets = Kaminari.paginate_array(tweets).page(params[:page]).per(8)
     else
-      @tweets = Tweet.active_display.latest.page(params[:page]).per(8)
+      @tweets = Tweet.active_tweets.latest.page(params[:page]).per(8)
     end
   end
   # 投稿編集画面

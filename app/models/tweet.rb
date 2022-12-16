@@ -9,7 +9,8 @@ class Tweet < ApplicationRecord
   validates :body,        presence: :true
   validates :once_weight, presence: :true, numericality: :only_integer
 
-  scope :active_display, -> {where(is_active: true, on_display: true)}
+  scope :active_tweets,  -> {where(is_active: true, on_display: true)}
+  scope :stop_tweets,    -> {where(is_active: false)}
   scope :latest,         -> {order(created_at: :desc)}
   scope :old,            -> {order(created_at: :asc)}
 
