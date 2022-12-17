@@ -8,6 +8,9 @@
       <%= f.submit "検索" %>
     <% end %>
   </div>
+  | <%= link_to "ID順", admin_users_path(crate_id: "true") %> |
+  <%= link_to "フォローワー数順", admin_users_path(follower_count: "true") %> |
+  <%= link_to "投稿数順", admin_users_path(tweet_count: "true") %> |
   <% @users.each do |user| %>
     <%= render "admin/users/info", user: user %>
   <% end %>

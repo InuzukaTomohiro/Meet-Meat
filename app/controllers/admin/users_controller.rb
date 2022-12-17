@@ -3,8 +3,22 @@ class Admin::UsersController < ApplicationController
   layout "layouts/admin_application"
   # ユーザー一覧画面
   def index
-    @users     = User.all.page(params[:page]).per(10)
+    # @users     = User.all.page(params[:page]).per(10)
     @users_all = User.all
+
+    if params[:create_id]
+      @user = User.all.order(created_at: :desc).page(params[:page]).per(10)
+    elsif  params[:follower_count]
+      users = User.all
+                  .sort{|a,b| b.followers.size <=> a.followers.size}
+      @users = Kaminari.paginate_array(users).page(params[:page]).per(10)
+    elsif params[:tweet_count]
+      users = User.all
+                  .sort{|a,b| b.tweets.size <=> a.tweets.size}
+      @users = Kaminari.paginate_array(users).page(params[:page]).per(10)
+    else
+      @users     = User.all.page(params[:page]).per(10)
+    end
   end
   # ユーザー詳細画面
   def show
@@ -14,7 +28,21 @@ class Admin::UsersController < ApplicationController
   end
   # 停止ユーザー一覧画面
   def no_active
-    @no_active_users = User.where(is_active: false).page(params[:page]).per(10)
+    @no_active_users_all = User.where(is_active: false)
+    # @no_active_users     = User.where(is_active: false).page(params[:page]).per(10)
+    if params[:create_id]
+      @no_active_users = User.where(is_active: false).page(params[:page]).per(10)
+    elsif  params[:follower_count]
+      users = User.where(is_active: false)
+                  .sort{|a,b| b.followers.size <=> a.followers.size}
+      @no_active_users = Kaminari.paginate_array(users).page(params[:page]).per(10)
+    elsif params[:tweet_count]
+      users = User.where(is_active: false)
+                  .sort{|a,b| b.tweets.size <=> a.tweets.size}
+      @no_active_users = Kaminari.paginate_array(users).page(params[:page]).per(10)
+    else
+      @no_active_users     = User.where(is_active: false).page(params[:page]).per(10)
+    end
   end
   # ユーザー編集画面
   def edit
