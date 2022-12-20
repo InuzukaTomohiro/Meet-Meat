@@ -7,17 +7,17 @@ class Admin::UsersController < ApplicationController
     @users_all = User.all
 
     if params[:create_id]
-      @user = User.all.order(created_at: :desc).page(params[:page]).per(10)
+      @user  = User.all.order(created_at: :desc).page(params[:page]).per(10)
     elsif  params[:follower_count]
-      users = User.all
+      users  = User.all
                   .sort{|a,b| b.followers.size <=> a.followers.size}
       @users = Kaminari.paginate_array(users).page(params[:page]).per(10)
     elsif params[:tweet_count]
-      users = User.all
+      users  = User.all
                   .sort{|a,b| b.tweets.size <=> a.tweets.size}
       @users = Kaminari.paginate_array(users).page(params[:page]).per(10)
     else
-      @users     = User.all.page(params[:page]).per(10)
+      @users = User.all.page(params[:page]).per(10)
     end
   end
   # ユーザー詳細画面
