@@ -7,7 +7,7 @@ class Admin::AchievementsController < ApplicationController
   end
 
   def index
-    @achievements = Achievement.all
+    @achievements = Achievement.all.order(:meat_id)
   end
 
   def edit
@@ -24,8 +24,8 @@ class Admin::AchievementsController < ApplicationController
   end
 
   def update
-    achievement = Achievement.find(params[:id])
-    if achievement.update(achievement_params)
+    @achievement = Achievement.find(params[:id])
+    if @achievement.update(achievement_params)
       redirect_to admin_achievements_path
     else
       render :edit
