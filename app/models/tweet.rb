@@ -82,5 +82,29 @@ class Tweet < ApplicationRecord
       save_notification_comment(current_user, comment_id, user_id)
     end
   end
+  
+  # 称号獲得機能
+  def create_achievement(current_user)
+    user_total_meats = current_user.tweets.group(:meat_id).sum(:once_weight)
+    user_total_meats.each do |id, weight|
+      if meat_id == 1
+        if weight > 500     then title = "10級"
+        elsif weight > 1000 then title = "９級"
+        elsif weight > 1500 then title = "8級"
+        elsif weight > 2000 then title = "7級"
+        elsif weight > 2500 then title = "6級"
+        elsif weight > 3000 then title = "5級"
+        elsif weight > 3500 then title = "4級"
+        elsif weight > 4000 then title = "3級"
+        elsif weight > 4500 then title = "2級"
+        elsif weight > 5000 then title = "1級"
+        end
+        achievement = current_user.achievements.new(title :title)
+        achievement.title = 
+      end
+    end
+    
+    
+  end
 
 end
