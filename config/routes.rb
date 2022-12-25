@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     patch "users/:id/update_status" => "users#update_status", as: "users_update_status"
     resources :users,  only: [:index, :show, :edit, :update]
     resources :meats,  only: [:new, :index, :create, :edit, :update]
+    resources :achievements, only: [:new, :index, :create, :edit, :update]
     resources :tweets, only: [:index, :update, :destroy] do
       resources :comments, only: [:index, :update, :destroy]
     end
