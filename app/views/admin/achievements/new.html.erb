@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-12">
+    <h2 class=text-center>称号新規登録</h2>
+    <%= form_with model: @achievement, url: admin_achievements_path do |f| %>
+      <%= render "layouts/errors", obj: @achievement %>
+      <table class="form">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= f.label :meat_id, "お肉の種類" %></td>
+            <td><%= f.select :meat_id, options_from_collection_for_select(Meat.all, :id, :meat_type, {:selected => @achievement.meat_id.to_i}), {include_blank: "選択してください"}, {class: "form-control"} %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :title, "称号名" %></td>
+            <td><%= f.text_field :title, autofocus: true, placeholder: "〇〇級", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :introduction, "称号説明" %></td>
+            <td><%= f.text_area :introduction, autofocus: true, placeholder: "〇〇達成の場合付与。", class: "form-control" %></td>
+          </tr>
+            <td></td>
+            <td><%= f.submit "新規登録", class: "btn btn-lg btn-success" %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

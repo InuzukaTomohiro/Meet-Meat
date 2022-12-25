@@ -1,0 +1,4 @@
+<%= link_to "新規作成", new_admin_achievement_path %>
+<% @achievements.each do |achievement| %>
+<%= link_to "編集", edit_admin_achievement_path(achievement) %>
+<% end %>
