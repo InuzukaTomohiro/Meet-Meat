@@ -35,7 +35,8 @@ class Public::TweetsController < ApplicationController
   def create
     @tweet = current_user.tweets.new(tweet_params)
     if @tweet.save
-      redirect_to tweets_path
+      @tweet.create_achievement!(current_user)
+      # redirect_to tweets_path
       flash[:notice] = "新規投稿が完了しました。"
     else
       render :new

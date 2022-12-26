@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_25_115337) do
+ActiveRecord::Schema.define(version: 2022_12_26_122515) do
 
   create_table "achievements", force: :cascade do |t|
     t.integer "meat_id", null: false
@@ -113,6 +113,13 @@ ActiveRecord::Schema.define(version: 2022_12_25_115337) do
     t.integer "once_weight", null: false
     t.boolean "on_display", default: true, null: false
     t.boolean "is_active", default: true, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_achievements", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "achievement_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
