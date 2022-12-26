@@ -104,7 +104,16 @@ class Tweet < ApplicationRecord
       end
       n = achievement(weight)
       unless current_user.user_achievements.exists?(achievement_id: n)
-        UserAchievement.create(user_id: current_user.id, achievement_id: n)
+        current_user.user_achievements.create(achievement_id: n)
+      end
+      n = achievement(weight).to_i - 1
+      if current_user.user_achievements.exists?(achievement_id: n)
+        n.times do
+          n -= 1
+          unless current_user.user_achievements.exists?(achievement_id: n)
+            current_user.user_achievements.create(achievement_id: n)
+          end
+        end
       end
     end
   end

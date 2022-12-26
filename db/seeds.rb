@@ -41,6 +41,27 @@ meats.each do |meat|
   end
 end
 
+# Achievementのテストデータ
+achievements = [
+  {id: 1, meat_id: 1, title: "10級", introduction: "テストデータ"},
+  {id: 2, meat_id: 1, title: "9級", introduction: "テストデータ"},
+  {id: 3, meat_id: 1, title: "8級", introduction: "テストデータ"},
+  {id: 4, meat_id: 1, title: "7級", introduction: "テストデータ"},
+  {id: 5, meat_id: 1, title: "6級", introduction: "テストデータ"},
+  {id: 6, meat_id: 1, title: "5級", introduction: "テストデータ"},
+  {id: 7, meat_id: 1, title: "4級", introduction: "テストデータ"},
+  {id: 8, meat_id: 1, title: "3級", introduction: "テストデータ"},
+  {id: 9, meat_id: 1, title: "2級", introduction: "テストデータ"},
+  {id: 10, meat_id: 1, title: "1級", introduction: "テストデータ"}
+]
+# Meatのデータがない場合のみ作成(meat_typeは一意性)
+achievements.each do |achievement|
+  Achievement.find_or_create_by(achievement)
+end
+
+
+
+
 # ユーザーテストデータ
 users = [
   {id: 1, nick_name: "山田です。", email: "user1@example.com", password: "passw@rd", phone_number: "0000000001", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author1.jpg"), filename: "sample-author1.jpg")},
