@@ -1,4 +1,35 @@
 <%= link_to "新規作成", new_admin_achievement_path %>
-<% @achievements.each do |achievement| %>
-<%= link_to "編集", edit_admin_achievement_path(achievement) %>
-<% end %>
+<section>
+  <div class="row">
+    <div class="col-11">
+      <h2>称号一覧</h2>
+    </div>
+    <%= link_to new_admin_achievement_path do %>
+      <div class="new-btn">
+        <i class="fas fa-plus new_meat"></i>
+      </div>
+    <% end %>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>称号元</th>
+        <th>称号名</th>
+        <th>称号条件</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @achievements.each do |achievement| %>
+      <tr>
+        <td><%= Meat.find(achievement.meat_id).meat_type %></td>
+        <td>
+          <%= link_to edit_admin_achievement_path(achievement) do %>
+            <%= achievement.title %>
+          <% end %>
+          </td>
+        <td><%= achievement.introduction %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
