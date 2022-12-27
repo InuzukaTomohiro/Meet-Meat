@@ -43,16 +43,16 @@ end
 
 # Achievementのテストデータ
 achievements = [
-  {id: 1, meat_id: 1, title: "10級", introduction: "テストデータ"},
-  {id: 2, meat_id: 1, title: "9級", introduction: "テストデータ"},
-  {id: 3, meat_id: 1, title: "8級", introduction: "テストデータ"},
-  {id: 4, meat_id: 1, title: "7級", introduction: "テストデータ"},
-  {id: 5, meat_id: 1, title: "6級", introduction: "テストデータ"},
-  {id: 6, meat_id: 1, title: "5級", introduction: "テストデータ"},
-  {id: 7, meat_id: 1, title: "4級", introduction: "テストデータ"},
-  {id: 8, meat_id: 1, title: "3級", introduction: "テストデータ"},
-  {id: 9, meat_id: 1, title: "2級", introduction: "テストデータ"},
-  {id: 10, meat_id: 1, title: "1級", introduction: "テストデータ"}
+  {id: 1, meat_id: 1, title: "10級", introduction: "テストデータ", condition: 500},
+  {id: 2, meat_id: 1, title: "9級", introduction: "テストデータ", condition: 1000},
+  {id: 3, meat_id: 1, title: "8級", introduction: "テストデータ", condition: 1500},
+  {id: 4, meat_id: 1, title: "7級", introduction: "テストデータ", condition: 2000},
+  {id: 5, meat_id: 1, title: "6級", introduction: "テストデータ", condition: 2500},
+  {id: 6, meat_id: 1, title: "5級", introduction: "テストデータ", condition: 3000},
+  {id: 7, meat_id: 1, title: "4級", introduction: "テストデータ", condition: 3500},
+  {id: 8, meat_id: 1, title: "3級", introduction: "テストデータ", condition: 4000},
+  {id: 9, meat_id: 1, title: "2級", introduction: "テストデータ", condition: 4500},
+  {id: 10, meat_id: 1, title: "1級", introduction: "テストデータ", condition: 5000}
 ]
 # Meatのデータがない場合のみ作成(meat_typeは一意性)
 achievements.each do |achievement|

@@ -89,16 +89,11 @@ class Tweet < ApplicationRecord
     user_total_meats.each do |id, weight|
       if id == 1
         def achievement(weight)
-          if    weight > 5000 then  10
-          elsif weight > 4500 then  9
-          elsif weight > 4000 then  8
-          elsif weight > 3500 then  7
-          elsif weight > 3000 then  6
-          elsif weight > 2500 then  5
-          elsif weight > 2000 then  4
-          elsif weight > 1500 then  3
-          elsif weight > 1000 then  2
-          elsif weight > 500  then  1
+          achievements = Achievement.all
+          achievements.each do |achievement|
+            if    weight > achievement.condition
+              return achievement.id
+            end
           end
         end
       end
@@ -106,16 +101,17 @@ class Tweet < ApplicationRecord
       unless current_user.user_achievements.exists?(achievement_id: n)
         current_user.user_achievements.create(achievement_id: n)
       end
-      n = achievement(weight).to_i - 1
-      if current_user.user_achievements.exists?(achievement_id: n)
-        n.times do
-          n -= 1
-          unless current_user.user_achievements.exists?(achievement_id: n)
-            current_user.user_achievements.create(achievement_id: n)
-          end
-        end
-      end
     end
   end
+
+  # n = achievement(weight).to_i - 1
+  #       if current_user.user_achievements.exists?(achievement_id: n)
+  #         n.times do
+  #           n -= 1
+  #           unless current_user.user_achievements.exists?(achievement_id: n)
+  #             current_user.user_achievements.create(achievement_id: n)
+  #           end
+  #         end
+  #       end
 
 end
