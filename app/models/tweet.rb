@@ -85,26 +85,21 @@ class Tweet < ApplicationRecord
 
   # 称号獲得機能
   def create_achievement!(current_user)
+    # ログインユーザーの投稿したお肉の種類ごとの合計値
     user_total_meats = current_user.tweets.group(:meat_id).sum(:once_weight)
+    # 存在している称号
+    achievements = Achievement.all
     user_total_meats.each do |id, weight|
-      if id == 1
-        def achievement(weight)
-          if    weight > 5000 then  10
-          elsif weight > 4500 then  9
-          elsif weight > 4000 then  8
-          elsif weight > 3500 then  7
-          elsif weight > 3000 then  6
-          elsif weight > 2500 then  5
-          elsif weight > 2000 then  4
-          elsif weight > 1500 then  3
-          elsif weight > 1000 then  2
-          elsif weight > 500  then  1
+      achievements.each do |achievement|
+        # 称号のお肉タイプと同一のお肉の総量が称号獲得の基準を上回った場合
+        if weight > achievement.condition && achievement.meat_id == id
+          # 一時的な変数「n」に称号番号を代入
+          then n = achievement.id
+          # ユーザーの保有する称号に「n」番の称号が存在しない場合、create
+          unless current_user.user_achievements.exists?(achievement_id: n)
+            current_user.user_achievements.create(achievement_id: n)
           end
         end
-      end
-      n = achievement(weight)
-      unless current_user.user_achievements.exists?(achievement_id: n)
-        UserAchievement.create(user_id: current_user.id, achievement_id: n)
       end
     end
   end

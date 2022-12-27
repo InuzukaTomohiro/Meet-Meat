@@ -41,6 +41,35 @@ meats.each do |meat|
   end
 end
 
+# Achievementのテストデータ
+achievements = [
+  {id: 1, meat_id: 1, title: "10級", introduction: "テストデータ", condition: 500},
+  {id: 2, meat_id: 1, title: "9級", introduction: "テストデータ", condition: 1000},
+  {id: 3, meat_id: 1, title: "8級", introduction: "テストデータ", condition: 1500},
+  {id: 4, meat_id: 1, title: "7級", introduction: "テストデータ", condition: 2000},
+  {id: 5, meat_id: 1, title: "6級", introduction: "テストデータ", condition: 2500},
+  {id: 6, meat_id: 1, title: "5級", introduction: "テストデータ", condition: 3000},
+  {id: 7, meat_id: 1, title: "4級", introduction: "テストデータ", condition: 3500},
+  {id: 8, meat_id: 1, title: "3級", introduction: "テストデータ", condition: 4000},
+  {id: 9, meat_id: 1, title: "2級", introduction: "テストデータ", condition: 4500},
+  {id: 10, meat_id: 1, title: "1級", introduction: "テストデータ", condition: 5000},
+  {id: 11, meat_id: 2, title: "1級", introduction: "テストデータ", condition: 500},
+  {id: 12, meat_id: 2, title: "1級", introduction: "テストデータ", condition: 1000},
+  {id: 13, meat_id: 2, title: "1級", introduction: "テストデータ", condition: 1500},
+  {id: 14, meat_id: 3, title: "1級", introduction: "テストデータ", condition: 500},
+  {id: 15, meat_id: 3, title: "1級", introduction: "テストデータ", condition: 1000},
+  {id: 16, meat_id: 3, title: "1級", introduction: "テストデータ", condition: 1500}
+
+
+]
+# Meatのデータがない場合のみ作成(meat_typeは一意性)
+achievements.each do |achievement|
+  Achievement.find_or_create_by(achievement)
+end
+
+
+
+
 # ユーザーテストデータ
 users = [
   {id: 1, nick_name: "山田です。", email: "user1@example.com", password: "passw@rd", phone_number: "0000000001", is_active: true,  profile_image: ActiveStorage::Blob.create_and_upload!(io: File.open("#{Rails.root}/db/fixtures/users/sample-author1.jpg"), filename: "sample-author1.jpg")},

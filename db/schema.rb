@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2022_12_26_122515) do
     t.integer "meat_id", null: false
     t.string "title", null: false
     t.string "introduction", null: false
-    t.boolean "is_get", default: false, null: false
+    t.integer "condition", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

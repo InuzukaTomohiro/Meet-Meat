@@ -5,7 +5,7 @@ class CreateAchievements < ActiveRecord::Migration[6.1]
       t.integer :meat_id,      null: false
       t.string  :title,        null: false
       t.string  :introduction, null: false
-      t.boolean :is_get,       null: false, default: :false
+      t.integer :condition,    null: false
       t.timestamps
     end
   end
