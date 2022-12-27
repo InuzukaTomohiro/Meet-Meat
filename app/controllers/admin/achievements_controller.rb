@@ -35,7 +35,7 @@ class Admin::AchievementsController < ApplicationController
   private
 
   def achievement_params
-    params.require(:achievement).permit(:title, :introduction, :is_get, :meat_id)
+    params.require(:achievement).permit(:title, :introduction, :condition, :meat_id)
   end
 
 end

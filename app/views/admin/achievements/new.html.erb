@@ -20,9 +20,14 @@
             <td><%= f.text_field :title, autofocus: true, placeholder: "〇〇級", class: "form-control" %></td>
           </tr>
           <tr>
-            <td><%= f.label :introduction, "称号条件" %></td>
+            <td><%= f.label :condition, "条件値" %></td>
+            <td><%= f.text_field :condition, autofocus: true, placeholder: "グラム単位で記入", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :introduction, "称号説明" %></td>
             <td><%= f.text_area :introduction, autofocus: true, placeholder: "〇〇達成の場合付与。", class: "form-control" %></td>
           </tr>
+          <tr>
             <td></td>
             <td><%= f.submit "新規登録", class: "btn btn-lg btn-success" %></td>
           </tr>

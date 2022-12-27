@@ -52,7 +52,15 @@ achievements = [
   {id: 7, meat_id: 1, title: "4級", introduction: "テストデータ", condition: 3500},
   {id: 8, meat_id: 1, title: "3級", introduction: "テストデータ", condition: 4000},
   {id: 9, meat_id: 1, title: "2級", introduction: "テストデータ", condition: 4500},
-  {id: 10, meat_id: 1, title: "1級", introduction: "テストデータ", condition: 5000}
+  {id: 10, meat_id: 1, title: "1級", introduction: "テストデータ", condition: 5000},
+  {id: 11, meat_id: 2, title: "1級", introduction: "テストデータ", condition: 500},
+  {id: 12, meat_id: 2, title: "1級", introduction: "テストデータ", condition: 1000},
+  {id: 13, meat_id: 2, title: "1級", introduction: "テストデータ", condition: 1500},
+  {id: 14, meat_id: 3, title: "1級", introduction: "テストデータ", condition: 500},
+  {id: 15, meat_id: 3, title: "1級", introduction: "テストデータ", condition: 1000},
+  {id: 16, meat_id: 3, title: "1級", introduction: "テストデータ", condition: 1500}
+
+
 ]
 # Meatのデータがない場合のみ作成(meat_typeは一意性)
 achievements.each do |achievement|
