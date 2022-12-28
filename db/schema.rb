@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(version: 2022_12_26_122515) do
   create_table "user_achievements", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "achievement_id", null: false
+    t.boolean "on_display", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

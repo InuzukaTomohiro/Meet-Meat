@@ -4,6 +4,7 @@ class CreateUserAchievements < ActiveRecord::Migration[6.1]
 
       t.integer :user_id,        null: false
       t.integer :achievement_id, null: false
+      t.boolean :on_display,     null: false, default: false
       t.timestamps
     end
   end

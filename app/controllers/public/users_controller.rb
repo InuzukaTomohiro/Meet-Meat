@@ -14,6 +14,8 @@ class Public::UsersController < ApplicationController
     @tweets        = @user.tweets.all.order(created_at: :desc).page(params[:page]).per(5)
     @tweets_all    = @user.tweets.all
     @total_weights = @tweets_all.group(:meat_id).sum(:once_weight)
+    @user_achievement = @user.user_achievements.find_by(on_display: true)
+    @achievement = @user_achievement.achievement
   end
   # user情報編集画面
   def edit

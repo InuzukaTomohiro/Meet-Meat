@@ -9,6 +9,11 @@
           <%= image_tag @user.get_profile_image(100, 100) %>
         </div>
         <div class="user-info col-6">
+          <div>
+            <%= link_to user_user_achievements_path(@user) do %>
+              <%= @achievement.title %>
+            <% end %>
+          </div>
           <div class="nickname"><%= @user.nick_name %></div>
           <!--ゲストユーザーではなく、なおかつカレントユーザーの場合に情報編集ボタンを表示-->
           <% if @user.email != "guest@example.com" && @user == current_user %>

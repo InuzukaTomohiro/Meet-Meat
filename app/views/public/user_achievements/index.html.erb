@@ -1,0 +1,30 @@
+<h2><%= @user.nick_name %>さんの称号一覧</h2>
+
+<table class="table active">
+  <thead>
+    <tr>
+      <th>獲得年月日</th>
+      <th>お肉の種類</th>
+      <th>称号名</th>
+      <th>称号条件</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user_achievements.each do |user_achievement| %>
+      <tr>
+        <td><%= user_achievement.created_at.strftime("%Y/%m/%d") %></td>
+        <td><%= Meat.find(user_achievement.achievement.meat_id).meat_type %></td>
+        <td><%= user_achievement.achievement.title %></td>
+        <td><%= user_achievement.achievement.introduction %></td>
+        <% if @user == current_user %>
+          <td>
+            <div id="achievement_error_<%= user_achievement.id %>"></div>
+            <div id="achievement_btn_<%= user_achievement.id %>">
+              <%= render "public/user_achievements/btn", user: @user, user_achievement: user_achievement %>
+            </div>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

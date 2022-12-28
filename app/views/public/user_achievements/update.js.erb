@@ -1,0 +1,2 @@
+$("#achievement_error_<%= @user_achievement.id %>").html("<%= j(render "public/user_achievements/error", error: @error) %>")
+$("#achievement_btn_<%= @user_achievement.id %>").html("<%= j(render "public/user_achievements/btn", user: @user, user_achievement: @user_achievement) %>")
