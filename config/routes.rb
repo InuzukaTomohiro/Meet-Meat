@@ -22,9 +22,10 @@ Rails.application.routes.draw do
     get "user_search"   => "searches#user_search"
     get "user_meat/:id" => "users#user_meat", as: "user_meat"
     patch "tweet/:id/update_display" => "tweets#update_display", as: "tweet_update_display"
-    resources :notifications, only: [:index]
+    resources :notifications,     only: [:index]
     resources :users, only: [:show, :edit, :update, :destroy] do
-      resource :relationships, only: [:create, :destroy]
+      resources :user_achievements, only: [:index, :update]
+      resource  :relationships,     only: [:create, :destroy]
       get "followings" => "relationships#followings", as: "followings"
       get "followers"  => "relationships#followers",  as: "followers"
     end

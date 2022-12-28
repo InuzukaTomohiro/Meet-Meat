@@ -1,6 +1,3 @@
 $(".comment_style").val("")
 $("#comment_counter_<%= @tweet.id %>").html("<%= j(render "public/comments/counter", tweet: @tweet) %>")
 $("#comment_error_<%= @tweet.id %>").html("<%= j(render "public/comments/error", errors: @errors) %>")
-
-
-

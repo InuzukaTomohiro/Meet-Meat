@@ -1,0 +1,7 @@
+<%= link_to user_user_achievement_path(user, user_achievement), method: :patch, remote: true do %>
+  <% if user_achievement.on_display == true %>
+    <div class="btn btn-sm btn-outline-success">選択中</div>
+  <% else %>
+    <div class="btn btn-sm btn-outline-danger">未選択</div>
+  <% end %>
+<% end %>
