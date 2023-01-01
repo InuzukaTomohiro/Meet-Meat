@@ -7,6 +7,9 @@
       <th>お肉の種類</th>
       <th>称号名</th>
       <th>称号条件</th>
+      <% if @user == current_user %>
+        <th colspan=2>称号設定</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
